@@ -1,4 +1,4 @@
-.PHONY: all pset solution clean check-code list
+.PHONY: all pset solution clean check-code list dist
 
 ROOT_DIR := $(CURDIR)
 EXAM_DIR ?=
@@ -34,3 +34,15 @@ check-code:
 
 clean:
 	$(call RUN_MAKE,clean)
+
+dist: all
+	@mkdir -p dist
+	@for d in build/series/*; do \
+		name=$$(basename $$d); \
+		if [ -f "$$d/pset/pset.pdf" ]; then \
+			cp "$$d/pset/pset.pdf" "dist/pset-$$name.pdf"; \
+		fi; \
+		if [ -f "$$d/solution/solution.pdf" ]; then \
+			cp "$$d/solution/solution.pdf" "dist/pset-$$name-solution.pdf"; \
+		fi; \
+	done
