@@ -1,0 +1,36 @@
+.PHONY: all pset solution clean check-code list
+
+ROOT_DIR := $(CURDIR)
+EXAM_DIR ?=
+
+SUB_MAKEFILES := $(shell find series -name Makefile -type f)
+SUBDIRS := $(sort $(dir $(SUB_MAKEFILES)))
+
+define RUN_MAKE
+	@status=0; \
+	if [ -n "$(EXAM_DIR)" ]; then \
+		$(MAKE) -C "$(EXAM_DIR)" $(1) EXAM_DIR="$(abspath $(EXAM_DIR))" || status=$$?; \
+	else \
+		for d in $(SUBDIRS); do \
+			$(MAKE) -C "$$d" $(1) || status=$$?; \
+		done; \
+	fi; \
+	exit $$status
+endef
+
+all: pset solution
+
+list:
+	@for d in $(SUBDIRS); do echo $$d; done
+
+pset:
+	$(call RUN_MAKE,pset)
+
+solution:
+	$(call RUN_MAKE,solution)
+
+check-code:
+	$(call RUN_MAKE,check-code)
+
+clean:
+	$(call RUN_MAKE,clean)
