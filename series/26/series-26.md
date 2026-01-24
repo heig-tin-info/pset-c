@@ -1,6 +1,6 @@
 # Série 26 — L'allocation dynamique
 
-## -
+## - { points=4 }
 
 On souhaite lire un fichier dont la taille n'est pas connue avant l'exécution du programme. Un espace mémoire doit alors être réservé sur le *heap*. Écrire la fonction `load` permettant de charger l'ensemble du fichier en mémoire dans la variable `data`.
 
@@ -29,7 +29,7 @@ int main(int argc, char*argv[]) {
     }
     ```
 
-## -
+## - { points=8 }
 
 Une structure avec un membre flexible est défini comme suit :
 
@@ -44,7 +44,7 @@ typedef struct record {
 } Record;
 ```
 
-### -
+### - { points=2 }
 
 Quelle est la taille de la structure record en bytes?
 
@@ -52,7 +52,7 @@ Quelle est la taille de la structure record en bytes?
 
     Le membre flexible n'est pas inclus dans la structure, cette dernière est donc la taille de l'entier 32-bit, soit 4 bytes.
 
-### -
+### - { points=2 }
 
 Déclarez la variable `r` puis allouer l'espace mémoire nécessaire pour y stocker 10 points.
 
@@ -63,7 +63,7 @@ Déclarez la variable `r` puis allouer l'espace mémoire nécessaire pour y stoc
     assert(r != NULL);
     ```
 
-### -
+### - { points=2 }
 
 Redimensionnez la variable `r` pour y stocker jusqu'à 100 points.
 
@@ -75,7 +75,7 @@ Redimensionnez la variable `r` pour y stocker jusqu'à 100 points.
     r = tmp;
     ```
 
-### -
+### - { points=2 }
 
 À la fin de l'exercice, il est nécessaire de libérer l'espace mémoire utilisé. Comment libérez-vous l'espace alloué ?
 
@@ -85,11 +85,11 @@ Redimensionnez la variable `r` pour y stocker jusqu'à 100 points.
     free(r);
     ```
 
-## -
+## - { points=4 }
 
 Une fonction s'occupe de redimensionner un set de données pour pouvoir y stocker `n` valeurs. Écrire la fonction `resize`.
 
-### -
+### - { points=2 }
 
 Dans le premier cas le set de donnée est défini comme suit:
 
@@ -121,7 +121,7 @@ typedef struct measurements {
     }
     ```
 
-### -
+### - { points=2 }
 
 Dans le second cas le set de donnée est défini à l'aide d'un membre flexible :
 
@@ -155,13 +155,13 @@ typedef struct measurements {
     }
     ```
 
-## -
+## - { points=4 }
 
 Dans un jeu de Sudoku, on souhaite allouer l'espace nécessaire pour y stocker une grille dont la taille (nombre de colonnes) est déterminée à l'exécution du programme.
 
 La grille est stockée dans un pointeur sur un tableau à deux dimensions, dont chaque dimension est la taille de la variable `columns`.
 
-### -
+### - { points=2 }
 
 Écrire la structure de donnée et allouer cette grille en initialisant toutes les valeurs à zéro.
 
@@ -174,7 +174,7 @@ La grille est stockée dans un pointeur sur un tableau à deux dimensions, dont 
     assert(grid != NULL);
     ```
 
-### -
+### - { points=2 }
 
 Affichez la grille sur la sortie standard.
 

@@ -1,10 +1,10 @@
 # Série 28 — Structure de données récursives
 
-## -
+## - { points=10 }
 
 On considère une liste simplement chaînée dont chaque noeud peut contenir un `float`. La liste est caractérisée par deux structures `Node` et `List`.
 
-### -
+### - { points=2 }
 
 Implémentez le type `Node` et la définition de son contenu.
 
@@ -17,7 +17,7 @@ Implémentez le type `Node` et la définition de son contenu.
     } Node;
     ```
 
-### -
+### - { points=2 }
 
 Implémentez le type `List` et la définition de son contenu. Cette dernière permet d'accéder le premier et le dernier élément de la liste et contient également le nombre d'éléments dans la liste.
 
@@ -31,7 +31,7 @@ Implémentez le type `List` et la définition de son contenu. Cette dernière pe
     } Node;
     ```
 
-### -
+### - { points=2 }
 
 Implémentez la fonction `push` permettant d'insérer un nouvel élément dans la liste. Veillez aux cas particuliers, par exemple lorsque la liste est vide. La fonction retourne une valeur négative en cas d'erreur, zéro en cas de succès.
 
@@ -57,7 +57,7 @@ Implémentez la fonction `push` permettant d'insérer un nouvel élément dans l
     }
     ```
 
-### -
+### - { points=2 }
 
 Implémentez la fonction `mean` permettant de calculer la valeur moyenne du contenu de la liste.
 
@@ -75,7 +75,7 @@ Implémentez la fonction `mean` permettant de calculer la valeur moyenne du cont
     }
     ```
 
-### -
+### - { points=2 }
 
 Implémentez une fonction de comparaison `compare` qui reçoit deux listes et retourne 0 si le contenu est identique, et 1 sinon.
 
@@ -99,13 +99,13 @@ Implémentez une fonction de comparaison `compare` qui reçoit deux listes et re
     }
     ```
 
-## -
+## - { points=6 }
 
 Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété suivante : l'enfant de gauche est toujours plus petit que son parent et l'enfant de droite est toujours plus grand que son parent. Voici un exemple :
 
 ![BST](../../assets/bst.pdf){ width=60% }
 
-### -
+### - { points=2 }
 
 Écrire la structure de donnée d'un noeud d'un BST contenant des valeurs entières non signées.
 
@@ -119,7 +119,7 @@ Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété sui
     } Node;
     ```
 
-### -
+### - { points=2 }
 
 Écrire une fonction récursive permettant de rechercher une valeur dans un bst. Si la valeur est trouvée la fonction retourne 1, sinon 0.
 
@@ -134,7 +134,7 @@ Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété sui
     }
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la complexité en temps (Big-O) pour la recherche d'un élément dans un BST ?
 

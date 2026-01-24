@@ -1,10 +1,10 @@
 # Série 7 — Chaînes de caractères
 
-## -
+## - { points=14 }
 
 Pour les exemples ci-dessous, indiquez successivement s'ils compilent sans erreur et le cas échéant, si les chaînes de caractères sont modifiables ou non.
 
-### -
+### - { points=2 }
 
 ```c
 char s[] = 'foo';
@@ -12,7 +12,7 @@ char s[] = 'foo';
 
 [Erreur, guillemet simple]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char s[42] = "Les carottes sont cuites.";
@@ -20,7 +20,7 @@ char s[42] = "Les carottes sont cuites.";
 
 [L'expression compile et la chaîne est modifiable.]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char s[2] = "Babel Fish";
@@ -28,7 +28,7 @@ char s[2] = "Babel Fish";
 
 [Erreur : la taille de la chaîne est trop courte]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char s[] = "foo\0bar\0";
@@ -36,7 +36,7 @@ char s[] = "foo\0bar\0";
 
 [L'expression compile et la chaîne est modificable]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char *s = "Prix Béton 1981";
@@ -44,7 +44,7 @@ char *s = "Prix Béton 1981";
 
 [L'expression compile mais la chaîne est non modifiable]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char *s[] = {"foo", "bar", "baz"};
@@ -52,7 +52,7 @@ char *s[] = {"foo", "bar", "baz"};
 
 [Le tableau de chaînes est non modifiable]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 char s[] = {"foo" "bar" "baz"};
@@ -60,11 +60,11 @@ char s[] = {"foo" "bar" "baz"};
 
 [La chaîne compile et est modifiable. Elle vaut "foobarbaz"]{w=12cm}
 
-## -
+## - { points=10 }
 
 Manipulation des chaînes de caractères : que retournent chacunes de ces fonctions ?
 
-### -
+### - { points=2 }
 
 ```c
 int foo() { char s[] = "foo"; return strlen(s); }
@@ -72,7 +72,7 @@ int foo() { char s[] = "foo"; return strlen(s); }
 
 [3]{w=3cm}
 
-### -
+### - { points=2 }
 
 ```c
 int foo() { char s[] = "foo"; return sizeof(s); }
@@ -80,7 +80,7 @@ int foo() { char s[] = "foo"; return sizeof(s); }
 
 [4]{w=3cm}
 
-### -
+### - { points=2 }
 
 ```c
 int foo() { char s[] = "foo"; return s[3]; }
@@ -88,7 +88,7 @@ int foo() { char s[] = "foo"; return s[3]; }
 
 [0]{w=3cm}
 
-### -
+### - { points=2 }
 
 ```c
 int foo() { char s[] = "foo"; return s[4]; }
@@ -96,7 +96,7 @@ int foo() { char s[] = "foo"; return s[4]; }
 
 [On ne peut pas savoir, peut être une *segmentation fault*.]{w=12cm}
 
-### -
+### - { points=2 }
 
 ```c
 int foo() { char s[] = "foo\n\t\0bar"; return strlen(s); }
@@ -104,7 +104,7 @@ int foo() { char s[] = "foo\n\t\0bar"; return strlen(s); }
 
 [5]{w=3cm}
 
-## -
+## - { points=4 }
 
 En utilisant la bibliothèque *ctype.h*, écrire une fonction qui transforme une chaîne de caractères reçue en majuscules. Le prototype de la fonction est `void majuscule(char *s)`.
 
@@ -119,7 +119,7 @@ En utilisant la bibliothèque *ctype.h*, écrire une fonction qui transforme une
     }
     ```
 
-## -
+## - { points=4 }
 
 Soit un texte d'entrée, indiquer la position à laquelle se trouve une sous-chaîne, si elle existe. Sinon retourne -1. Le prototype de la fonction est `int position(char s[], char sub[])`. Aidez-vous également de la bibliothèque *ctype.h*.
 
@@ -134,7 +134,7 @@ Soit un texte d'entrée, indiquer la position à laquelle se trouve une sous-cha
     }
     ```
 
-## -
+## - { points=4 }
 
 Que fait cette fonction et que retourne-t-elle ?
 
@@ -159,7 +159,7 @@ int mysterious()
 
     La fonction compte le nombre de voyelles dans la chaîne `s`. Elle retourne la valeur 3.
 
-## -
+## - { points=4 }
 
 **Difficile :** Il existe trois types de modifications qui peuvent être appliquées à une chaîne de caractère : insérer un caractère, supprimer un caractère, ou remplacer un caractère. Considérant deux chaînes de caractères, écrivez une fonction qui retourne si les deux chaînes ne sont qu'à une modification près.
 

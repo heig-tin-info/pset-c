@@ -2,7 +2,7 @@
 
 Pour vous préparer aux examens écrits, on vous propose de réaliser les exercices suivants sur papier avec un crayon et une gomme. Vous pouvez utiliser des feuilles de brouillon.
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui reçoit en paramètre une chaîne de caractères et qui transforme les minuscules en majuscules dans cette chaîne. Ne pas utiliser la fonction standard `toupper`.
 
@@ -19,7 +19,7 @@ Pour vous préparer aux examens écrits, on vous propose de réaliser les exerci
     }
     ```
 
-## -
+## - { points=4 }
 
 Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaîne de caractère.
 
@@ -35,7 +35,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui retourne une valeur aléatoire entière entre a et b, vous pouvez utiliser la fonction `rand()`.
 
@@ -47,7 +47,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui échange deux entiers passés par référence.
 
@@ -62,7 +62,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui reçoit trois valeurs réelles en paramètres et qui les trie dans l'ordre croissant. Par exemple si vous avez $a=15, b=23, c=4$ après l'appel de fonction, ces valeurs vaudront : $a=4, b=15, c=23$. Vous pouvez utiliser la fonction `swap` écrite plus haut pour échanger les valeurs.
 
@@ -77,7 +77,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui retourne la moyenne de trois valeurs réelles reçues en paramètres.
 
@@ -90,7 +90,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui affiche `version` sur la sortie standard si un argument `--version` est présent dans les arguments du programme. Cette fonction aura le prototype suivant, et la fonction main est donnée.
 
@@ -109,7 +109,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui retourne la valeur minimale d'un tableau de réels. Le prototype est le suivant :
 

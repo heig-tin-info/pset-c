@@ -1,6 +1,6 @@
 # Série E1 — Freinage d'une voiture avec traînée aérodynamique
 
-## -
+## - { points=4 }
 
 ### Modèle physique {heading=true}
 

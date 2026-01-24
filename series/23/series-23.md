@@ -1,6 +1,6 @@
 # Série 23 — Les pointeurs
 
-## -
+## - { points=4 }
 
 Complétez le tableau suivant en indiquant la valeur des variables après chaque instruction.
 
@@ -26,7 +26,7 @@ Pour indiquer qu'une variable est non initialisée ou que son contenu n'est pas 
 | `*q = *p /= *q;` | [6] | [6] | [6] | [&a] | [&b] |
 | `int *r[3] = {&a, &b, &c};` | [6] | [6] | [6] | [&a] | [&b] |
 
-## -
+## - { points=4 }
 
 Intéressons-nous à l'arithmétique de pointeurs. On considère `p` un pointeur qui *pointe* sur un tableau `a`:
 
@@ -49,7 +49,7 @@ Quelles sont les valeurs ou adresses que fournissent ces expressions ?
 - `(uintptr_t)(p + 3) - (uintptr_t)a` — [12 (bytes)]
 - `(&a)[1][-1]` — [162]
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui respecte le prototype ci-dessous. Cette fonction copie une chaîne de caractère de la source vers la destination.
 

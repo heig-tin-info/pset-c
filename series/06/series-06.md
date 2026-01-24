@@ -1,6 +1,6 @@
 # Série 6 — Opérateurs et embranchements
 
-## Opérateurs combinés
+## Opérateurs combinés { points=4 }
 
 En reprenant à chaque fois les valeurs suivantes, calculer les valeurs de `i`, `j` et lorsque cela s'applique `z` après l'exécution des instructions suivantes :
 
@@ -22,9 +22,9 @@ int z;
 | `z = i++ * j == 6` | [2] | [3] | [0] |
 | `z = ++i * j == 6` | [2] | [3] | [1] |
 
-## Opérateur ternaire
+## Opérateur ternaire { points=4 }
 
-### -
+### - { points=2 }
 
 Simplifiez l'expression suivante.
 
@@ -38,7 +38,7 @@ z = (a > b ? a : b) + (a <= b ? a : b) ;
     z = a + b;
     ```
 
-### -
+### - { points=2 }
 
 Soit variable `n` est de type `int`. Écrire une expression unique qui prend la valeur:
 
@@ -52,7 +52,7 @@ Soit variable `n` est de type `int`. Écrire une expression unique qui prend la 
     n < 0 ? -1 : (n == 0) ? 0 : 1
     ```
 
-## Opérateurs incorrects
+## Opérateurs incorrects { points=10 }
 
 Soit les déclarations suivantes, indiquez pourquoi les propositions suivantes sont incorrectes :
 
@@ -61,7 +61,7 @@ double f, g = 7;
 int i, j = j;
 ```
 
-### -
+### - { points=2 }
 
 ```c
 int(f) + 1.9
@@ -71,7 +71,7 @@ int(f) + 1.9
 
     La coercition de type s'écrit `(int)f` et non `int(f)`.
 
-### -
+### - { points=2 }
 
 ```c
 i = 1 + j = j / 2
@@ -81,7 +81,7 @@ i = 1 + j = j / 2
 
     L'opérateur `=` est moins prioritaire que `+`. En conséquence, cette expression tente d'affecter `j / 2` à `1 + j`. Or, une affectation n'est possible que si l'expression à gauche est une variable, ce qui n'est pas le cas ici.
 
-### -
+### - { points=2 }
 
 ```c
 f = g << 2
@@ -91,7 +91,7 @@ f = g << 2
 
     Le décalage de bits est un opérateur de type `int`, et non un opérateur de type `double`.
 
-### -
+### - { points=2 }
 
 ```c
 i = ++j++
@@ -101,7 +101,7 @@ i = ++j++
 
     Cette expression essaie d'exécuter l'opérateur de post-incrémentation à `(++j)` or cette expression est évalué comme une valeur, et non une variable.
 
-### -
+### - { points=2 }
 
 ```c
 i++ = ++j
@@ -111,7 +111,7 @@ i++ = ++j
 
     La partie gauche de l'opérateur `i++` est évaluée comme une valeur, et n'est donc pas assignable. On dit que le membre de gauche n'est pas une *lvalue*.
 
-## -
+## - { points=20 }
 
 Indiquez pour chaque groupe d'instruction ci-dessous si l'expression est correcte ou non. Sinon, expliquer pourquoi.
 
@@ -120,7 +120,7 @@ int i;
 assert(scanf("%d", &i) == 1);
 ```
 
-### -
+### - { points=2 }
 
 ```c
 if (!(i < 8) && !(i > 8)) then printf("i vaut 8\n");
@@ -130,7 +130,7 @@ if (!(i < 8) && !(i > 8)) then printf("i vaut 8\n");
 
     Incorrect : une erreur apparaît à la compilation, le mot *then* n'est pas valide en C.
 
-### -
+### - { points=2 }
 
 ```c
 if (!(i < 8) && !(i > 8)) printf("i "); printf("vaut 8\n");
@@ -140,7 +140,7 @@ if (!(i < 8) && !(i > 8)) printf("i "); printf("vaut 8\n");
 
     Incorrect : la première instruction est correctement exécutée mais la seconde s'exécute inconditionnellement.
 
-### -
+### - { points=2 }
 
 ```c
 if !(i < 8) && !(i > 8) printf("i vaut 8\n");
@@ -150,7 +150,7 @@ if !(i < 8) && !(i > 8) printf("i vaut 8\n");
 
     Incorrect : l'expression est mal formée, la condition d'embranchement après le *if* doit être entre parenthèses.
 
-### -
+### - { points=2 }
 
 ```c
 if (!(i < 8) && !(i > 8)) printf("i vaut 8\n");
@@ -160,7 +160,7 @@ if (!(i < 8) && !(i > 8)) printf("i vaut 8\n");
 
     Correct !
 
-### -
+### - { points=2 }
 
 ```c
 if (i = 8) printf("i vaut 8\n");
@@ -170,7 +170,7 @@ if (i = 8) printf("i vaut 8\n");
 
     Incorrect : affiche que `i` vaut 8 dans tous les cas.
 
-### -
+### - { points=2 }
 
 ```c
 if (i & (1 << 3)) printf("i vaut 8\n");
@@ -180,7 +180,7 @@ if (i & (1 << 3)) printf("i vaut 8\n");
 
     Correct !
 
-### -
+### - { points=2 }
 
 ```c
 if (i ^ 8) printf("i vaut 8\n");
@@ -190,7 +190,7 @@ if (i ^ 8) printf("i vaut 8\n");
 
     Incorrect : affiche *i vaut 8* pour tous les cas sauf lorsque `i` vaut 8 !
 
-### -
+### - { points=2 }
 
 ```c
 if (i - 8) printf("i vaut 8\n");
@@ -200,7 +200,7 @@ if (i - 8) printf("i vaut 8\n");
 
     Incorrect : affiche *i vaut 8* pour tous les cas sauf lorsque `i` vaut 8 !
 
-### -
+### - { points=2 }
 
 ```c
 if (i == 1 << 3) printf ("i vaut 8\n");
@@ -210,7 +210,7 @@ if (i == 1 << 3) printf ("i vaut 8\n");
 
     Correct !
 
-### -
+### - { points=2 }
 
 ```c
 if (!((i < 8) || (i > 8))) printf("i vaut 8\n");
@@ -220,7 +220,7 @@ if (!((i < 8) || (i > 8))) printf("i vaut 8\n");
 
     Correct !
 
-## -
+## - { points=4 }
 
 Que voyez-vous sur la sortie standard ?
 

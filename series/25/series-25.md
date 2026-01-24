@@ -1,6 +1,6 @@
 # Série 25 — La récursivité
 
-## -
+## - { points=14 }
 
 On considère la suite de Fibonacci, définie par la relation suivante:
 
@@ -12,7 +12,7 @@ $$
     \end{matrix}\right.
 $$
 
-### -
+### - { points=2 }
 
 Écrire une fonction récursive qui calcule le terme de rang $n$ de cette suite.
 
@@ -25,7 +25,7 @@ $$
     }
     ```
 
-### -
+### - { points=2 }
 
 Représentez par un arbre les appels de fonction imbriqués lors de l'évaluation pour l'appel de `fib(7)`.
 
@@ -35,7 +35,7 @@ Représentez par un arbre les appels de fonction imbriqués lors de l'évaluatio
 
     ![Arbre d'appels Fibonacci](../../assets/fib.png){ width=80% }
 
-### -
+### - { points=2 }
 
 Quelle est la complexité en temps (*big-O*) de cette fonction ?
 
@@ -89,7 +89,7 @@ Quelle est la complexité en temps (*big-O*) de cette fonction ?
     O((1+\sqrt{5}/2)^n + ((1-\sqrt{5})/2)^2) = O(1.618^n) \rightarrow O(2^n)
     $$
 
-### -
+### - { points=2 }
 
 Écrire une fonction itérative qui calcule le terme de rang $n$.
 
@@ -111,7 +111,7 @@ Quelle est la complexité en temps (*big-O*) de cette fonction ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la complexité en temps de cette fonction itérative ?
 
@@ -123,7 +123,7 @@ Quelle est la complexité en temps de cette fonction itérative ?
     O(n)
     $$
 
-### -
+### - { points=2 }
 
 Écrire une fonction de mémoization en programmation dynamique qui encapsule votre fonction récursive afin de réduire la complexité.
 
@@ -144,7 +144,7 @@ Quelle est la complexité en temps de cette fonction itérative ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la complexité de cette nouvelle fonction ?
 
@@ -152,7 +152,7 @@ Quelle est la complexité de cette nouvelle fonction ?
 
     La complexité devient $O(n)$ temps avec une complexité de $O(n)$ en espace mémoire.
 
-## -
+## - { points=4 }
 
 Pour réaliser certaines fonctions de calcul dans une application de simulation numérique, on doit disposer d'une fonction calculant le polynôme suivant :
 
@@ -187,7 +187,7 @@ double compute_polynom(double x)
 
 Cette fonction est appelée des millions de fois pendant le calcul de la simulation numérique, et les temps de calcul obtenus sont beaucoup trop élevés.
 
-### -
+### - { points=2 }
 
 Expliquez pourquoi la programmation de cette fonction n'est pas optimale au niveau des performances.
 
@@ -196,7 +196,7 @@ Expliquez pourquoi la programmation de cette fonction n'est pas optimale au nive
     La factorielle de 1 à 5 est recalculée des millions de fois, alors que c'est une valeur constante.
     Le calcul du polynôme est fait avec la méthode inefficace des puissances. Ainsi, on ne réutilise pas la valeur de $x^2$ pour calculer $x^3$.
 
-### -
+### - { points=2 }
 
 Proposez des optimisations du code permettant de diminuer significativement les temps de calcul de cette fonction.
 

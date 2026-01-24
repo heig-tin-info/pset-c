@@ -1,6 +1,6 @@
 # Série 9 — Pointeurs et tableaux
 
-## -
+## - { points=4 }
 
 Que fait ce programme ?
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     }
     ```
 
-## -
+## - { points=10 }
 
 Quelques questions sur les tableaux. Considérez ces déclarations:
 
@@ -75,7 +75,7 @@ int *e[10];
 int (*f)[10];
 ```
 
-### -
+### - { points=2 }
 
 Quelle est la taille en mémoire de chaque déclaration ?
 
@@ -94,7 +94,7 @@ Quelle est la taille en mémoire de chaque déclaration ?
     int (*f)[10]; // sizeof(int *) = 8
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la différence entre `sizeof(a)`, `sizeof(*a)` et `sizeof(a[1])` ?
 
@@ -106,7 +106,7 @@ Quelle est la différence entre `sizeof(a)`, `sizeof(*a)` et `sizeof(a[1])` ?
     sizeof(a[1]) = sizeof(int) = 4 // Taille du deuxième élément du tableau
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la différence entre `sizeof(d)`, `strlen(d)` ? Et comment est-ce que `strlen` fonctionne ?
 
@@ -119,7 +119,7 @@ Quelle est la différence entre `sizeof(d)`, `strlen(d)` ? Et comment est-ce que
 
     La fonction `strlen` itère sur la chaîne de caractères jusqu'à trouver la sentinelle `\0`.
 
-### -
+### - { points=2 }
 
 Pouvez-vous implémenter le comportement de `strlen` ?
 
@@ -135,7 +135,7 @@ Pouvez-vous implémenter le comportement de `strlen` ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Comment afficher le contenu de `b` sous forme de matrice ligne colonne ?
 
@@ -149,11 +149,11 @@ Comment afficher le contenu de `b` sous forme de matrice ligne colonne ?
     }
     ```
 
-## -
+## - { points=6 }
 
 Pointeurs et fonctions
 
-### -
+### - { points=2 }
 
 Quelle est la différence entre `int *p` et `int* p` ?
 
@@ -161,7 +161,7 @@ Quelle est la différence entre `int *p` et `int* p` ?
 
     Il n'y en a pas, les deux sont équivalents. Rappelez-vous que le C ne considère pas les espaces comme significatifs.
 
-### -
+### - { points=2 }
 
 Quelle est la différence entre `int *p` et `int p[10]` ?
 
@@ -171,7 +171,7 @@ Quelle est la différence entre `int *p` et `int p[10]` ?
 
     `int p[10]` déclare un tableau non initialisé de 10 entiers. La différence est que `p` peut être modifié pour pointer vers un autre entier, alors que `p[10]` est une constante qui ne peut pas être modifiée, seul le contenu du tableau peut être modifié.
 
-### -
+### - { points=2 }
 
 Pour la déclaration `int a[10]`, si j'écrit `a[10] = 42`, est-ce que le compilateur va générer une erreur ? Et que se passe-t-il ?
 
@@ -181,11 +181,11 @@ Pour la déclaration `int a[10]`, si j'écrit `a[10] = 42`, est-ce que le compil
 
     En effet `a[10]` est un raccourci pour `*(a + 10)`, et `a + 10` est une adresse qui n'est pas dans le tableau car on accède au onzième élément alors que le tableau n'en contient que dix. On appelle ça du jardinage mémoire et le risque est une erreur de segmentation.
 
-## -
+## - { points=12 }
 
 Passage par adresse et par valeur
 
-### -
+### - { points=2 }
 
 Que signifie ce prototype de fonction `void f(int *p)` ?
 
@@ -193,7 +193,7 @@ Que signifie ce prototype de fonction `void f(int *p)` ?
 
     La fonction `f` reçoit un pointeur vers un entier en paramètre. C'est à dire qu'elle reçoit l'adresse d'une variable de type entier et peut donc modifier cette variable à la source. Si la variable p était passée directement `void f(int p)`, la fonction recevrait une copie de la variable et ne pourrait pas la modifier. Enfin, elle pourrait modifier la valeur sur le *stack* mais pas la valeur de la variable originale.
 
-### -
+### - { points=2 }
 
 Que signifie ce prototype de fonction `void f(int a[])`, comparez avec la question précédente.
 
@@ -201,7 +201,7 @@ Que signifie ce prototype de fonction `void f(int a[])`, comparez avec la questi
 
     C'est la même chose. L'écriture `int a[]` est un raccourci pour `int *a`.
 
-### -
+### - { points=2 }
 
 Considérant le code suivant, est-ce que le code est fonctionnel ? Que voyez-vous à l'écran si vous l'exécutez ?
 
@@ -240,7 +240,7 @@ int main() {
           |                  ^
     ```
 
-### -
+### - { points=2 }
 
 Si le code est modifié avec ce prototype de fonction `void f(int a[10])`, comparez avec la questions précédente.
 
@@ -248,7 +248,7 @@ Si le code est modifié avec ce prototype de fonction `void f(int a[10])`, compa
 
     Le comportement est strictement identique car `int a[10]` est un raccourci pour `int *a`. Le passage de la taille du tableau est ignoré par le compilateur.
 
-### -
+### - { points=2 }
 
 Comment convenablement écrire la fonction `f` pour qu'elle s'adapte à n'importe quelle taille de tableau ? (indice, il faut deux paramètres)
 
@@ -266,7 +266,7 @@ Comment convenablement écrire la fonction `f` pour qu'elle s'adapte à n'import
 
     La fonction retourne la taille du tableau et affiche sur la sortie standard les éléments du tableau.
 
-### -
+### - { points=2 }
 
 Comment modifier le prototype de `f` pour que le tableau puisse être parcouru mais qu'il ne puisse pas être modifié ?
 

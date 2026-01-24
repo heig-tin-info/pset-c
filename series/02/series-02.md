@@ -1,6 +1,6 @@
 # Série 2 — Variables et identificateurs
 
-## -
+## - { points=4 }
 
 Pour chacun des identificateurs suivants, indiquez s'il est correct ou incorrect, et donnez une justification.
 
@@ -19,7 +19,7 @@ Pour chacun des identificateurs suivants, indiquez s'il est correct ou incorrect
 - `INT` — [Correct, mais pas recommandé]{w=10cm}
 - `main` — [Correct, mais plutôt réservé à la fonction d'entrée]{w=10cm}
 
-## -
+## - { points=4 }
 
 Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non initialisées sont notées avec `?`. Cela signifie que leur contenu n'est pas prévisible.
 
@@ -32,7 +32,7 @@ Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non 
 | `b = a * (c + 1);` | [6] | [36] | [5] | [?] |
 | `d = b % 2;` | [6] | [36] | [5] | [0] |
 
-## -
+## - { points=4 }
 
 Écrire une fonction permettant d'échanger les valeurs de `a` et `b`. À la fin de cette séquence d'instruction, la valeur initiale de `a` doit être dans `b` et réciproquement.
 
@@ -45,7 +45,7 @@ Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non 
     b = tmp;
     ```
 
-## -
+## - { points=4 }
 
 Le programme suivant comporte 13 erreurs. Trouvez-les et corrigez-les.
 
@@ -107,7 +107,7 @@ INT Main()
     } // 13. Une accolade en trop.
     ```
 
-## -
+## - { points=4 }
 
 Écrire un programme demandant sur l'entrée standard 2 nombres réels : tension et résistance. Le programme indique ensuite la valeur du courant circulant dans le circuit en utilisant la loi d'Ohm. Un test doit être prévu si la résistance est nulle.
 

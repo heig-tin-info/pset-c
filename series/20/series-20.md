@@ -1,6 +1,6 @@
 # Série 20 — Révision du cours Info1
 
-## -
+## - { points=20 }
 
 Considérez les déclarations suivantes :
 
@@ -14,7 +14,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
 **Exemple :** `2 / 3 * c`, réponse : `(int)0`.
 
-### -
+### - { points=2 }
 
 `c / 2`
 
@@ -22,7 +22,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)1
 
-### -
+### - { points=2 }
 
 `s + c / 10`
 
@@ -30,7 +30,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)7
 
-### -
+### - { points=2 }
 
 `l + i / 2.0`
 
@@ -38,7 +38,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (double)5.5
 
-### -
+### - { points=2 }
 
 `d + f`
 
@@ -46,7 +46,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (double)11
 
-### -
+### - { points=2 }
 
 `(int)d + f`
 
@@ -54,7 +54,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (float)10.3
 
-### -
+### - { points=2 }
 
 `(int)d + l`
 
@@ -62,7 +62,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (long)11
 
-### -
+### - { points=2 }
 
 `c << 2`
 
@@ -70,7 +70,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)12
 
-### -
+### - { points=2 }
 
 `s & 0xf0`
 
@@ -78,7 +78,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)0
 
-### -
+### - { points=2 }
 
 `s && 0xf0`
 
@@ -86,7 +86,7 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)1
 
-### -
+### - { points=2 }
 
 `d + f == s + l`
 
@@ -94,11 +94,11 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur.
 
     (int)0
 
-## -
+## - { points=10 }
 
 Dans chacune des structures de contrôle ci-dessous, indiquer la nature de l'erreur.
 
-### -
+### - { points=2 }
 
 ```c
 double x = 100.0;
@@ -113,7 +113,7 @@ while (x > 1.0);
 
     Il manque les accolades autour du bloc `do..while`.
 
-### -
+### - { points=2 }
 
 ```c
 long x = 100;
@@ -125,7 +125,7 @@ if (x = 0)
 
     Le test d'égalité utilise l'opérateur `==`. L'opérateur d'affectation `=` n'est pas valable.
 
-### -
+### - { points=2 }
 
 ```c
 double x = 100.0;
@@ -142,7 +142,7 @@ switch (x) {
 
     L'instruction `switch` n'est pas applicable à un type à virgule flottante.
 
-### -
+### - { points=2 }
 
 ```c
 for (int i = 0; i < 10; i++);
@@ -155,7 +155,7 @@ for (int i = 0; i < 10; i++);
 
     Le point virgule à la fin de l'instruction termine cette dernière. Le bloc formé des accolades n'appartient pas à la boucle.
 
-### -
+### - { points=2 }
 
 ```c
 int i = 0;
@@ -169,7 +169,7 @@ while i < 100
 
     Il manque des parenthèses autour de la condition de l'instruction `while`.
 
-## -
+## - { points=4 }
 
 On s'intéresse ici au passage par adresse. Observez le programme suivant et indiquez ce que vous voyez sur la sortie standard.
 
@@ -196,7 +196,7 @@ int main() {
 
     00000 105 102 300 102
 
-## -
+## - { points=4 }
 
 Algorithme sur les tableaux : écrire une fonction qui reçoit en paramètre un tableau d'entiers et qui retourne la position de la première occurrence d'une valeur dans ce tableau, ou `-1` si la valeur n'est pas présente. Utiliser la syntaxe pointeur pour le paramètre tableau.
 
@@ -211,7 +211,7 @@ Algorithme sur les tableaux : écrire une fonction qui reçoit en paramètre un 
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction qui calcul la longueur totale des segments de droite dont les points sont reçus en paramètre. Les données sont un tableau composé de N par 2. Les indices du sous tableau sont les coordonnées X et Y des points.
 

@@ -1,8 +1,8 @@
 # Série 5 — Opérateurs logiques
 
-## Opérateurs de relation et opérateurs logiques
+## Opérateurs de relation et opérateurs logiques { points=4 }
 
-### -
+### - { points=2 }
 
 Ajouter à l'expression suivante toutes les parenthèses montrant l'ordre d'exécution des opérations.
 
@@ -19,7 +19,7 @@ int z = x >= 0 && x <= 20 && y > x || y == 50 && x == 1 * 2 || y == 30 + 30;
     ((y == 50) && (x == (1 * 2))) || (y == (30 + 30)));
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la valeur de `z` évaluées avec les valeurs suivantes ?
 
@@ -30,9 +30,9 @@ Quelle est la valeur de `z` évaluées avec les valeurs suivantes ?
 - `x = 2.0 ; y = 50.0;` — [1]{w=5cm}
 - `x = -10.0 ; y = 60.0;` — [1]{w=5cm}
 
-## Cas particuliers
+## Cas particuliers { points=10 }
 
-### -
+### - { points=2 }
 
 Que vaut `i` ?
 
@@ -43,7 +43,7 @@ i++;
 
 [\texttt{i} vaut 32768]{w=5cm}
 
-### -
+### - { points=2 }
 
 Que vaut `i` ?
 
@@ -54,7 +54,7 @@ int16_t i = 0;
 
 [\texttt{i} vaut 0.]{w=5cm}
 
-### -
+### - { points=2 }
 
 Que vaut `i` ?
 
@@ -64,7 +64,7 @@ short i = 'A' > 'B' ? 'C' : 'D';
 
 [\texttt{i} vaut 'D', soit 68.]{w=5cm}
 
-### -
+### - { points=2 }
 
 Que valent `i`, `j` et `k` ?
 
@@ -75,7 +75,7 @@ k = (k = 5, i++) >= j ? i++ : --j;
 
 [i: 1, j: 0, k: 5]{w=5cm}
 
-### -
+### - { points=2 }
 
 Que valent `i`, `j` et `k` ?
 
@@ -86,7 +86,7 @@ k = i >= j << 1 ? i++ << 2 : --j << 3;
 
 [i: 3, j: 1, k: 8]{w=5cm}
 
-## Calcul de masques : que vaut `m` en binaire ?
+## Calcul de masques : que vaut `m` en binaire ? { points=4 }
 
 ```c
 char m, n = 2;
@@ -102,9 +102,9 @@ char d = 0x55, e = 0xaa;
 - `m = d & ~(1 << n);` — [0b01010001]{w=5cm}
 - `m = e & ~(1 << n);` — [0b10101010]{w=5cm}
 
-## Résoudre le problème avec une ligne de code
+## Résoudre le problème avec une ligne de code { points=6 }
 
-### -
+### - { points=2 }
 
 Mettre à 1 (*set*) le n-ième bit de la variable `x`.
 
@@ -112,7 +112,7 @@ Mettre à 1 (*set*) le n-ième bit de la variable `x`.
 
     x |= 1 << n;
 
-### -
+### - { points=2 }
 
 Mettre à 0 (*clear*) le n-ième bit de la variable `x`.
 
@@ -122,7 +122,7 @@ Mettre à 0 (*clear*) le n-ième bit de la variable `x`.
     x &= ~(1 << n);
     ```
 
-### -
+### - { points=2 }
 
 Inverser (*toggle*) le n-ième bit de la variable `x`.
 
@@ -132,7 +132,7 @@ Inverser (*toggle*) le n-ième bit de la variable `x`.
     x ^= 1 << n;
     ```
 
-## -
+## - { points=4 }
 
 Écrire une fonction en C qui inverse les chiffres d'un entier. Utilisez le prototype suivant :
 

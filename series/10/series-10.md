@@ -1,8 +1,8 @@
 # Série 16 — Révision, fonctions et programmes
 
-## Choix multiples
+## Choix multiples { points=8 }
 
-### -
+### - { points=2 }
 
 Cocher les propositions vraies concernant `strncmp` ?
 
@@ -11,7 +11,7 @@ Cocher les propositions vraies concernant `strncmp` ?
 - [ ] La fonction retourne 1 si les chaînes sont égales.
 - [x] La fonction peut s'appeler avec `strncmp("abc", "ab", 2)`.
 
-### -
+### - { points=2 }
 
 Quel est le rôle de l'opérateur `^` ?
 
@@ -22,7 +22,7 @@ Quel est le rôle de l'opérateur `^` ?
 - [ ] Modulo.
 - [ ] Inversion bit à bit.
 
-### -
+### - { points=2 }
 
 Quelles sont les déclarations de tableaux valides ?
 
@@ -33,7 +33,7 @@ Quelles sont les déclarations de tableaux valides ?
 - [ ] `int a[10] = 0;`
 - [ ] `int a[3]; a = {1,2,3};`
 
-### -
+### - { points=2 }
 
 Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 
@@ -43,9 +43,9 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 - [x] Les deux peuvent être passés à une fonction pour être modifiés.
 - [x] L'accès à l'élément 2 s'écrit dans les deux cas `p[2]`.
 
-## Fonctions
+## Fonctions { points=10 }
 
-### -
+### - { points=2 }
 
 Écrire une fonction `vowel` qui prend en paramètre une chaîne de caractère et qui retourne le nombre de voyelles dans la chaîne.
 
@@ -65,7 +65,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire une fonction `max_interval` qui calcule l'intervalle le plus grand dans un tableau d'entiers passé en paramètre. Le second paramètre est la taille du tableau.
 
@@ -85,7 +85,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire une fonction `is_palindrome` qui retourne vrai si une chaîne de caractères est un palindrome, faux sinon. La chaîne est passée en paramètre.
 
@@ -102,7 +102,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire une fonction qui prend en paramètre deux tableaux d'entiers et qui s'assure que l'un est bien dans l'ordre inverse que l'autre. La fonction prend en paramètre les deux tableaux et leur taille qui est commune.
 
@@ -118,7 +118,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire un une fonction qui rempli un tableau à deux dimensions de taille 10x10 avec des valeurs aléatoires entre 0 et 100. La fonction prend en paramètre le tableau, le nombre de lignes et le nombre de colonnes.
 
@@ -133,7 +133,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-## -
+## - { points=4 }
 
 Écrire un programme complet qui lit sur les arguments `--min=X` et `--max=Y` où X et Y sont des entiers positifs. Le programme appelle une fonction `compute(x, y)` avec les valeurs capturées sur les arguments. Cette fonction retourne vraie si elle s'est exécutée correctement, sinon faux.
 

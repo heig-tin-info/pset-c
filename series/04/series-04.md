@@ -1,6 +1,6 @@
 # Série 4 — Boucles
 
-## -
+## - { points=8 }
 
 Considérons le cas d'un système de vision industrielle qui inspecte des pièces fabriquées au sein d'une ligne d'assemblage. Le programme de ce système de vision comporte certaines variables internes permettant de mémoriser le décompte des pièces analysées. Ces variables sont les suivantes :
 
@@ -10,7 +10,7 @@ int nb_parts_bad = 200;
 double percent_good = (nb_parts - nb_parts_bad) / nb_parts;
 ```
 
-### -
+### - { points=2 }
 
 Quel résultats espérait le développeur ?
 
@@ -18,7 +18,7 @@ Quel résultats espérait le développeur ?
 
     Avec 200 pièces mauvaises sur 2000 pièces produites, le programmeur attendait un résultat de 0.9, signifiant 90 % de pièces bonnes.
 
-### -
+### - { points=2 }
 
 Qu'obtient-il dans la pratique ?
 
@@ -26,7 +26,7 @@ Qu'obtient-il dans la pratique ?
 
     0.0
 
-### -
+### - { points=2 }
 
 Expliquez les défaut constaté ?
 
@@ -34,7 +34,7 @@ Expliquez les défaut constaté ?
 
     Le calcul effectue la division entière 1800 / 2000, qui donne comme résultat 0. Ensuite, le résultat est transformé en float et donne 0.0
 
-### -
+### - { points=2 }
 
 Que corriger pour obtenir un résultat correct ?
 
@@ -46,11 +46,11 @@ Que corriger pour obtenir un résultat correct ?
     double percent_good = (double)(nb_parts - nb_parts_bad) / nb_parts;
     ```
 
-## -
+## - { points=10 }
 
 Indiquer si les affirmations suivantes sont justes ou fausses. Dans les cas où elles sont fausses, expliquer ce qui serait correct pour une instruction `do..while` :
 
-### -
+### - { points=2 }
 
 Les instructions de la boucle sont toujours exécutées au moins une fois.
 
@@ -58,7 +58,7 @@ Les instructions de la boucle sont toujours exécutées au moins une fois.
 
     Correct
 
-### -
+### - { points=2 }
 
 Comme un mot réservé spécifique commence et termine la boucle, on n'a pas besoin de créer un bloc lorsque l'on a plusieurs instructions.
 
@@ -66,7 +66,7 @@ Comme un mot réservé spécifique commence et termine la boucle, on n'a pas bes
 
     Incorrect, il faut utiliser un bloc s'il y a plusieurs instructions dans la boucle.
 
-### -
+### - { points=2 }
 
 La condition se trouvant en fin de boucle, on sort de la boucle lorsque la condition est vraie.
 
@@ -74,7 +74,7 @@ La condition se trouvant en fin de boucle, on sort de la boucle lorsque la condi
 
     Incorrect, on sort de la boucle lorsque la condition est fausse.
 
-### -
+### - { points=2 }
 
 Le type de la condition peut être char.
 
@@ -82,7 +82,7 @@ Le type de la condition peut être char.
 
     Correct
 
-### -
+### - { points=2 }
 
 Les instructions de la boucle ne peuvent pas être une autre boucle `do..while`.
 
@@ -90,9 +90,9 @@ Les instructions de la boucle ne peuvent pas être une autre boucle `do..while`.
 
     Incorrect. Une boucle do while peut se trouver à l'intérieur d'une boucle `do..while`.
 
-## -
+## - { points=8 }
 
-### -
+### - { points=2 }
 
 Écrire un programme qui affiche les nombres entiers de 1 à 100 en employant une boucle `for`.
 
@@ -107,7 +107,7 @@ Les instructions de la boucle ne peuvent pas être une autre boucle `do..while`.
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire ce même programme en utilisant une boucle `while`.
 
@@ -123,7 +123,7 @@ Les instructions de la boucle ne peuvent pas être une autre boucle `do..while`.
     }
     ```
 
-### -
+### - { points=2 }
 
 Même question avec une boucle `do..while`.
 
@@ -140,7 +140,7 @@ Même question avec une boucle `do..while`.
     }
     ```
 
-### -
+### - { points=2 }
 
 Parmi ces trois implémentations laquelle est la plus adaptée au problème ?
 
@@ -148,9 +148,9 @@ Parmi ces trois implémentations laquelle est la plus adaptée au problème ?
 
     Lorsque le nombre d'itérations est connu à l'avance, la boucle `for` est la plus adaptée.
 
-## Boucles `for` : renseignez ce qu'affiche ces boucles
+## Boucles `for` : renseignez ce qu'affiche ces boucles { points=14 }
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 'a'; i < 'd'; printf("%i-", ++i));
@@ -160,7 +160,7 @@ for (i = 'a'; i < 'd'; printf("%i-", ++i));
 
     98-99-100-
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 'a'; i < 'd'; printf("%c-", ++i));
@@ -170,7 +170,7 @@ for (i = 'a'; i < 'd'; printf("%c-", ++i));
 
     b-c-d-
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 'a'; i++ < 'd'; printf("%c-", i ));
@@ -180,7 +180,7 @@ for (i = 'a'; i++ < 'd'; printf("%c-", i ));
 
     b-c-d
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 'a'; i <= 'a' + 25; printf("%c-", i++ ));
@@ -190,7 +190,7 @@ for (i = 'a'; i <= 'a' + 25; printf("%c-", i++ ));
 
     a-b-c-d-...z-
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 1 / 3; i ; printf("%i\n", i++ ));
@@ -200,7 +200,7 @@ for (i = 1 / 3; i ; printf("%i\n", i++ ));
 
     (rien)
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 0; i != 1  ; printf("%i", i += 1 / 3 ));
@@ -210,7 +210,7 @@ for (i = 0; i != 1  ; printf("%i", i += 1 / 3 ));
 
     0000 ...
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 12, k = 1; k++ < 5 ; printf("%i ", i-- ));
@@ -220,9 +220,9 @@ for (i = 12, k = 1; k++ < 5 ; printf("%i ", i-- ));
 
     12 11 10 9 
 
-## Boucles `while` : renseignez ce qu'affiche ces boucles
+## Boucles `while` : renseignez ce qu'affiche ces boucles { points=20 }
 
-### -
+### - { points=2 }
 
 ```c
 int i = 0;
@@ -233,7 +233,7 @@ while (i - 10) { i += 2; printf ( "%i.", i ); }
 
     2.4.6.8.10.
 
-### -
+### - { points=2 }
 
 ```c
 int i = 0;
@@ -245,7 +245,7 @@ i += 2; printf("%i-", i);
 
     10-
 
-### -
+### - { points=2 }
 
 ```c
 short i = 0;
@@ -256,7 +256,7 @@ while ( i < 11 ) { i += 2; printf("%i-", i); }
 
     2-4-6-8-10-12-
 
-### -
+### - { points=2 }
 
 ```c
 for (i = 'a'; i <= 'a' + 25; printf("%c-", i++ ));
@@ -266,7 +266,7 @@ for (i = 'a'; i <= 'a' + 25; printf("%c-", i++ ));
 
     a-b-c-d-...z-
 
-### -
+### - { points=2 }
 
 ```c
 char i = 11;
@@ -277,7 +277,7 @@ while (i--) { printf("%i/", i--); }
 
     10/8/6/4/2/0/-2/-4/-6/-8 ... (à l'infini)
 
-### -
+### - { points=2 }
 
 ```c
 long i = 12l;
@@ -288,7 +288,7 @@ while (i--) { printf("%i%%", --i); }
 
     10%8%6%4%2%0%
 
-### -
+### - { points=2 }
 
 ```c
 int i = 0;
@@ -299,7 +299,7 @@ while (i++ < 10) { printf("%i", i--); }
 
     1111111111 ... (à l'infini)
 
-### -
+### - { points=2 }
 
 ```c
 int i = 1;
@@ -310,7 +310,7 @@ while (i <= 5) { printf("%i/", 2 * i++); }
 
     2/4/6/8/10/
 
-### -
+### - { points=2 }
 
 ```c
 int i = 1;
@@ -321,7 +321,7 @@ while (i != 9) { printf ( "%i-", i = i + 2 ); }
 
     3-5-7-9-
 
-### -
+### - { points=2 }
 
 ```c
 int i = 1;

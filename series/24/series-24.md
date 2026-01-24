@@ -1,8 +1,8 @@
 # Série 24 — Le Préprocesseur
 
-## -
+## - { points=4 }
 
-### -
+### - { points=2 }
 
 Quelle sera la valeur affichée par le programme ci-dessous ?
 
@@ -22,7 +22,7 @@ int main() {
 
     L'expression `NINE * TEN` est évaluée comme `9 * 1 + 9`, ce qui donne `18`.
 
-### -
+### - { points=2 }
 
 Quelles modifications faut-il apporter pour que le résultat soit correct ?
 
@@ -34,7 +34,7 @@ Quelles modifications faut-il apporter pour que le résultat soit correct ?
     #define TEN (ONE + NINE)
     ```
 
-## -
+## - { points=4 }
 
 Expliquer pourquoi ce programme affiche `5`, et comment corriger ce problème.
 
@@ -58,7 +58,7 @@ int main(void)
     #define MAX(i, j) ((i) > (j) ? (i) : (j))
     ```
 
-## -
+## - { points=4 }
 
 Expliquez pourquoi ce programme affiche la valeur `7`.
 
@@ -87,11 +87,11 @@ int main(void)
     }
     ```
 
-## -
+## - { points=4 }
 
 Qu'affichent les programmes ci-dessous ?
 
-### -
+### - { points=2 }
 
 ```c
 #include <stdio.h>
@@ -127,7 +127,7 @@ int main(void)
     #if defined
     ```
 
-### -
+### - { points=2 }
 
 ```c
 #include <stdio.h>
@@ -164,7 +164,7 @@ int main()
     #if !defined
     ```
 
-## -
+## - { points=10 }
 
 Calcul du taux d'intérêt.
 
@@ -207,7 +207,7 @@ int main(void)
 }
 ```
 
-### -
+### - { points=2 }
 
 Que fait ce programme ? Que voit l'utilisateur à l'écran ?
 
@@ -224,7 +224,7 @@ echo "1000\n5\n" | ./a.out
     Montant annuel des intérêts : 50 CHF
     ```
 
-### -
+### - { points=2 }
 
 Que faut-il faire pour adapter rapidement ce programme à une autre zone géographique ?
 
@@ -232,7 +232,7 @@ Que faut-il faire pour adapter rapidement ce programme à une autre zone géogra
 
     Il suffit de remplacer la définiton du symbole `ZONE_SWISS` par le symbole d'une autre zone.
 
-### -
+### - { points=2 }
 
 Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE_AFRICA` ?
 
@@ -240,7 +240,7 @@ Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE
 
     Le nom de la zone géographique affichée sera `Afrique` et l'unité monétaire utilisée sera `CFA`.
 
-### -
+### - { points=2 }
 
 Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE_JAPAN` ?
 
@@ -248,7 +248,7 @@ Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE
 
     Le programme n'a pas été prévu pour fonctionner avec cette zone. Lors de la compilation du programme un message d'erreur sera affiché.
 
-### -
+### - { points=2 }
 
 Comment compiler le programme depuis la ligne de commande pour n'importe quelle zone ?
 

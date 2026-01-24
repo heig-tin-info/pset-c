@@ -1,6 +1,6 @@
 # Série 16 — Lanceur Spatial
 
-## Lanceur Spatial
+## Lanceur Spatial { points=4 }
 
 ### Contexte {heading=true}
 

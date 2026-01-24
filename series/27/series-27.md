@@ -8,11 +8,11 @@ Parfois d'autres opérations existent : *delete* pour supprimer un élément à 
 
 Utilisez ici `assert` pour le test des erreurs, et ne réduisez pas la taille du tableau, il ne fait que s'agrandir au gré des données le peuplant.
 
-## -
+## - { points=22 }
 
 On souhaite implémenter un tableau dynamique, implémentez les fonctions demandées :
 
-### -
+### - { points=2 }
 
 Écrire une structure de donnée représentant un tableau dynamique et permettant de stocker des paires de `double`.
 
@@ -26,7 +26,7 @@ On souhaite implémenter un tableau dynamique, implémentez les fonctions demand
     } Array;
     ```
 
-### -
+### - { points=2 }
 
 Compte tenu de la structure déclarée précédemment, écrire une fonction permettant d'initialiser un tableau. C'est à dire allouer l'espace mémoire nécessaire et renseigner les informations nécessaires. La structure de ce tableau est la suivante :
 
@@ -38,7 +38,7 @@ typedef struct array {
 } Array;
 ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_init`.
 
@@ -52,7 +52,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_push`.
 
@@ -71,7 +71,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_pop`.
 
@@ -86,7 +86,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_shift`.
 
@@ -105,7 +105,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_unshift`.
 
@@ -127,7 +127,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_insert`.
 
@@ -149,7 +149,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Écrire la fonction `array_delete`.
 
@@ -165,7 +165,7 @@ typedef struct array {
     }
     ```
 
-### -
+### - { points=2 }
 
 Quelle est la complexité (Big-O) en temps pour l'opération *push* ?
 
@@ -173,7 +173,7 @@ Quelle est la complexité (Big-O) en temps pour l'opération *push* ?
 
     O(1) amorti.
 
-### -
+### - { points=2 }
 
 Quelle est la complexité (Big-O) en temps pour l'opération *insert* ?
 
