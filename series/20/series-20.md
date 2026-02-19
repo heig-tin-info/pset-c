@@ -48,6 +48,8 @@ while (x > 1.0);
 
     Il manque les accolades autour du bloc `do..while`.
 
+---
+
 ## - { points=2 }
 
 ```c
@@ -90,8 +92,6 @@ for (int i = 0; i < 10; i++);
 
     Le point virgule à la fin de l'instruction termine cette dernière. Le bloc formé des accolades n'appartient pas à la boucle.
 
----
-
 ## - { points=2 }
 
 ```c
@@ -105,6 +105,8 @@ while i < 100
 !!! solution { lines=2 }
 
     Il manque des parenthèses autour de la condition de l'instruction `while`.
+
+---
 
 ## - { points=2 }
 
@@ -133,7 +135,6 @@ int main() {
 
     00000 105 102 300 102
 
----
 
 # Programmation
 
