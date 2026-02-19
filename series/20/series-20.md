@@ -1,3 +1,5 @@
+
+
 # Arithmétique et expressions { points=10 }
 
 Considérez les déclarations suivantes :
@@ -9,6 +11,8 @@ float f = 3.3; double d = 7.7;
 ```
 
 Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur. On vous donne un exemple de réponse pour la première expression.
+
+
 
 | Expression       | Type et valeur             |
 | ---------------- | -------------------------- |
@@ -24,7 +28,6 @@ Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur. On v
 | `s && 0xf0`      | [`(int)1`]{width=3cm}      |
 | `d + f == s + l` | [`(int)0`]{width=3cm}      |
 
----
 
 # Analyse de code
 

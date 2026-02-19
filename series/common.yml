@@ -13,3 +13,4 @@ press:
     marks: false
 exam:
   titlepage: minimal
+  next-page-advice: false
