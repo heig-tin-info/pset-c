@@ -114,3 +114,7 @@ After pushing changes to `template-exam`:
 1. Update the `rev` under `[tool.uv.sources]` in `pyproject.toml`.
 2. Run `uv lock`.
 3. Commit `pyproject.toml` and `uv.lock` in this repository.
+
+## CI Note (Private `template-exam`)
+
+If `yves-chevallier/template-exam` is private for your CI runner, add a repository secret named `TEMPLATE_EXAM_TOKEN` (GitHub PAT with read access to that repository). The workflow will use it automatically before `uv sync`.

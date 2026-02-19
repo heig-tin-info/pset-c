@@ -31,10 +31,13 @@ jobs:
         with:
           version: '0.8.14'
 
-      - name: Install Tectonic
-        uses: taiki-e/install-action@v2
-        with:
-          tool: tectonic
+      - name: Configure Git auth for template-exam (optional)
+        env:
+          TEMPLATE_EXAM_TOKEN: ${{ secrets.TEMPLATE_EXAM_TOKEN }}
+        run: |
+          if [ -n "${TEMPLATE_EXAM_TOKEN}" ]; then
+            git config --global url."https://x-access-token:${TEMPLATE_EXAM_TOKEN}@github.com/".insteadOf "https://github.com/"
+          fi
 
       - name: Sync dependencies
         run: uv sync --extra dev

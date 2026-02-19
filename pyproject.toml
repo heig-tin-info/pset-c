@@ -17,4 +17,4 @@ dev = [
 
 [tool.uv.sources]
 texsmith = { git = "https://github.com/yves-chevallier/texsmith.git" }
-texsmith-template-exam = { git = "ssh://git@github.com/yves-chevallier/template-exam.git", rev = "61dfd974b16684c397a3e5f481b94ed30ec4d625" }
+texsmith-template-exam = { git = "https://github.com/yves-chevallier/template-exam.git", rev = "61dfd974b16684c397a3e5f481b94ed30ec4d625" }
