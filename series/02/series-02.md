@@ -1,42 +1,42 @@
-# Série 2 — Variables et identificateurs
-
-## - { points=4 }
+# Identificateurs { points=4 }
 
 Pour chacun des identificateurs suivants, indiquez s'il est correct ou incorrect, et donnez une justification.
 
-- `2_pi` — [Incorrect, commence par un chiffre]{w=10cm}
-- `x_2` — [Correct]{w=10cm}
-- `x__3` — [Correct]{w=10cm}
-- `x  2` — [Incorrect, contient des espaces]{w=10cm}
-- `robotPosition` — [Correct]{w=10cm}
-- `stored_values` — [Correct]{w=10cm}
-- `-output_current` — [Incorrect, tiret interdit]{w=10cm}
-- `_alarm_` — [Correct]{w=10cm}
-- `issue#2` — [Incorrect, signe dièse interdit]{w=10cm}
-- `int` — [Incorrect, mot réservé du langage]{w=10cm}
-- `défaillance` — [Incorrect, mot accentué]{w=10cm}
-- `f'` — [Incorrect, comporte une apostrophe]{w=10cm}
-- `INT` — [Correct, mais pas recommandé]{w=10cm}
-- `main` — [Correct, mais plutôt réservé à la fonction d'entrée]{w=10cm}
+| Identificateur | Validité | Justification / Commentaire |
+| -------------- | -------- | ------------- |
+| `2_pi` | [Incorrect]{w=2cm} | [commence par un chiffre]{w=8cm} |
+| `x_2` | [Correct]{w=2cm} | [Underscore pas nécessaire]{w=8cm} |
+| `x__3` | [Correct]{w=2cm} | [Double underscore redondant]{w=8cm} |
+| `x  2` | [Incorrect]{w=2cm} | [contient des espaces]{w=8cm} |
+| `robotPosition` | [Correct]{w=2cm} | [Notation camlCase]{w=8cm} |
+| `stored_values` | [Correct]{w=2cm} | [Notation snake_case]{w=8cm} |
+| `-output_current` | [Incorrect]{w=2cm} | [tiret interdit]{w=8cm} |
+| `_alarm_` | [Correct]{w=2cm} | [Peu conseillé]{w=8cm} |
+| `issue#2` | [Incorrect]{w=2cm} | [signe dièse interdit]{w=8cm} |
+| `int` | [Incorrect]{w=2cm} | [mot réservé du langage]{w=8cm} |
+| `défaillance` | [Incorrect]{w=2cm} | [mot accentué]{w=8cm} |
+| `f'` | [Incorrect]{w=2cm} | [comporte une apostrophe]{w=8cm} |
+| `INT` | [Correct]{w=2cm} | [mais pas recommandé]{w=8cm} |
+| `main` | [Correct]{w=2cm} | [mais plutôt réservé à la fonction d'entrée]{w=8cm} |
 
-## - { points=4 }
+# Affectation { points=4 }
 
 Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non initialisées sont notées avec `?`. Cela signifie que leur contenu n'est pas prévisible.
 
 | Instruction | a | b | c | d |
 | --- | --- | --- | --- | --- |
-| `a = 5;` | [5] | [?] | [?] | [?] |
-| `b = c;` | [5] | [?] | [?] | [?] |
-| `c = a;` | [5] | [?] | [5] | [?] |
-| `a = a + 1;` | [6] | [?] | [5] | [?] |
-| `b = a * (c + 1);` | [6] | [36] | [5] | [?] |
-| `d = b % 2;` | [6] | [36] | [5] | [0] |
+| `a = 5;` | [5]{width=2cm} | [?]{width=2cm} | [?]{width=2cm} | [?]{width=2cm} |
+| `b = c;` | [5]{width=2cm} | [?]{width=2cm} | [?]{width=2cm} | [?]{width=2cm} |
+| `c = a;` | [5]{width=2cm} | [?]{width=2cm} | [5]{width=2cm} | [?]{width=2cm} |
+| `a = a + 1;` | [6]{width=2cm} | [?]{width=2cm} | [5]{width=2cm} | [?]{width=2cm} |
+| `b = a * (c + 1);` | [6]{width=2cm} | [36]{width=2cm} | [5]{width=2cm} | [?]{width=2cm} |
+| `d = b % 2;` | [6]{width=2cm} | [36]{width=2cm} | [5]{width=2cm} | [0]{width=2cm} |
 
-## - { points=4 }
+# Échange de variables { points=4 }
 
-Écrire une fonction permettant d'échanger les valeurs de `a` et `b`. À la fin de cette séquence d'instruction, la valeur initiale de `a` doit être dans `b` et réciproquement.
+Écrire une série d'instructions permettant d'échanger les valeurs de `a` et `b`. À la fin de cette séquence d'instruction, la valeur initiale de `a` doit être dans `b` et réciproquement.
 
-!!! solution { box=5cm }
+!!! solution { lines=5 }
 
     ```c
     int tmp;
@@ -45,7 +45,7 @@ Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non 
     b = tmp;
     ```
 
-## - { points=4 }
+# Débogue { points=4 }
 
 Le programme suivant comporte 13 erreurs. Trouvez-les et corrigez-les.
 
@@ -107,11 +107,13 @@ INT Main()
     } // 13. Une accolade en trop.
     ```
 
-## - { points=4 }
+---
+
+# Programmation { points=4 }
 
 Écrire un programme demandant sur l'entrée standard 2 nombres réels : tension et résistance. Le programme indique ensuite la valeur du courant circulant dans le circuit en utilisant la loi d'Ohm. Un test doit être prévu si la résistance est nulle.
 
-!!! solution { box=10cm }
+!!! solution { lines=15cm }
 
     ```c
     #include <stdio.h>

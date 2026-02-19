@@ -1,18 +1,4 @@
 title: "Série 28"
 subtitle: "Structure de données récursives"
-language: fr
-typesetting:
-  paragraph:
-    indent: none
-    spacing: 1.1em
-press:
-  paper:
-    margin:
-      top: 12mm
-      left: 2.4cm
-      right: 2.4cm
-      bottom: 2.4cm
-    marks: false
 exam:
   course: INFO2-TIN
-  titlepage: minimal

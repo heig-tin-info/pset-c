@@ -1,8 +1,6 @@
-# Série 1 — Numération et Arguments
+# Quelques généralités { points=16 }
 
-## Quelques généralités { points=16 }
-
-### - { points=2 }
+## - { points=2 }
 
 Comment écrire en C une constante littérale hexadécimale correspondant à la valeur $1ab4_{16}$ ?
 
@@ -10,7 +8,7 @@ Comment écrire en C une constante littérale hexadécimale correspondant à la 
 
     0x1ab4
 
-### - { points=2 }
+## - { points=2 }
 
 Comment écrire en C une constante littérale octale représentant la valeur $2642_{8}$ ?
 
@@ -18,15 +16,15 @@ Comment écrire en C une constante littérale octale représentant la valeur $26
 
     02642
 
-### - { points=2 }
+## - { points=2 }
 
 Bien qu'il ne soit pas normalisé dans C11, le préfixe [0b] est utilisé pour représenter une constante littérale binaire.
 
-### - { points=2 }
+## - { points=2 }
 
 Le signe d'un nombre en complément à deux peut être connu en observant son bit de poids [fort] tandis que le bit de poids [faible] renseigne sur sa parité (pair ou impair).
 
-### - { points=2 }
+## - { points=2 }
 
 Le programme suivant est appelé. Combien d'arguments le programme reçoit-il ?
 
@@ -38,7 +36,7 @@ Le programme suivant est appelé. Combien d'arguments le programme reçoit-il ?
 
     4 arguments
 
-### - { points=2 }
+## - { points=2 }
 
 Comment s'appelle le flux qui permet à un programme de recevoir des informations par exemple saisies au clavier ?
 
@@ -46,7 +44,7 @@ Comment s'appelle le flux qui permet à un programme de recevoir des information
 
     L'entrée standard
 
-### - { points=2 }
+## - { points=2 }
 
 Combien de bytes y a-t-il dans un Mebibyte (MiB) ?
 
@@ -54,7 +52,7 @@ Combien de bytes y a-t-il dans un Mebibyte (MiB) ?
 
     $1024\cdot 1024 = 1'048'576\ \text{Bytes}$
 
-### - { points=2 }
+## - { points=2 }
 
 Combien de bits faut-il pour représenter un Gigabyte (GB) de données ?
 
@@ -62,9 +60,21 @@ Combien de bits faut-il pour représenter un Gigabyte (GB) de données ?
 
     $\lceil \log_2\left(1 \cdot 10^9 \right)\rceil \approx \lceil 29.89 \rceil = 30\ \text{bits}$
 
-## Effectuer les additions suivantes à la main en binaire sur 8 bits { points=8 }
+---
 
-### - { points=2 }
+# Effectuer les additions suivantes à la main en binaire sur 8 bits { points=8 }
+
+Exemple:
+
+```c
+    11
+  00001001 = 0x09 = 9
++ 00011000 = 0x18 = 24
+  --------
+  00100001 = 0x21 = 33
+```
+
+## - { points=2 }
 
 $1 + 51$
 
@@ -78,7 +88,7 @@ $1 + 51$
       00110100 = 0x34 = 52
     ```
 
-### - { points=2 }
+## - { points=2 }
 
 $51 - 7$
 
@@ -92,7 +102,7 @@ $51 - 7$
       00101100 = 0x2C = 44
     ```
 
-### - { points=2 }
+## - { points=2 }
 
 $204 + 51$
 
@@ -105,7 +115,7 @@ $204 + 51$
       11111111 = 0xFF = 255
     ```
 
-### - { points=2 }
+## - { points=2 }
 
 $204 + 204$
 
@@ -119,7 +129,11 @@ $204 + 204$
       10011000 = 0x98 = (408-256) = 152
     ```
 
-## - { points=4 }
+---
+
+# Programmation
+
+## - { points=2 }
 
 Écrire un programme qui lit le premier nombre passé en argument depuis la ligne de commande et l'affiche à l'écran.
 

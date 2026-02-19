@@ -801,6 +801,7 @@ provides-extras = ["dev"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "pytest", specifier = ">=8.0" },
     { name = "ruff", specifier = ">=0.14.1" },
     { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
     { name = "texsmith-exam", editable = "../template-exam/texsmith_exam" },
