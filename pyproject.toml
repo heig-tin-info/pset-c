@@ -11,6 +11,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "PyYAML>=6.0,<7.0",
+    "pelican>=4.10,<5.0",
+    "markdown>=3.6,<4.0",
 ]
 
 [tool.uv.sources]

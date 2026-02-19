@@ -80,4 +80,4 @@ dist: all
 	@for src in $(SERIES_DIR)/series-*.md; do \
 		cp "$$src" "dist/$$(basename "$$src")"; \
 	done
-	uv run --extra dev python scripts/generate_dist_index.py
+	uv run --extra dev pelican pelican/content -s pelicanconf.py -o dist
