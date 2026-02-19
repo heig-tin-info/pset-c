@@ -1,11 +1,13 @@
-.PHONY: all pset solution list clean mrproper dist $(SERIES_TARGETS)
+.PHONY: all pset solution list clean mrproper dist deps deps-dev-template deps-reset-template $(SERIES_TARGETS)
 
 ROOT_DIR := $(CURDIR)
 TEXSMITH := uv run texsmith
+UV := uv
 SERIES_DIR := $(ROOT_DIR)/series
 BUILD_ROOT := $(ROOT_DIR)/build/series
 COMMON_CONFIG := $(SERIES_DIR)/common.yml
 CPP_FLAGS := -std=c++20 -Wall -Wextra -pedantic
+TEMPLATE_EXAM_PATH ?= ../template-exam
 
 SERIES_FILES := $(sort $(wildcard $(SERIES_DIR)/series-*.md))
 SERIES_TARGETS := $(basename $(notdir $(SERIES_FILES)))
@@ -42,6 +44,17 @@ define check_series_code
 endef
 
 all: $(SERIES_TARGETS)
+
+deps:
+	$(UV) sync --extra dev
+
+deps-dev-template:
+	@test -d "$(TEMPLATE_EXAM_PATH)" || (echo "Missing template-exam checkout: $(TEMPLATE_EXAM_PATH)" && exit 1)
+	$(UV) sync --extra dev
+	$(UV) pip install -e "$(TEMPLATE_EXAM_PATH)"
+
+deps-reset-template:
+	$(UV) sync --extra dev --reinstall-package texsmith-template-exam
 
 # Backward-compatible aggregate targets
 pset: $(addprefix pset-,$(SERIES_TARGETS))

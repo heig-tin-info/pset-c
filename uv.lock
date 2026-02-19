@@ -260,7 +260,7 @@ requires-dist = [
     { name = "pelican", marker = "extra == 'dev'", specifier = ">=4.10,<5.0" },
     { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0,<7.0" },
     { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
-    { name = "texsmith-template-exam", editable = "../template-exam" },
+    { name = "texsmith-template-exam", git = "ssh://git@github.com/yves-chevallier/template-exam.git?rev=61dfd974b16684c397a3e5f481b94ed30ec4d625" },
 ]
 provides-extras = ["dev"]
 
@@ -904,34 +904,9 @@ dependencies = [
 [[package]]
 name = "texsmith-template-exam"
 version = "0.1.0"
-source = { editable = "../template-exam" }
+source = { git = "ssh://git@github.com/yves-chevallier/template-exam.git?rev=61dfd974b16684c397a3e5f481b94ed30ec4d625#61dfd974b16684c397a3e5f481b94ed30ec4d625" }
 dependencies = [
     { name = "texsmith" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
-    { name = "texsmith-exam", marker = "extra == 'dev'", editable = "../template-exam/texsmith_exam" },
-]
-provides-extras = ["dev"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.0" },
-    { name = "ruff", specifier = ">=0.14.1" },
-    { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
-    { name = "texsmith-exam", editable = "../template-exam/texsmith_exam" },
-]
-docs = [
-    { name = "mike", specifier = ">=2.1.2" },
-    { name = "mkdocs", specifier = ">=1.6.1" },
-    { name = "mkdocs-awesome-nav", specifier = ">=3.2.0" },
-    { name = "mkdocs-drawio", git = "https://github.com/yves-chevallier/mkdocs-drawio.git?rev=testounet" },
-    { name = "mkdocs-material", specifier = ">=9.6.22" },
-    { name = "mkdocs-material-extensions", specifier = ">=1.3.1" },
-    { name = "mkdocs-pills", specifier = ">=0.1.0" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.21.2" },
 ]
 
 [[package]]

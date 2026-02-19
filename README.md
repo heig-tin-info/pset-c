@@ -1,68 +1,116 @@
 # pset-c
 
-Séries d'exercices C (INFO1/INFO2) converties en Markdown et rendues en PDF avec TeXSmith et le template **exam**.
+C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with TeXSmith and the `exam` template.
 
-## Contenu
+## Repository Layout
 
-- Sources Markdown dans `series/` (ex: `series/series-07.md`).
-- Configuration par série dans le frontmatter de chaque fichier Markdown.
-- PDFs générés dans `build/series/<id>/`.
-- Site statique de téléchargement dans `dist/` (GitHub Pages).
+- `series/`: Markdown sources (`series-*.md`) with frontmatter config.
+- `series/common.yml`: shared TeXSmith config.
+- `assets/`: shared assets used by series.
+- `build/`: local build output (`build/series/<id>/...`).
+- `dist/`: static distribution folder (PDFs + site).
+- `pelican/` + `pelicanconf.py`: static site generation for `dist/index.html`.
 
-## Technologies
+## Tooling
 
-- **TeXSmith** (renderer Markdown → LaTeX → PDF)
-- **texsmith-template-exam** (template d'examen)
-- **Tectonic** (compilation LaTeX via TeXSmith)
-- **uv** pour l'environnement Python et les dépendances
-- **Makefile** pour automatiser les builds
-- **Tailwind CSS (CDN)** pour la page `dist/index.html`
+- `uv` for Python environment and dependency management.
+- `texsmith` + `texsmith-template-exam` for Markdown -> LaTeX -> PDF.
+- `pelican` for static index page generation.
+- `make` for build orchestration.
 
-## Prérequis
+## Prerequisites
 
-- `uv` installé
-- (optionnel) `make`
+- `uv`
+- `make` (recommended)
+- `tectonic` available in `PATH` (required by TeXSmith for PDF builds)
 
-## Installation
+## Install Dependencies
 
 ```bash
-uv sync
+make deps
 ```
 
-## Construire les PDFs
+Equivalent command:
 
-### Tout construire (pset + solution)
+```bash
+uv sync --extra dev
+```
+
+## Build PDFs
+
+Build everything (pset + solution for all series):
 
 ```bash
 make all
 ```
 
-### Construire une série précise (pset + solution)
+Build one series (example `series-20`):
 
 ```bash
-make series-07
+make series-20
 ```
 
-Les PDFs sont générés dans `build/series/<id>/pset/` et `build/series/<id>/solution/`.
+Outputs:
 
-## Générer le dossier de distribution (GitHub Pages)
+- `build/series/<id>/pset/pset.pdf`
+- `build/series/<id>/solution/solution.pdf`
+
+## Build Distribution
 
 ```bash
 make dist
 ```
 
-Cela copie tous les PDFs dans `dist/` et utilise `dist/index.html` comme page d'accueil.
+This command:
 
-## Mettre à jour l'index HTML
+- Builds all series.
+- Copies PDFs to `dist/`.
+- Copies source Markdown files (`series-*.md`) to `dist/`.
+- Regenerates `dist/index.html` using Pelican.
 
-`dist/index.html` est un fichier statique listant toutes les séries avec liens de téléchargement.
-Si vous modifiez les titres ou ajoutez de nouvelles séries, régénérez l'index via le script interne (ou demandez à Codex de le faire).
+## Cleanup
 
-## Structure du dépôt
-
+```bash
+make clean      # remove build/
+make mrproper   # clean + remove dist/*.pdf
 ```
-series/           # sources Markdown (frontmatter inclus)
-assets/           # images utilisées dans les séries
-build/            # PDFs générés (local)
-dist/             # site statique (GitHub Pages)
+
+## Codex Dev Mode for `template-exam`
+
+Default behavior uses the pinned GitHub revision of `texsmith-template-exam` from `pyproject.toml`.
+
+To work in debug mode (editable local checkout, useful for Codex iterations):
+
+1. Clone `template-exam` next to this repository:
+
+```bash
+git clone git@github.com:yves-chevallier/template-exam.git ../template-exam
 ```
+
+2. Enable editable override:
+
+```bash
+make deps-dev-template
+```
+
+This installs `../template-exam` in editable mode into this repo's `.venv`, so local changes are picked up immediately.
+
+3. When finished, publish your changes in `template-exam`, then reset this repo to pinned dependency behavior:
+
+```bash
+make deps-reset-template
+```
+
+Tip: if your local checkout path differs, pass it explicitly:
+
+```bash
+make deps-dev-template TEMPLATE_EXAM_PATH=/path/to/template-exam
+```
+
+## Updating the `template-exam` Pin
+
+After pushing changes to `template-exam`:
+
+1. Update the `rev` under `[tool.uv.sources]` in `pyproject.toml`.
+2. Run `uv lock`.
+3. Commit `pyproject.toml` and `uv.lock` in this repository.
