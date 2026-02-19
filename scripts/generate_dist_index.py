@@ -1,0 +1,275 @@
+#!/usr/bin/env python3
+"""Generate dist/index.html from series markdown frontmatter."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from html import escape
+from pathlib import Path
+import re
+
+import yaml
+
+
+@dataclass(frozen=True)
+class SeriesEntry:
+    slug: str
+    series_id: str
+    title: str
+    subtitle: str
+    tags: list[str]
+    pset_pdf: str
+    solution_pdf: str
+    source_md: str
+
+
+def read_frontmatter(path: Path) -> dict:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return {}
+
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}
+
+    raw = text[4:end]
+    parsed = yaml.safe_load(raw) or {}
+    if not isinstance(parsed, dict):
+        return {}
+    return parsed
+
+
+def sort_key(series_id: str) -> tuple[int, int | str]:
+    if series_id.isdigit():
+        return (0, int(series_id))
+    match = re.match(r"^(\d+)-", series_id)
+    if match:
+        return (0, int(match.group(1)))
+    return (1, series_id)
+
+
+def render_tags(tags: list[str]) -> str:
+    if not tags:
+        return "<span class=\"text-gray-500 dark:text-gray-400 text-xs\">-</span>"
+    return "".join(
+        (
+            '<span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-700 '
+            'px-2 py-0.5 text-xs text-gray-700 dark:text-gray-200 mr-1 mb-1">'
+            f"{escape(tag)}</span>"
+        )
+        for tag in tags
+    )
+
+
+def build_entries(series_dir: Path) -> list[SeriesEntry]:
+    entries: list[SeriesEntry] = []
+    for path in sorted(series_dir.glob("series-*.md")):
+        fm = read_frontmatter(path)
+        slug = path.stem
+        series_id = slug.removeprefix("series-")
+        title = str(fm.get("title", slug))
+        subtitle = str(fm.get("subtitle", ""))
+        tags = fm.get("tags", [])
+        if not isinstance(tags, list):
+            tags = []
+        tags_clean = [str(tag).strip() for tag in tags if str(tag).strip()]
+
+        entries.append(
+            SeriesEntry(
+                slug=slug,
+                series_id=series_id,
+                title=title,
+                subtitle=subtitle,
+                tags=tags_clean,
+                pset_pdf=f"pset-{series_id}.pdf",
+                solution_pdf=f"pset-{series_id}-solution.pdf",
+                source_md=f"{slug}.md",
+            )
+        )
+
+    entries.sort(key=lambda entry: sort_key(entry.series_id))
+    return entries
+
+
+def render_html(entries: list[SeriesEntry]) -> str:
+    rows: list[str] = []
+    for entry in entries:
+        rows.append(
+            f"""
+      <tr class=\"border-b border-gray-200 dark:border-gray-700\"> 
+        <td class=\"p-3\"><input type=\"checkbox\" class=\"series-check\" data-pset=\"{escape(entry.pset_pdf)}\" data-solution=\"{escape(entry.solution_pdf)}\" data-source=\"{escape(entry.source_md)}\" /></td>
+        <td class=\"p-3 font-semibold\">{escape(entry.title)}</td>
+        <td class=\"p-3 text-sm text-gray-600 dark:text-gray-300\">{escape(entry.subtitle)}</td>
+        <td class=\"p-3\">{render_tags(entry.tags)}</td>
+        <td class=\"p-3\"><a href=\"{escape(entry.pset_pdf)}\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">PDF</a></td>
+        <td class=\"p-3\"><a href=\"{escape(entry.solution_pdf)}\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">Solution</a></td>
+        <td class=\"p-3\"><a href=\"{escape(entry.source_md)}\" class=\"text-blue-600 dark:text-blue-400 hover:underline\">Markdown</a></td>
+      </tr>""".rstrip()
+        )
+
+    body = "\n".join(rows)
+
+    return f"""<!DOCTYPE html>
+<html lang=\"fr\">
+<head>
+  <meta charset=\"UTF-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+  <title>Refcards</title>
+
+  <script>
+    (function () {{
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = stored ? stored : (prefersDark ? "dark" : "light");
+      if (theme === "dark") document.documentElement.classList.add("dark");
+    }})();
+  </script>
+
+  <script>
+    tailwind = {{ config: {{ darkMode: "class" }} }};
+  </script>
+  <script src=\"https://cdn.tailwindcss.com\"></script>
+</head>
+
+<body class=\"bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100\">
+
+  <header class=\"bg-white dark:bg-gray-800 shadow-md\">
+    <div class=\"max-w-6xl mx-auto flex items-center justify-between p-4\">
+      <div class=\"flex items-center gap-3\">
+        <img src=\"https://raw.githubusercontent.com/HEIG-VD/logos/refs/heads/main/heig-vd/svg/heig-vd-red.svg\" alt=\"Logo\" class=\"h-12\" />
+        <span class=\"font-bold text-lg\">Séries d'exercices</span>
+      </div>
+
+      <nav class=\"flex items-center gap-3\">
+        <a href=\"mailto:yves.chevallier@heig-vd.ch\" class=\"text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3\">
+          Contact
+        </a>
+
+        <a href=\"https://github.com/heig-cheatsheet\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Organisation GitHub\"
+           class=\"p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition\">
+          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" class=\"w-6 h-6 fill-gray-700 dark:fill-gray-200\">
+            <path d=\"M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.2 3.3 9.6 7.8 11.1.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7 1.9 2.7 1.4.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6a11.5 11.5 0 0 0 7.8-11.1A11.5 11.5 0 0 0 12 .5Z\"/>
+          </svg>
+        </a>
+
+        <button id=\"theme-toggle\" type=\"button\"
+          class=\"p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition\"
+          aria-label=\"Basculer le thème\">
+          <svg id=\"icon-sun\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6 hidden dark:block fill-gray-200\" viewBox=\"0 0 24 24\">
+            <path d=\"M6.8 12a5.2 5.2 0 1 1 10.4 0 5.2 5.2 0 0 1-10.4 0ZM11 1h2v3h-2V1Zm0 19h2v3h-2v-3ZM1 11h3v2H1v-2Zm19 0h3v2h-3v-2ZM3.5 3.5 5.6 5.6 4.2 7 2 4.8 3.5 3.5ZM18.4 18.4l2.1 2.1-1.4 1.4-2.2-2.2 1.5-1.3ZM3.5 20.5 2 19.2 4.2 17l1.4 1.4-2.1 2.1ZM20.5 3.5 19.2 2 17 4.2l1.4 1.4 2.1-2.1Z\"/>
+          </svg>
+          <svg id=\"icon-moon\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6 block dark:hidden fill-gray-700\" viewBox=\"0 0 24 24\">
+            <path d=\"M21 12.8A9 9 0 0 1 11.2 3 8 8 0 1 0 21 12.8Z\"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class=\"max-w-4xl mx-auto text-center py-10\">
+    <h1 class=\"text-3xl font-bold mb-3\">Séries d'exercices (PDF)</h1>
+    <p class=\"text-lg text-gray-600 dark:text-gray-300\">
+      Téléchargez rapidement chaque série, sa solution et le markdown source.
+    </p>
+  </section>
+
+  <section class=\"max-w-6xl mx-auto p-4\">
+    <div class=\"flex flex-wrap items-center gap-3 mb-4\">
+      <button id=\"download-selected\" class=\"bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg\">Télécharger la sélection</button>
+      <button id=\"download-all\" class=\"bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg\">Télécharger tout</button>
+    </div>
+
+    <div class=\"overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow\">
+      <table class=\"min-w-full text-left\">
+        <thead class=\"bg-gray-100 dark:bg-gray-700\">
+          <tr>
+            <th class=\"p-3\"><input id=\"check-all\" type=\"checkbox\" aria-label=\"Tout sélectionner\" /></th>
+            <th class=\"p-3\">Série</th>
+            <th class=\"p-3\">Sous-titre</th>
+            <th class=\"p-3\">Keywords</th>
+            <th class=\"p-3\">Série</th>
+            <th class=\"p-3\">Solution</th>
+            <th class=\"p-3\">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+{body}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <script>
+    (function () {{
+      const btn = document.getElementById("theme-toggle");
+      const getTheme = () => document.documentElement.classList.contains("dark") ? "dark" : "light";
+      const applyTheme = (theme) => document.documentElement.classList.toggle("dark", theme === "dark");
+
+      btn.addEventListener("click", () => {{
+        const next = getTheme() === "dark" ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem("theme", next);
+      }});
+
+      const checks = Array.from(document.querySelectorAll(".series-check"));
+      const checkAll = document.getElementById("check-all");
+
+      checkAll.addEventListener("change", () => {{
+        checks.forEach((cb) => cb.checked = checkAll.checked);
+      }});
+
+      checks.forEach((cb) => cb.addEventListener("change", () => {{
+        checkAll.checked = checks.length > 0 && checks.every((x) => x.checked);
+      }}));
+
+      function triggerDownloads(paths) {{
+        const uniq = [...new Set(paths.filter(Boolean))];
+        uniq.forEach((file, index) => {{
+          const a = document.createElement("a");
+          a.href = file;
+          a.download = "";
+          a.style.display = "none";
+          document.body.appendChild(a);
+          setTimeout(() => a.click(), index * 120);
+          setTimeout(() => a.remove(), index * 120 + 1000);
+        }});
+      }}
+
+      document.getElementById("download-selected").addEventListener("click", () => {{
+        const selected = checks.filter((cb) => cb.checked);
+        const files = selected.flatMap((cb) => [
+          cb.dataset.pset,
+          cb.dataset.solution,
+          cb.dataset.source,
+        ]);
+        triggerDownloads(files);
+      }});
+
+      document.getElementById("download-all").addEventListener("click", () => {{
+        const files = checks.flatMap((cb) => [
+          cb.dataset.pset,
+          cb.dataset.solution,
+          cb.dataset.source,
+        ]);
+        triggerDownloads(files);
+      }});
+    }})();
+  </script>
+</body>
+</html>
+"""
+
+
+def main() -> None:
+    root_dir = Path(__file__).resolve().parents[1]
+    series_dir = root_dir / "series"
+    dist_dir = root_dir / "dist"
+    dist_dir.mkdir(parents=True, exist_ok=True)
+
+    entries = build_entries(series_dir)
+    html = render_html(entries)
+    (dist_dir / "index.html").write_text(html, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

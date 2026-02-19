@@ -1,44 +1,75 @@
-.PHONY: all pset solution clean check-code list dist
+.PHONY: all pset solution list clean mrproper dist $(SERIES_TARGETS)
 
 ROOT_DIR := $(CURDIR)
-EXAM_DIR ?=
+TEXSMITH := uv run texsmith
+SERIES_DIR := $(ROOT_DIR)/series
+BUILD_ROOT := $(ROOT_DIR)/build/series
+COMMON_CONFIG := $(SERIES_DIR)/common.yml
+CPP_FLAGS := -std=c++20 -Wall -Wextra -pedantic
 
-SUB_MAKEFILES := $(shell find series -name Makefile -type f)
-SUBDIRS := $(sort $(dir $(SUB_MAKEFILES)))
+SERIES_FILES := $(sort $(wildcard $(SERIES_DIR)/series-*.md))
+SERIES_TARGETS := $(basename $(notdir $(SERIES_FILES)))
 
-define RUN_MAKE
-	@status=0; \
-	if [ -n "$(EXAM_DIR)" ]; then \
-		$(MAKE) -C "$(EXAM_DIR)" $(1) EXAM_DIR="$(abspath $(EXAM_DIR))" || status=$$?; \
+define build_variant
+	@name="$(1)"; \
+	id="$${name#series-}"; \
+	src="$(SERIES_DIR)/$${name}.md"; \
+	out="$(BUILD_ROOT)/$${id}/$(2)"; \
+	extra_args=""; \
+	if [ "$(2)" = "solution" ]; then extra_args="-a solution=true"; fi; \
+	mkdir -p "$$out"; \
+	$(TEXSMITH) -o"$$out" -texam "$(COMMON_CONFIG)" "$$src" --build $$extra_args; \
+	if [ -f "$$out/main.pdf" ]; then \
+		mv "$$out/main.pdf" "$$out/$(2).pdf"; \
+	elif [ -f "$$out/$${name}.pdf" ]; then \
+		mv "$$out/$${name}.pdf" "$$out/$(2).pdf"; \
 	else \
-		for d in $(SUBDIRS); do \
-			$(MAKE) -C "$$d" $(1) || status=$$?; \
-		done; \
-	fi; \
-	exit $$status
+		echo "No PDF output found in $$out"; \
+		exit 1; \
+	fi
 endef
 
-all: pset solution
+define check_series_code
+	@name="$(1)"; \
+	id="$${name#series-}"; \
+	assets_dir="$(SERIES_DIR)/assets/$${id}"; \
+	if [ -d "$$assets_dir" ]; then \
+		cpp_sources=$$(find "$$assets_dir" -maxdepth 1 -type f -name '*.cpp'); \
+		if [ -n "$$cpp_sources" ]; then \
+			g++ $(CPP_FLAGS) -c $$cpp_sources; \
+		fi; \
+	fi
+endef
+
+all: $(SERIES_TARGETS)
+
+# Backward-compatible aggregate targets
+pset: $(addprefix pset-,$(SERIES_TARGETS))
+solution: $(addprefix solution-,$(SERIES_TARGETS))
 
 list:
-	@for d in $(SUBDIRS); do echo $$d; done
+	@for s in $(SERIES_TARGETS); do echo $$s; done
 
-pset:
-	$(call RUN_MAKE,pset)
+$(SERIES_TARGETS): %: pset-% solution-%
 
-solution:
-	$(call RUN_MAKE,solution)
+pset-%:
+	$(call check_series_code,$*)
+	$(call build_variant,$*,pset)
 
-check-code:
-	$(call RUN_MAKE,check-code)
+solution-%:
+	$(call check_series_code,$*)
+	$(call build_variant,$*,solution)
 
 clean:
-	$(call RUN_MAKE,clean)
+	rm -rf $(ROOT_DIR)/build
+
+mrproper: clean
+	rm -f $(ROOT_DIR)/dist/*.pdf
 
 dist: all
 	@mkdir -p dist
 	@for d in build/series/*; do \
-		name=$$(basename $$d); \
+		name=$$(basename "$$d"); \
 		if [ -f "$$d/pset/pset.pdf" ]; then \
 			cp "$$d/pset/pset.pdf" "dist/pset-$$name.pdf"; \
 		fi; \
@@ -46,3 +77,7 @@ dist: all
 			cp "$$d/solution/solution.pdf" "dist/pset-$$name-solution.pdf"; \
 		fi; \
 	done
+	@for src in $(SERIES_DIR)/series-*.md; do \
+		cp "$$src" "dist/$$(basename "$$src")"; \
+	done
+	uv run --extra dev python scripts/generate_dist_index.py

@@ -8,6 +8,11 @@ dependencies = [
     "texsmith-template-exam",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "PyYAML>=6.0,<7.0",
+]
+
 [tool.uv.sources]
 texsmith = { git = "https://github.com/yves-chevallier/texsmith.git" }
 texsmith-template-exam = { path = "/home/ycr/template-exam", editable = true }

@@ -4,8 +4,8 @@ Séries d'exercices C (INFO1/INFO2) converties en Markdown et rendues en PDF ave
 
 ## Contenu
 
-- Sources Markdown dans `series/<id>/` (ex: `series/07/series-07.md`).
-- Configuration par série dans `series/<id>/config.yml`.
+- Sources Markdown dans `series/` (ex: `series/series-07.md`).
+- Configuration par série dans le frontmatter de chaque fichier Markdown.
 - PDFs générés dans `build/series/<id>/`.
 - Site statique de téléchargement dans `dist/` (GitHub Pages).
 
@@ -37,11 +37,10 @@ uv sync
 make all
 ```
 
-### Construire une série précise
+### Construire une série précise (pset + solution)
 
 ```bash
-make -C series/07 pset
-make -C series/07 solution
+make series-07
 ```
 
 Les PDFs sont générés dans `build/series/<id>/pset/` et `build/series/<id>/solution/`.
@@ -62,7 +61,7 @@ Si vous modifiez les titres ou ajoutez de nouvelles séries, régénérez l'inde
 ## Structure du dépôt
 
 ```
-series/           # sources Markdown + config par série
+series/           # sources Markdown (frontmatter inclus)
 assets/           # images utilisées dans les séries
 build/            # PDFs générés (local)
 dist/             # site statique (GitHub Pages)

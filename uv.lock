@@ -217,11 +217,18 @@ dependencies = [
     { name = "texsmith-template-exam" },
 ]
 
+[package.optional-dependencies]
+dev = [
+    { name = "pyyaml" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0,<7.0" },
     { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
     { name = "texsmith-template-exam", editable = "../template-exam" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "flexcache"
