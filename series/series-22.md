@@ -88,7 +88,7 @@ Déclarez un tableau de `Birthday` de taille `10`. Initialisez la première entr
 
     ```c
     Birthday birthdays[10] = {
-        { .name = "John Doe", .date = { .year=2000, .month=1, .day=1 } }
+        { .name = "John Doe", .birthday = { .year=2000, .month=1, .day=1 } }
     };
     ```
 
@@ -97,7 +97,7 @@ Déclarez un tableau de `Birthday` de taille `10`. Initialisez la première entr
 Quelle est la taille en octets des structures suivantes :
 
 - `struct { int32_t a; int32_t b; };` — [8 bytes]
-- `struct { char *name; int32_t age; };` — [12 bytes sur une machine 64 bits]
+- `struct { char *name; int32_t age; };` — [16 bytes sur une machine 64 bits]
 - `struct { char k[8]; short s[2]; };` — [12 bytes]
 - `struct { char a; short b; };` — [4 bytes (à cause de l'alignement)]
 

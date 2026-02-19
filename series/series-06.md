@@ -17,7 +17,7 @@ exam:
 En reprenant à chaque fois les valeurs suivantes, calculer les valeurs de `i`, `j` et lorsque cela s'applique `z` après l'exécution des instructions suivantes :
 
 ```c
-int i = 1; j = 3;
+int i = 1, j = 3;
 int z;
 ```
 

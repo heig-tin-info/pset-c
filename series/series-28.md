@@ -14,7 +14,7 @@ exam:
 
 ## - { points=10 }
 
-On considère une liste simplement chaînée dont chaque noeud peut contenir un `float`. La liste est caractérisée par deux structures `Node` et `List`.
+On considère une liste simplement chaînée dont chaque noeud peut contenir un `double`. La liste est caractérisée par deux structures `Node` et `List`.
 
 ### - { points=2 }
 
@@ -40,7 +40,7 @@ Implémentez le type `List` et la définition de son contenu. Cette dernière pe
       size_t count;
       Node *head;
       Node *tail;
-    } Node;
+    } List;
     ```
 
 ### - { points=2 }

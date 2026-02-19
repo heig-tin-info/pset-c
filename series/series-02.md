@@ -10,7 +10,7 @@ exam:
   course: INFO1-TIN
 ---
 
-# Identificateurs { points=4 }
+# Identificateurs { points=15 }
 
 Pour chacun des identificateurs suivants, indiquez s'il est correct ou incorrect, et donnez une justification.
 
@@ -30,8 +30,9 @@ Pour chacun des identificateurs suivants, indiquez s'il est correct ou incorrect
 | `f'` | [Incorrect]{w=2cm} | [comporte une apostrophe]{w=8cm} |
 | `INT` | [Correct]{w=2cm} | [mais pas recommandé]{w=8cm} |
 | `main` | [Correct]{w=2cm} | [mais plutôt réservé à la fonction d'entrée]{w=8cm} |
+| `M_PI` | [Incorrect]{w=2cm} | [constante réservée]{w=8cm} |
 
-# Affectation { points=4 }
+# Affectation { points=6 }
 
 Pour chacune des variables suivantes, indiquer leurs valeurs. Les variables non initialisées sont notées avec `?`. Cela signifie que leur contenu n'est pas prévisible.
 

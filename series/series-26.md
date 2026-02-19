@@ -19,11 +19,11 @@ On souhaite lire un fichier dont la taille n'est pas connue avant l'exécution d
 ```c
 int main(int argc, char*argv[]) {
   assert(argc > 1);
-  FILE *fp = fopen(argv[1]);
+  FILE *fp = fopen(argv[1], "r");
   assert(fp != NULL);
   char *data;
   load(&data, fp);
-  close(fp);
+  fclose(fp);
 }
 ```
 

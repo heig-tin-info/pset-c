@@ -10,7 +10,7 @@ exam:
   course: INFO1-TIN
 ---
 
-# Quelques généralités { points=16 }
+# Quelques généralités
 
 ## - { points=2 }
 

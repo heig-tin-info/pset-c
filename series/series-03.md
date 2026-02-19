@@ -61,10 +61,10 @@ Que voyez-vous sur la sortie standard ?
 | Expression                          | Sortie standard               |
 | ----------------------------------- | ----------------------------- |
 | `printf("%d\n", 42);`               | [`"42\n"`]{width=5cm}         |
-| `printf("u% 5d\n", 42);`            | [`"u 42\n"`]{width=5cm}       |
+| `printf("u% 5d\n", 42);`            | [`"u   42\n"`]{width=5cm}     |
 | `printf("%05d\n", 42);`             | [`"00042\n"`]{width=5cm}      |
-| `printf("%-5d<", 42);`              | [`"42 <"`]{width=5cm}         |
-| `printf("%-05d\n", 42);`            | [`"42 \n"`]{width=5cm}        |
+| `printf("%-5d<", 42);`              | [`"42   <"`]{width=5cm}       |
+| `printf("%-05d\n", 42);`            | [`"42   \n"`]{width=5cm}      |
 | `printf("%0*d\n", 10, 42);`         | [`"0000000042\n"`]{width=5cm} |
 | `printf("%.1f\n", 3.1415);`         | [`"3.1\n"`]{width=5cm}        |
 | `printf("%05.1f\n", 3.1415);`       | [`"003.1\n"`]{width=5cm}      |

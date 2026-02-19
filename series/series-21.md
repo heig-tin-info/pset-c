@@ -38,7 +38,7 @@ Quel est le mode à transmettre à l'appel `fopen("f.txt", mode)` pour ouvrir un
 
 - [ ] `"r"`
 - [ ] `"w"`
-- [x] `"ab+"`
+- [x] `"rb+"`
 - [ ] `"aw"`
 - [ ] `"w+"`
 
