@@ -6,7 +6,10 @@ PSET_DIR := $(CURDIR)
 PSET_DIR_REL := $(patsubst $(ROOT_DIR)/%,%,$(PSET_DIR))
 BUILD_DIR := $(ROOT_DIR)/build/$(PSET_DIR_REL)
 CONFIG_COMMON := $(ROOT_DIR)/series/common.yml
-CONFIG := $(CONFIG_COMMON) $(PSET_DIR)/config.yml
+CONFIG_LOCAL := $(PSET_DIR)/config.yml
+PSET_CONFIG := $(BUILD_DIR)/pset/config.yml
+SOLUTION_CONFIG := $(BUILD_DIR)/solution/config.yml
+MERGE_CONFIG := uv run python $(ROOT_DIR)/scripts/merge_yaml.py
 SOURCES := $(wildcard $(PSET_DIR)/*.md)
 MAIN_SOURCE := $(firstword $(SOURCES))
 OUTPUT_BASENAME := $(basename $(notdir $(MAIN_SOURCE)))
@@ -24,7 +27,8 @@ endif
 
 pset: check-code
 	mkdir -p $(BUILD_DIR)/pset
-	$(TEXSMITH) -o$(BUILD_DIR)/pset -t$(TEMPLATE) $(CONFIG) $(SOURCES) --build
+	$(MERGE_CONFIG) $(CONFIG_COMMON) $(CONFIG_LOCAL) $(PSET_CONFIG)
+	$(TEXSMITH) -o$(BUILD_DIR)/pset -t$(TEMPLATE) $(PSET_CONFIG) $(SOURCES) --build
 	@if [ -f "$(BUILD_DIR)/pset/main.pdf" ]; then \
 		mv "$(BUILD_DIR)/pset/main.pdf" "$(BUILD_DIR)/pset/pset.pdf"; \
 	elif [ -f "$(BUILD_DIR)/pset/$(OUTPUT_BASENAME).pdf" ]; then \
@@ -36,7 +40,8 @@ pset: check-code
 
 solution: check-code
 	mkdir -p $(BUILD_DIR)/solution
-	$(TEXSMITH) -o$(BUILD_DIR)/solution -t$(TEMPLATE) $(CONFIG) $(SOURCES) --build -a solution=true
+	$(MERGE_CONFIG) $(CONFIG_COMMON) $(CONFIG_LOCAL) $(SOLUTION_CONFIG)
+	$(TEXSMITH) -o$(BUILD_DIR)/solution -t$(TEMPLATE) $(SOLUTION_CONFIG) $(SOURCES) --build -a solution=true
 	@if [ -f "$(BUILD_DIR)/solution/main.pdf" ]; then \
 		mv "$(BUILD_DIR)/solution/main.pdf" "$(BUILD_DIR)/solution/solution.pdf"; \
 	elif [ -f "$(BUILD_DIR)/solution/$(OUTPUT_BASENAME).pdf" ]; then \
