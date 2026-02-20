@@ -22,6 +22,7 @@ define build_variant
 	if [ "$(2)" = "light" ]; then \
 		light_src="$(BUILD_ROOT)/$${id}/light-src/$${name}.md"; \
 		mkdir -p "$(BUILD_ROOT)/$${id}/light-src"; \
+		ln -sfn "$(ROOT_DIR)/assets" "$(BUILD_ROOT)/$${id}/assets"; \
 		$(UV) run --extra dev python "$(LIGHT_PREP_SCRIPT)" "$$src" "$$light_src"; \
 		src="$$light_src"; \
 		extra_args="-a compact=true"; \
