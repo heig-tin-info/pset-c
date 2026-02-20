@@ -1,224 +1,186 @@
 ---
 title: Série 26
-subtitle: La récursivité
+subtitle: Compilation séparée et bibliothèques
 tags:
-- recursion
-- fibonacci
-- complexity
-- call-tree
+- separate-compilation
+- headers
+- static-library
+- linker
+- make
 exam:
   course: INFO2-TIN
 ---
-## Fibonacci
 
-On considère la suite de Fibonacci, définie par la relation suivante:
+# Généralités
 
-$$
-\left\{\begin{matrix}
-    f_0 & = & 0\\
-    f_1 & = & 1\\
-    f_n & = & f_{n-1}+f_{n-2}
-    \end{matrix}\right.
-$$
+## - { points=2 }
 
-### - { points=2 }
+Parmi les propositions suivantes, lesquelles sont vraies pour un projet C en compilation séparée ?
 
-Écrire une fonction récursive qui calcule le terme de rang $n$ de cette suite.
+- [x] Chaque fichier `.c` est compilé indépendamment en fichier objet `.o`
+- [x] L'éditeur de liens (linker) assemble les fichiers objets
+- [ ] Les fichiers `.h` sont compilés en `.o`
+- [x] Un symbole global peut être défini dans un seul fichier `.c`
 
-!!! solution { lines=5 }
+## - { points=2 }
 
-    ```c
-    int fib(unsigned int n) {
-      if (n == 0 || n == 1) return n;
-      return fib(n - 1) + fib(n - 2);
-    }
-    ```
+Quel est le rôle d'un fichier d'en-tête `.h` ?
 
-### - { points=2 }
+- [x] Déclarer les fonctions, types et constantes accessibles aux autres fichiers
+- [ ] Contenir des définitions de variables globales sans `extern`
+- [ ] Remplacer le besoin de compiler les `.c`
+- [ ] Contenir le code exécutable final
 
-Représentez par un arbre les appels de fonction imbriqués lors de l'évaluation pour l'appel de `fib(7)`.
+## - { points=2 }
 
-!!! solution { lines=5 }
+On dispose de `main.c` et `maths.c`, avec un en-tête `maths.h`.
+Quelle commande compile et lie correctement l'exécutable `app` ?
 
-    On peut établir le diagramme d'appel suivant:
-
-    ![Arbre d'appels Fibonacci](../assets/fib.png){ width=80% }
-
-### - { points=2 }
-
-Quelle est la complexité en temps (*big-O*) de cette fonction ?
-
-!!! solution { lines=5 }
-
-    Pour l'appel de `fib(7)` on peut voir le nombre d'appels suivants.
-
-    ```text
-    n | Appels
-    0 | 1
-    1 | 1
-    2 | 3
-    3 | 5
-    4 | 9
-    5 | 15
-    6 | 25
-    7 | 40
-    ```
-
-    La complexité en temps de cette fonction est exponentiel. Rappelons l'équation de la suite de fibonacci :
-
-    $$
-    f(n) = f(n - 1) + f (n - 2)
-    $$
-
-    Son équation caractéristique est :
-
-    $$
-    x^2 = x + 1\\
-    x^2 - x - 1 = 0
-    $$
-
-    Donc, la résolution par la relation quadratique donne les racines suivantes:
-
-    $$
-        x_{1,2} = \left\{\begin{matrix}
-            (1+\sqrt{5})/2 \\
-            (1-\sqrt{5})/2 \\
-            \end{matrix}\right.
-    $$
-
-    On sait que pour une solution linaire récursive est donné par :
-
-    $$
-    f(n) = \alpha_1^2 + \alpha_1^2
-    $$
-
-    où, $\alpha_1$ et $\alpha_2$ sont les racines de l'équation caractéristique. De cette assertion, on peut considérer que la complexité en temps est donnée par:
-
-    $$
-    O((1+\sqrt{5}/2)^n + ((1-\sqrt{5})/2)^2) = O(1.618^n) \rightarrow O(2^n)
-    $$
-
-### - { points=2 }
-
-Écrire une fonction itérative qui calcule le terme de rang $n$.
-
-!!! solution { lines=10 }
-
-    ```c
-    int fib_iterative(unsigned int n) {
-      int result, first = 0, second = 1;
-      for (i = 0; i < n; i++) {
-        if (i <= 1)
-          result = i;
-        else {
-          result = first + second;
-          first = second;
-          second = result;
-        }
-      }
-      return result;
-    }
-    ```
-
-### - { points=2 }
-
-Quelle est la complexité en temps de cette fonction itérative ?
-
-!!! solution { lines=3 }
-
-    On ne voit ici qu'une seule boucle parcourant les valeurs de 0 à $n$. Dès lors la complexité en temps est de :
-
-    $$
-    O(n)
-    $$
-
-### - { points=2 }
-
-Écrire une fonction de mémoization en programmation dynamique qui encapsule votre fonction récursive afin de réduire la complexité.
-
-!!! solution { lines=10 }
-
-    La mémoization est une technique permettant de mémoriser les résultats des appels d'une fonction récursive. Ceci permet de réduire la complexité de traitement en utilisant davantage de mémoire.
-
-    ```c
-    #define FIB_CACHE_SIZE 100
-    int fib_cache[FIB_CACHE_SIZE] = {};
-    int fib_mem(unsigned int n) {
-        assert(n < FIB_CACHE_SIZE);
-        if (fib_cache[n] > 0)
-            return fib_cache[n];
-        int result = fib(n);
-        fib_cache[n] = result;
-        return result;
-    }
-    ```
-
-### - { points=2 }
-
-Quelle est la complexité de cette nouvelle fonction ?
-
-!!! solution { lines=2 }
-
-    La complexité devient $O(n)$ temps avec une complexité de $O(n)$ en espace mémoire.
+- [ ] `cc -o app main.c maths.h`
+- [ ] `cc -c main.c maths.c -o app`
+- [x] `cc -c main.c && cc -c maths.c && cc -o app main.o maths.o`
+- [ ] `cc -o app main.o maths.h`
 
 ---
 
-## Simulation numérique
+# Analyse de code
 
-Pour réaliser certaines fonctions de calcul dans une application de simulation numérique, on doit disposer d'une fonction calculant le polynôme suivant :
+## - { points=4 }
 
-$$
-p(x) = \frac{0\cdot x^0}{0!} + \frac{1\cdot x^1}{1!} + \frac{2\cdot x^2}{2!} + \frac{3\cdot x^3}{3!} + \frac{4\cdot x^4}{4!} + \frac{5\cdot x^5}{5!}
-$$
-
-Le calcul de ce polynôme a été programmé de la façon suivante dans cette application :
+On considère les fichiers suivants :
 
 ```c
-long factoriel(long n)
-{
-  return n == 0 ? 1 : n * factoriel(n-1);
+// maths.h
+#ifndef MATHS_H
+#define MATHS_H
+
+double mean(const double *values, size_t n);
+
+double sum(const double *values, size_t n);
+
+#endif
+```
+
+```c
+// maths.c
+#include "maths.h"
+
+double sum(const double *values, size_t n) {
+    double s = 0.0;
+    for (size_t i = 0; i < n; i++) s += values[i];
+    return s;
 }
 
-double power(double x, int n)
-{
-  double result = 1.0;
-  for (int i = 0; i < n; i++)
-    result *= x;
-  return result;
-}
-
-double compute_polynom(double x)
-{
-  double result = 0;
-  for (int i = 0; i <= 5; i++)
-    result += i*power(x, i)/factoriel(i);
-  return result;
+double mean(const double *values, size_t n) {
+    return sum(values, n) / n;
 }
 ```
 
-Cette fonction est appelée des millions de fois pendant le calcul de la simulation numérique, et les temps de calcul obtenus sont beaucoup trop élevés.
+```c
+// main.c
+#include <stdio.h>
+#include "maths.h"
 
-### - { points=2 }
+int main(void) {
+    double v[] = {1.0, 2.0, 3.0, 4.0};
+    printf("%g\n", mean(v, 4));
+}
+```
 
-Expliquez pourquoi la programmation de cette fonction n'est pas optimale au niveau des performances.
+1. Quel fichier doit contenir les **définitions** des fonctions ?
+2. Quel fichier doit contenir les **déclarations** des fonctions ?
+3. Pourquoi le `#ifndef` est-il utile ?
 
-!!! solution { lines=3 }
+!!! solution { lines=6 }
 
-    La factorielle de 1 à 5 est recalculée des millions de fois, alors que c'est une valeur constante.
-    Le calcul du polynôme est fait avec la méthode inefficace des puissances. Ainsi, on ne réutilise pas la valeur de $x^2$ pour calculer $x^3$.
+    1. Les définitions doivent être dans `maths.c`.
+    2. Les déclarations doivent être dans `maths.h`.
+    3. Le garde d'inclusion évite les inclusions multiples et les redéfinitions.
 
-### - { points=2 }
+---
 
-Proposez des optimisations du code permettant de diminuer significativement les temps de calcul de cette fonction.
+# Programmation
 
-!!! solution { lines=fill }
+## - { points=6 }
 
-    Après simplification, on voit que cette fonction peut être calculée de façon beaucoup plus simple et efficace sous la forme suivante :
+Créez un module `stats` qui expose les fonctions suivantes :
+
+- `double stats_min(const double *v, size_t n);`
+- `double stats_max(const double *v, size_t n);`
+
+Indiquez ce qui doit se trouver dans `stats.h` et dans `stats.c`.
+
+!!! solution { lines=10 }
 
     ```c
-    double calcul_polynome2(double x)
-    {
-      return x * (1.0 + x * (1.0 + x * (0.5 + x * ((1/6.0) + x *
-         (1/24.)))));
+    // stats.h
+    #ifndef STATS_H
+    #define STATS_H
+    #include <stddef.h>
+    double stats_min(const double *v, size_t n);
+    double stats_max(const double *v, size_t n);
+    #endif
+    ```
+
+    ```c
+    // stats.c
+    #include "stats.h"
+    double stats_min(const double *v, size_t n) {
+        double m = v[0];
+        for (size_t i = 1; i < n; i++) if (v[i] < m) m = v[i];
+        return m;
     }
+    double stats_max(const double *v, size_t n) {
+        double m = v[0];
+        for (size_t i = 1; i < n; i++) if (v[i] > m) m = v[i];
+        return m;
+    }
+    ```
+
+## - { points=4 }
+
+On souhaite créer une bibliothèque statique `libgeom.a` contenant `geom.c` et `geom.h`.
+Donnez les commandes nécessaires pour :
+
+1. Compiler `geom.c` en fichier objet.
+2. Créer la bibliothèque statique.
+3. Lier un programme `main.c` avec cette bibliothèque.
+
+!!! solution { lines=6 }
+
+    ```bash
+    cc -c geom.c -o geom.o
+    ar rcs libgeom.a geom.o
+    cc main.c -L. -lgeom -o app
+    ```
+
+## - { points=3 }
+
+Complétez le `Makefile` minimal suivant pour construire `app` à partir de `main.c` et `maths.c`.
+
+```make
+CC = cc
+CFLAGS = -Wall -Wextra -std=c11
+
+app: main.o maths.o
+	# TODO
+
+main.o: main.c maths.h
+	# TODO
+
+maths.o: maths.c maths.h
+	# TODO
+```
+
+!!! solution { lines=6 }
+
+    ```make
+    app: main.o maths.o
+    	$(CC) $(CFLAGS) -o app main.o maths.o
+
+    main.o: main.c maths.h
+    	$(CC) $(CFLAGS) -c main.c
+
+    maths.o: maths.c maths.h
+    	$(CC) $(CFLAGS) -c maths.c
     ```

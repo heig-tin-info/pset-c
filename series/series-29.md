@@ -1,154 +1,192 @@
 ---
 title: Série 29
-subtitle: Structure de données récursives
+subtitle: Tableaux dynamiques
 tags:
-- linked-list
-- recursive-data-structures
-- binary-search-tree
-- algorithms
+- dynamic-array
+- amortized-complexity
+- api-design
+- memory-management
 exam:
   course: INFO2-TIN
 ---
-## Liste simplement chaînée
 
-On considère une liste simplement chaînée dont chaque noeud peut contenir un `double`. La liste est caractérisée par deux structures `Node` et `List`.
+## Tableau dynamique
+
+Un tableau dynamique est déterminé par un facteur de croissance et comporte généralement deux informations associées aux données : le nombre d'éléments stockés dans le tableau, la capacité du tableau en nombre d'éléments. Lorsque la capacité du tableau atteint la limite de stockage, il est étendu en prenant en compte le facteur de croissance.
+
+Les opérations sur un tableau dynamiques sont : *push* pour ajouter un élément à la fin du tableau, *unshift* pour ajouter un élément au début du tableau, *pop* pour supprimer un élément à la fin du tableau et *shift* pour supprimer un élément en début de tableau.
+
+Parfois d'autres opérations existent : *delete* pour supprimer un élément à l'indice K et *insert* pour ajouter un élément après l'élément K.
+
+Utilisez ici `assert` pour le test des erreurs, et ne réduisez pas la taille du tableau, il ne fait que s'agrandir au gré des données le peuplant.
+
+On souhaite implémenter un tableau dynamique, implémentez les fonctions demandées :
 
 ### - { points=2 }
 
-Implémentez le type `Node` et la définition de son contenu.
+Écrire une structure de donnée représentant un tableau dynamique et permettant de stocker des paires de `double`.
 
 !!! solution { lines=5 }
 
     ```c
-    typedef struct node {
-      double value;
-      struct node *next;
-    } Node;
+    typedef struct array {
+      size_t capacity;
+      size_t elements;
+      double (*data)[2];
+    } Array;
     ```
 
 ### - { points=2 }
 
-Implémentez le type `List` et la définition de son contenu. Cette dernière permet d'accéder le premier et le dernier élément de la liste et contient également le nombre d'éléments dans la liste.
+Compte tenu de la structure déclarée précédemment, écrire une fonction permettant d'initialiser un tableau. C'est à dire allouer l'espace mémoire nécessaire et renseigner les informations nécessaires. La structure de ce tableau est la suivante :
 
-!!! solution { lines=6 }
-
-    ```c
-    typedef struct list {
-      size_t count;
-      Node *head;
-      Node *tail;
-    } List;
-    ```
+```c
+typedef struct array {
+  size_t capacity;
+  size_t elements;
+  double (*data)[2];
+} Array;
+```
 
 ### - { points=2 }
 
-Implémentez la fonction `push` permettant d'insérer un nouvel élément dans la liste. Veillez aux cas particuliers, par exemple lorsque la liste est vide. La fonction retourne une valeur négative en cas d'erreur, zéro en cas de succès.
+Écrire la fonction `array_init`.
 
-!!! solution { lines=15 }
+!!! solution { lines=5 }
 
     ```c
-    int push(List *list, double value) {
-      Node *node = malloc(sizeof(Node));
-      if (node == NULL) {
-        return -1;
-      }
-      node->value = value;
-      node->next = NULL;
-      if (list->count == 0) {
-        list->head = node;
-        list->tail = node;
-      } else {
-        list->tail->next = node;
-        list->tail = node;
-      }
-      list->count++;
-      return 0;
+    void array_init(Array *array) {
+      array->capacity = 1;
+      array->elements = 0;
+      array->data = malloc(sizeof(double[2]) * array->capacity);
     }
     ```
 
 ### - { points=2 }
 
-Implémentez la fonction `mean` permettant de calculer la valeur moyenne du contenu de la liste.
+Écrire la fonction `array_push`.
 
 !!! solution { lines=10 }
 
     ```c
-    double mean(List *list) {
-      double sum = 0;
-      Node *node = list->head;
-      while (node != NULL) {
-        sum += node->value;
-        node = node->next;
+    void array_push(Array *array, double x, double y) {
+      if (array->elements == array->capacity) {
+        array->capacity *= 2;
+        array->data = realloc(array->data, sizeof(double[2]) * array->capacity);
+        assert(array->data != NULL);
       }
-      return sum / list->count;
+      array->data[array->elements][0] = x;
+      array->data[array->elements][1] = y;
+      array->elements++;
     }
     ```
 
 ### - { points=2 }
 
-Implémentez une fonction de comparaison `compare` qui reçoit deux listes et retourne 0 si le contenu est identique, et 1 sinon.
+Écrire la fonction `array_pop`.
+
+!!! solution { lines=6 }
+
+    ```c
+    void array_pop(Array *array, double *x, double *y) {
+      assert(array->elements > 0);
+      array->elements--;
+      *x = array->data[array->elements][0];
+      *y = array->data[array->elements][1];
+    }
+    ```
+
+### - { points=2 }
+
+Écrire la fonction `array_shift`.
+
+!!! solution { lines=10 }
+
+    ```c
+    void array_shift(Array *array, double *x, double *y) {
+      assert(array->elements > 0);
+      *x = array->data[0][0];
+      *y = array->data[0][1];
+      for (size_t i = 0; i < array->elements - 1; i++) {
+        array->data[i][0] = array->data[i + 1][0];
+        array->data[i][1] = array->data[i + 1][1];
+      }
+      array->elements--;
+    }
+    ```
+
+### - { points=2 }
+
+Écrire la fonction `array_unshift`.
 
 !!! solution { lines=15 }
 
     ```c
-    int compare(List *a, List *b) {
-      if (a->count != b->count) {
-        return -1;
+    void array_unshift(Array *array, double x, double y) {
+      if (array->elements == array->capacity) {
+        array->capacity *= 2;
+        array->data = realloc(array->data, sizeof(double[2]) * array->capacity);
       }
-      Node *node_a = a->head;
-      Node *node_b = b->head;
-      while (node_a != NULL) {
-        if (node_a->value != node_b->value) {
-          return -1;
-        }
-        node_a = node_a->next;
-        node_b = node_b->next;
+      for (size_t i = array->elements; i > 0; i--) {
+        array->data[i][0] = array->data[i - 1][0];
+        array->data[i][1] = array->data[i - 1][1];
       }
-      return 0;
-    }
-    ```
-
----
-
-## Arbre de recherche binaire
-
-Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété suivante : l'enfant de gauche est toujours plus petit que son parent et l'enfant de droite est toujours plus grand que son parent. Voici un exemple :
-
-![BST](../assets/bst.pdf){ width=50% }
-
-### - { points=2 }
-
-Écrire la structure de donnée d'un noeud d'un BST contenant des valeurs entières non signées.
-
-!!! solution { lines=6 }
-
-    ```c
-    typedef struct node {
-      unsigned int value;
-      struct node *left;
-      struct node *right;
-    } Node;
-    ```
-
-### - { points=2 }
-
-Écrire une fonction récursive permettant de rechercher une valeur dans un bst. Si la valeur est trouvée la fonction retourne 1, sinon 0.
-
-!!! solution { lines=6 }
-
-    ```c
-    int search(Node *root, unsigned int value) {
-      if (root == NULL) return 0;
-      if (root->value == value) return 1;
-      return search(
-        root->value > value ? root->left : root->right, value);
+      array->data[0][0] = x;
+      array->data[0][1] = y;
+      array->elements++;
     }
     ```
 
 ### - { points=2 }
 
-Quelle est la complexité en temps (Big-O) pour la recherche d'un élément dans un BST ?
+Écrire la fonction `array_insert`.
+
+!!! solution { lines=15 }
+
+    ```c
+    void array_insert(Array *array, size_t index, double x, double y) {
+      if (array->elements == array->capacity) {
+        array->capacity *= 2;
+        array->data = realloc(array->data, sizeof(double[2]) * array->capacity);
+      }
+      for (size_t i = array->elements; i > index; i--) {
+        array->data[i][0] = array->data[i - 1][0];
+        array->data[i][1] = array->data[i - 1][1];
+      }
+      array->data[index][0] = x;
+      array->data[index][1] = y;
+      array->elements++;
+    }
+    ```
+
+### - { points=2 }
+
+Écrire la fonction `array_delete`.
+
+!!! solution { lines=6 }
+
+    ```c
+    void array_delete(Array *array, size_t index) {
+      for (size_t i = index; i < array->elements - 1; i++) {
+        array->data[i][0] = array->data[i + 1][0];
+        array->data[i][1] = array->data[i + 1][1];
+      }
+      array->elements--;
+    }
+    ```
+
+### - { points=2 }
+
+Quelle est la complexité (Big-O) en temps pour l'opération *push* ?
 
 !!! solution { lines=1 }
 
-    $O(\log n)$
+    O(1) amorti.
+
+### - { points=2 }
+
+Quelle est la complexité (Big-O) en temps pour l'opération *insert* ?
+
+!!! solution { lines=1 }
+
+    O(n)
