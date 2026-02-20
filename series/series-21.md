@@ -9,20 +9,17 @@ tags:
 exam:
   course: INFO2-TIN
 ---
+# Généralités
 
-# Série 21 — Les fichiers
+## - { points=3 }
 
-## - { points=6 }
-
-### - { points=2 }
-
-Tout programme exécuté ouvre trois flux (fichiers) quels sont leur noms et leur direction (entrée/sortie) ?
+Tout programme exécuté ouvre trois flux (fichiers) quels sont leur noms et leur direction (entrée/sortie), selon la convention de numérotation des flux ?
 
 1. [stdin, entrée]{w=4cm}
 2. [stdout, sortie]{w=4cm}
 3. [stderr, sortie]{w=4cm}
 
-### - { points=2 }
+## - { points=1 }
 
 Quelle est la fonction utilisée pour positionner manuellement le curseur dans un fichier ?
 
@@ -32,9 +29,9 @@ Quelle est la fonction utilisée pour positionner manuellement le curseur dans u
 - [ ] `fputc`
 - [ ] `feof`
 
-### - { points=2 }
+## - { points=1 }
 
-Quel est le mode à transmettre à l'appel `fopen("f.txt", mode)` pour ouvrir un fichier existant en mode binaire en lecture écriture ?
+Quel est le mode à transmettre à l'appel `fopen("f.txt", mode)` pour ouvrir un fichier existant en mode **binaire** en **lecture écriture** ?
 
 - [ ] `"r"`
 - [ ] `"w"`
@@ -42,11 +39,20 @@ Quel est le mode à transmettre à l'appel `fopen("f.txt", mode)` pour ouvrir un
 - [ ] `"aw"`
 - [ ] `"w+"`
 
-## - { points=4 }
+## - { points=1 }
 
-Vous disposez d'un pointeur sur un fichier ouvert en lecture `fp` et vous souhaitez connaître la taille de ce fichier. Écrire une fonction `size_t fsize(FILE *fp)` qui retourne la taille du fichier.
+Le caractère `\0` peut-il théoriquement apparaître dans quel type de fichier ?
 
-!!! solution { lines=7 }
+- [ ] Texte
+- [x] Binaire
+
+# Programmation
+
+## - { points=5 }
+
+Vous disposez d'un pointeur sur un fichier ouvert en lecture `fp` et vous souhaitez connaître la taille de ce fichier. Écrire une fonction `size_t fsize(FILE *fp)` qui retourne la taille du fichier
+
+!!! solution { lines=fill }
 
     ```c
     size_t fsize(FILE *fp) {
@@ -59,11 +65,11 @@ Vous disposez d'un pointeur sur un fichier ouvert en lecture `fp` et vous souhai
     }
     ```
 
-## - { points=4 }
+## - { points=5 }
 
 Écrire un programme qui prend le nom d'un fichier texte en argument ainsi qu'un texte à rechercher. Votre programme doit afficher le numéro de toute ligne du fichier contenant le texte recherché.
 
-!!! solution { lines=12 }
+!!! solution { lines=15 }
 
     ```c
     int main(int argc, char *argv[]) {
@@ -83,11 +89,11 @@ Vous disposez d'un pointeur sur un fichier ouvert en lecture `fp` et vous souhai
     }
     ```
 
-## - { points=4 }
+## - { points=5 }
 
 Écrire un programme qui retourne la taille de la ligne la plus longue dans un fichier texte. Le programme prend soit un nom de fichier passé en arguments, soit utilise l'entrée standard.
 
-!!! solution { lines=12 }
+!!! solution { lines=15 }
 
     ```c
     int main(int argc, char *argv[]) {

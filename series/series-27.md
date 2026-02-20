@@ -10,7 +10,7 @@ exam:
   course: INFO2-TIN
 ---
 
-# Série 27 — Tableaux dynamiques
+## Tableau dynamique
 
 Un tableau dynamique est déterminé par un facteur de croissance et comporte généralement deux informations associées aux données : le nombre d'éléments stockés dans le tableau, la capacité du tableau en nombre d'éléments. Lorsque la capacité du tableau atteint la limite de stockage, il est étendu en prenant en compte le facteur de croissance.
 
@@ -20,15 +20,13 @@ Parfois d'autres opérations existent : *delete* pour supprimer un élément à 
 
 Utilisez ici `assert` pour le test des erreurs, et ne réduisez pas la taille du tableau, il ne fait que s'agrandir au gré des données le peuplant.
 
-## - { points=22 }
-
 On souhaite implémenter un tableau dynamique, implémentez les fonctions demandées :
 
 ### - { points=2 }
 
 Écrire une structure de donnée représentant un tableau dynamique et permettant de stocker des paires de `double`.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     typedef struct array {
@@ -54,7 +52,7 @@ typedef struct array {
 
 Écrire la fonction `array_init`.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     void array_init(Array *array) {
@@ -68,7 +66,7 @@ typedef struct array {
 
 Écrire la fonction `array_push`.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     void array_push(Array *array, double x, double y) {
@@ -87,7 +85,7 @@ typedef struct array {
 
 Écrire la fonction `array_pop`.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     void array_pop(Array *array, double *x, double *y) {
@@ -102,7 +100,7 @@ typedef struct array {
 
 Écrire la fonction `array_shift`.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     void array_shift(Array *array, double *x, double *y) {
@@ -121,7 +119,7 @@ typedef struct array {
 
 Écrire la fonction `array_unshift`.
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     void array_unshift(Array *array, double x, double y) {
@@ -143,7 +141,7 @@ typedef struct array {
 
 Écrire la fonction `array_insert`.
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     void array_insert(Array *array, size_t index, double x, double y) {
@@ -165,7 +163,7 @@ typedef struct array {
 
 Écrire la fonction `array_delete`.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     void array_delete(Array *array, size_t index) {

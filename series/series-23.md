@@ -2,66 +2,68 @@
 title: Série 23
 subtitle: Les pointeurs
 tags:
-- pointers
-- pointer-arithmetic
-- indirection
-- string-copy
+  - pointers
+  - pointer-arithmetic
+  - indirection
+  - string-copy
 exam:
   course: INFO2-TIN
 ---
 
-# Série 23 — Les pointeurs
-
-## - { points=4 }
+## Pointeurs et arithmétique de pointeurs { points=10 }
 
 Complétez le tableau suivant en indiquant la valeur des variables après chaque instruction.
 
 Pour indiquer que la variable `p` contient l'adresse `a`, on notera `&a` dans la colonne `p`.
 
-Pour indiquer qu'une variable est non initialisée ou que son contenu n'est pas connu, la case sera laissée vide.
+Pour indiquer qu'une variable est non initialisée ou que son contenu n'est pas connu, utiliser `?`.
 
-| Instruction | a | b | c | p | q |
-| --- | --- | --- | --- | --- | --- |
-| `int a = 1;` | [1] | [] | [] | [] | [] |
-| `int b = 2;` | [1] | [2] | [] | [] | [] |
-| `int c = 3;` | [1] | [2] | [3] | [] | [] |
-| `int *p = &a;` | [1] | [2] | [3] | [&a] | [] |
-| `int *q = &c;` | [1] | [2] | [3] | [&a] | [&c] |
-| `*p=(*q)++;` | [3] | [2] | [4] | [&a] | [&c] |
-| `p = q;` | [3] | [2] | [4] | [&c] | [&c] |
-| `q = &b;` | [3] | [2] | [4] | [&c] | [&b] |
-| `*p -= *q;` | [3] | [2] | [2] | [&c] | [&b] |
-| `++*q;` | [3] | [3] | [2] | [&c] | [&b] |
-| `*p *= *q;` | [3] | [3] | [6] | [&c] | [&b] |
-| `a = ++*q**p;` | [24] | [4] | [6] | [&c] | [&b] |
-| `p = &a;` | [24] | [4] | [6] | [&a] | [&b] |
-| `*q = *p /= *q;` | [6] | [6] | [6] | [&a] | [&b] |
-| `int *r[3] = {&a, &b, &c};` | [6] | [6] | [6] | [&a] | [&b] |
+| Instruction                 | a           | b          | c          | p           | q           |
+| --------------------------- | ----------- | ---------- | ---------- | ----------- | ----------- |
+| `int a = 1;`                | [1]{w=1cm}  | [?]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int b = 2;`                | [1]{w=1cm}  | [2]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int c = 3;`                | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int *p = &a;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [?]{w=1cm}  |
+| `int *q = &c;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
+| `*p=(*q)++;`                | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
+| `p = q;`                    | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&c]{w=1cm} |
+| `q = &b;`                   | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `*p -= *q;`                 | [3]{w=1cm}  | [2]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `++*q;`                     | [3]{w=1cm}  | [3]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `*p *= *q;`                 | [3]{w=1cm}  | [3]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `a = ++*q**p;`              | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `p = &a;`                   | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
+| `*q = *p /= *q;`            | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
+| `int *r[3] = {&a, &b, &c};` | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
 
-## - { points=4 }
+---
 
-Intéressons-nous à l'arithmétique de pointeurs. On considère `p` un pointeur qui *pointe* sur un tableau `a`:
+## Pointeurs { points=11 }
+
+Intéressons-nous à l'arithmétique de pointeurs. On considère `p` un pointeur qui _pointe_ sur un tableau `a`:
 
 ```c
 int a[] = {4, 8, 15, 16, 23, 42, 66, 104, 162};
 int *p = a;
 ```
 
-Quelles sont les valeurs ou adresses que fournissent ces expressions ?
+Quelles sont les valeurs ou adresses que fournissent ces expressions ? Pour indiquer l'adresse utiliser par exemple `&a[3]` pour indiquer l'adresse de l'élément `a[3]`. Pour indiquer la valeur d'un élément du tableau, utiliser par exemple `15` pour indiquer la valeur de l'élément `a[2]`.
 
-- `*p+2` — [6]
-- `*(p+2)` — [15]
-- `&a[4]-3` — [L'adresse de l'élément `a[1]`]
-- `a + 3` — [L'adresse de l'élément `a[3]`]
-- `&a[7]-p` — [7]
-- `p+(*p-2)` — [L'adresse de l'élément `a[2]`]
-- `*(p+*(p+4)-a[3])` — [104]
-- `(p+1)[2]` — [16]
-- `5[p] // wtf!` — [42]
-- `(uintptr_t)(p + 3) - (uintptr_t)a` — [12 (bytes)]
-- `(&a)[1][-1]` — [162]
+| Expression                          | Valeur ou adresse   |
+| ----------------------------------- | ------------------- |
+| `*p+2`                              | [6]{w=2cm}          |
+| `*(p+2)`                            | [15]{w=2cm}         |
+| `&a[4]-3`                           | [`&a[1]`]{w=2cm}    |
+| `a + 3`                             | [`&a[3]`]{w=2cm}    |
+| `&a[7]-p`                           | [7]{w=2cm}          |
+| `p+(*p-2)`                          | [`&a[2]`]{w=2cm}    |
+| `*(p+*(p+4)-a[3])`                  | [104]{w=2cm}        |
+| `(p+1)[2]`                          | [16]{w=2cm}         |
+| `5[p] // wtf!`                      | [42]{w=2cm}         |
+| `(uintptr_t)(p + 3) - (uintptr_t)a` | [12 (bytes)]{w=2cm} |
+| `(&a)[1][-1]`                       | [162]{w=2cm}        |
 
-## - { points=4 }
+## Programmation { points=5 }
 
 Écrire une fonction qui respecte le prototype ci-dessous. Cette fonction copie une chaîne de caractère de la source vers la destination.
 

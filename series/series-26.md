@@ -10,9 +10,7 @@ exam:
   course: INFO2-TIN
 ---
 
-# Série 26 — L'allocation dynamique
-
-## - { points=4 }
+## Lecture de fichier sur le *heap* { points=4 }
 
 On souhaite lire un fichier dont la taille n'est pas connue avant l'exécution du programme. Un espace mémoire doit alors être réservé sur le *heap*. Écrire la fonction `load` permettant de charger l'ensemble du fichier en mémoire dans la variable `data`.
 
@@ -27,7 +25,7 @@ int main(int argc, char*argv[]) {
 }
 ```
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     void load(char **data, FILE*fp) {
@@ -41,7 +39,7 @@ int main(int argc, char*argv[]) {
     }
     ```
 
-## - { points=8 }
+## Membre flexible
 
 Une structure avec un membre flexible est défini comme suit :
 
@@ -68,7 +66,7 @@ Quelle est la taille de la structure record en bytes?
 
 Déclarez la variable `r` puis allouer l'espace mémoire nécessaire pour y stocker 10 points.
 
-!!! solution
+!!! solution { lines=2 }
 
     ```c
     Record *r = malloc(sizeof(Record) + sizeof(Point) * 10);
@@ -79,7 +77,7 @@ Déclarez la variable `r` puis allouer l'espace mémoire nécessaire pour y stoc
 
 Redimensionnez la variable `r` pour y stocker jusqu'à 100 points.
 
-!!! solution
+!!! solution { lines=4 }
 
     ```c
     void *tmp = realloc(r, sizeof(Record) + sizeof(Point) * 100);
@@ -91,13 +89,13 @@ Redimensionnez la variable `r` pour y stocker jusqu'à 100 points.
 
 À la fin de l'exercice, il est nécessaire de libérer l'espace mémoire utilisé. Comment libérez-vous l'espace alloué ?
 
-!!! solution
+!!! solution { lines=1 }
 
     ```c
     free(r);
     ```
 
-## - { points=4 }
+## Redimensionnement
 
 Une fonction s'occupe de redimensionner un set de données pour pouvoir y stocker `n` valeurs. Écrire la fonction `resize`.
 
@@ -113,7 +111,7 @@ typedef struct measurements {
 } Measurements;
 ```
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     int resize(Measurements *meas, size_t n) {
@@ -145,7 +143,7 @@ typedef struct measurements {
 } Measurements;
 ```
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     int resize(Measurements **meas, size_t n) {
@@ -167,7 +165,7 @@ typedef struct measurements {
     }
     ```
 
-## - { points=4 }
+## Sudoku
 
 Dans un jeu de Sudoku, on souhaite allouer l'espace nécessaire pour y stocker une grille dont la taille (nombre de colonnes) est déterminée à l'exécution du programme.
 
@@ -177,7 +175,7 @@ La grille est stockée dans un pointeur sur un tableau à deux dimensions, dont 
 
 Écrire la structure de donnée et allouer cette grille en initialisant toutes les valeurs à zéro.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     const int columns = 10;
@@ -190,7 +188,7 @@ La grille est stockée dans un pointeur sur un tableau à deux dimensions, dont 
 
 Affichez la grille sur la sortie standard.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     for(int i = 0; i < columns; i++) {

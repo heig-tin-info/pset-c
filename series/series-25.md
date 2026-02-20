@@ -9,10 +9,7 @@ tags:
 exam:
   course: INFO2-TIN
 ---
-
-# Série 25 — La récursivité
-
-## - { points=14 }
+## Fibonacci
 
 On considère la suite de Fibonacci, définie par la relation suivante:
 
@@ -28,7 +25,7 @@ $$
 
 Écrire une fonction récursive qui calcule le terme de rang $n$ de cette suite.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     int fib(unsigned int n) {
@@ -41,7 +38,7 @@ $$
 
 Représentez par un arbre les appels de fonction imbriqués lors de l'évaluation pour l'appel de `fib(7)`.
 
-!!! solution
+!!! solution { lines=5 }
 
     On peut établir le diagramme d'appel suivant:
 
@@ -51,7 +48,7 @@ Représentez par un arbre les appels de fonction imbriqués lors de l'évaluatio
 
 Quelle est la complexité en temps (*big-O*) de cette fonction ?
 
-!!! solution
+!!! solution { lines=5 }
 
     Pour l'appel de `fib(7)` on peut voir le nombre d'appels suivants.
 
@@ -105,7 +102,7 @@ Quelle est la complexité en temps (*big-O*) de cette fonction ?
 
 Écrire une fonction itérative qui calcule le terme de rang $n$.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     int fib_iterative(unsigned int n) {
@@ -139,7 +136,7 @@ Quelle est la complexité en temps de cette fonction itérative ?
 
 Écrire une fonction de mémoization en programmation dynamique qui encapsule votre fonction récursive afin de réduire la complexité.
 
-!!! solution
+!!! solution { lines=10 }
 
     La mémoization est une technique permettant de mémoriser les résultats des appels d'une fonction récursive. Ceci permet de réduire la complexité de traitement en utilisant davantage de mémoire.
 
@@ -160,11 +157,13 @@ Quelle est la complexité en temps de cette fonction itérative ?
 
 Quelle est la complexité de cette nouvelle fonction ?
 
-!!! solution { lines=1 }
+!!! solution { lines=2 }
 
     La complexité devient $O(n)$ temps avec une complexité de $O(n)$ en espace mémoire.
 
-## - { points=4 }
+---
+
+## Simulation numérique
 
 Pour réaliser certaines fonctions de calcul dans une application de simulation numérique, on doit disposer d'une fonction calculant le polynôme suivant :
 
@@ -212,7 +211,7 @@ Expliquez pourquoi la programmation de cette fonction n'est pas optimale au nive
 
 Proposez des optimisations du code permettant de diminuer significativement les temps de calcul de cette fonction.
 
-!!! solution
+!!! solution { lines=fill }
 
     Après simplification, on voit que cette fonction peut être calculée de façon beaucoup plus simple et efficace sous la forme suivante :
 

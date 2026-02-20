@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.13"
 
 [[package]]
@@ -260,7 +260,7 @@ requires-dist = [
     { name = "pelican", marker = "extra == 'dev'", specifier = ">=4.10,<5.0" },
     { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0,<7.0" },
     { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
-    { name = "texsmith-template-exam", git = "https://github.com/yves-chevallier/template-exam.git?rev=61dfd974b16684c397a3e5f481b94ed30ec4d625" },
+    { name = "texsmith-template-exam", git = "https://github.com/yves-chevallier/template-exam.git" },
 ]
 provides-extras = ["dev"]
 
@@ -904,7 +904,7 @@ dependencies = [
 [[package]]
 name = "texsmith-template-exam"
 version = "0.1.0"
-source = { git = "https://github.com/yves-chevallier/template-exam.git?rev=61dfd974b16684c397a3e5f481b94ed30ec4d625#61dfd974b16684c397a3e5f481b94ed30ec4d625" }
+source = { git = "https://github.com/yves-chevallier/template-exam.git#61dfd974b16684c397a3e5f481b94ed30ec4d625" }
 dependencies = [
     { name = "texsmith" },
 ]

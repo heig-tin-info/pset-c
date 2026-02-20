@@ -9,10 +9,7 @@ tags:
 exam:
   course: INFO2-TIN
 ---
-
-# Série 24 — Le Préprocesseur
-
-## - { points=4 }
+## Macros sans paramètres
 
 ### - { points=2 }
 
@@ -30,7 +27,7 @@ int main() {
 }
 ```
 
-!!! solution { lines=1 }
+!!! solution { lines=2 }
 
     L'expression `NINE * TEN` est évaluée comme `9 * 1 + 9`, ce qui donne `18`.
 
@@ -46,7 +43,9 @@ Quelles modifications faut-il apporter pour que le résultat soit correct ?
     #define TEN (ONE + NINE)
     ```
 
-## - { points=4 }
+## Macros avec paramètres
+
+### - { points=5 }
 
 Expliquer pourquoi ce programme affiche `5`, et comment corriger ce problème.
 
@@ -54,13 +53,10 @@ Expliquer pourquoi ce programme affiche `5`, et comment corriger ce problème.
 #include <stdio.h>
 #define MAX(i, j) i > j ? i : j
 
-int main(void)
-{
-    printf("%d\n", MAX(5, 2) + 4);
-}
+int main(void) { printf("%d\n", MAX(5, 2) + 4); }
 ```
 
-!!! solution
+!!! solution { lines=fill }
 
     L'appel de la macro `MAX(5,2)` est évalué comme `5 > 2 ? 5 : 2`. Mais l'addition qui suit donne l'expression : `5 > 2 ? 5 : 2 + 4`, soit `true ? 5 : 6` en raison des priorités des opérateurs.
 
@@ -70,7 +66,7 @@ int main(void)
     #define MAX(i, j) ((i) > (j) ? (i) : (j))
     ```
 
-## - { points=4 }
+### - { points=5 }
 
 Expliquez pourquoi ce programme affiche la valeur `7`.
 
@@ -85,7 +81,7 @@ int main(void)
 }
 ```
 
-!!! solution
+!!! solution { lines=10 }
 
     Une fois de plus le préprocesseur agit comme du remplacement de chaînes, et donc l'expression `ABS(++i)` est évaluée comme `((++i) >= 0 ? (++i) : -(++i))`. Comme `++i` est supérieur à 0, l'opérateur conditionnel évalue et retourne la première expression soit `++i`. Au final, `i` aura été incrémenté deux fois.
 
@@ -99,7 +95,7 @@ int main(void)
     }
     ```
 
-## - { points=4 }
+## Compilation conditionnelle { points=4 }
 
 Qu'affichent les programmes ci-dessous ?
 
@@ -132,7 +128,7 @@ int main(void)
 }
 ```
 
-!!! solution
+!!! solution { lines=3 }
 
     ```c
     #ifdef
@@ -168,7 +164,7 @@ int main()
 }
 ```
 
-!!! solution
+!!! solution { lines=4 }
 
     ```c
     #else
@@ -176,7 +172,9 @@ int main()
     #if !defined
     ```
 
-## - { points=10 }
+---
+
+## Lecture de code { points=10 }
 
 Calcul du taux d'intérêt.
 
@@ -227,7 +225,7 @@ Que fait ce programme ? Que voit l'utilisateur à l'écran ?
 echo "1000\n5\n" | ./a.out
 ```
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     Programme de calcul des intérêts au 2022-04-11 pour la Suisse.
@@ -264,7 +262,7 @@ Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE
 
 Comment compiler le programme depuis la ligne de commande pour n'importe quelle zone ?
 
-!!! solution
+!!! solution { lines=1 }
 
     Il faut tout d'abord retirer la définition `ZONE_SWISS` du programme, puis compiler en utilisant par exemple :
 

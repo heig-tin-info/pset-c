@@ -9,10 +9,7 @@ tags:
 exam:
   course: INFO2-TIN
 ---
-
-# Série 28 — Structure de données récursives
-
-## - { points=10 }
+## Liste simplement chaînée
 
 On considère une liste simplement chaînée dont chaque noeud peut contenir un `double`. La liste est caractérisée par deux structures `Node` et `List`.
 
@@ -20,7 +17,7 @@ On considère une liste simplement chaînée dont chaque noeud peut contenir un 
 
 Implémentez le type `Node` et la définition de son contenu.
 
-!!! solution
+!!! solution { lines=5 }
 
     ```c
     typedef struct node {
@@ -33,7 +30,7 @@ Implémentez le type `Node` et la définition de son contenu.
 
 Implémentez le type `List` et la définition de son contenu. Cette dernière permet d'accéder le premier et le dernier élément de la liste et contient également le nombre d'éléments dans la liste.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     typedef struct list {
@@ -47,7 +44,7 @@ Implémentez le type `List` et la définition de son contenu. Cette dernière pe
 
 Implémentez la fonction `push` permettant d'insérer un nouvel élément dans la liste. Veillez aux cas particuliers, par exemple lorsque la liste est vide. La fonction retourne une valeur négative en cas d'erreur, zéro en cas de succès.
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     int push(List *list, double value) {
@@ -73,7 +70,7 @@ Implémentez la fonction `push` permettant d'insérer un nouvel élément dans l
 
 Implémentez la fonction `mean` permettant de calculer la valeur moyenne du contenu de la liste.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     double mean(List *list) {
@@ -91,7 +88,7 @@ Implémentez la fonction `mean` permettant de calculer la valeur moyenne du cont
 
 Implémentez une fonction de comparaison `compare` qui reçoit deux listes et retourne 0 si le contenu est identique, et 1 sinon.
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     int compare(List *a, List *b) {
@@ -111,17 +108,19 @@ Implémentez une fonction de comparaison `compare` qui reçoit deux listes et re
     }
     ```
 
-## - { points=6 }
+---
+
+## Arbre de recherche binaire
 
 Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété suivante : l'enfant de gauche est toujours plus petit que son parent et l'enfant de droite est toujours plus grand que son parent. Voici un exemple :
 
-![BST](../assets/bst.pdf){ width=60% }
+![BST](../assets/bst.pdf){ width=50% }
 
 ### - { points=2 }
 
 Écrire la structure de donnée d'un noeud d'un BST contenant des valeurs entières non signées.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     typedef struct node {
@@ -135,7 +134,7 @@ Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété sui
 
 Écrire une fonction récursive permettant de rechercher une valeur dans un bst. Si la valeur est trouvée la fonction retourne 1, sinon 0.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     int search(Node *root, unsigned int value) {
