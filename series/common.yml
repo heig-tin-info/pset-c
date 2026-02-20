@@ -16,3 +16,4 @@ exam:
   titlepage: minimal
   next-page-advice: false
   problem-label: Exercice
+  fillin-style: dotted
