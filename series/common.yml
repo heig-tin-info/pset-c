@@ -1,4 +1,5 @@
 language: fr
+problem-label: Exercice
 typesetting:
   paragraph:
     indent: none
@@ -14,3 +15,4 @@ press:
 exam:
   titlepage: minimal
   next-page-advice: false
+  problem-label: Exercice
