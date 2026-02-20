@@ -1,271 +1,86 @@
 ---
 title: Série 24
-subtitle: Le Préprocesseur
+subtitle: Les pointeurs
 tags:
-- preprocessor
-- macros
-- macro-pitfalls
-- operator-precedence
+  - pointers
+  - pointer-arithmetic
+  - indirection
+  - string-copy
 exam:
   course: INFO2-TIN
 ---
-## Macros sans paramètres
 
-### - { points=2 }
+## Pointeurs et arithmétique de pointeurs { points=10 }
 
-Quelle sera la valeur affichée par le programme ci-dessous ?
+Complétez le tableau suivant en indiquant la valeur des variables après chaque instruction.
 
-```c
-#include <stdio.h>
+Pour indiquer que la variable `p` contient l'adresse `a`, on notera `&a` dans la colonne `p`.
 
-#define ONE 1
-#define NINE 9
-#define TEN ONE + NINE
+Pour indiquer qu'une variable est non initialisée ou que son contenu n'est pas connu, utiliser `?`.
 
-int main() {
-    printf("%d\n", NINE * TEN);
-}
-```
-
-!!! solution { lines=2 }
-
-    L'expression `NINE * TEN` est évaluée comme `9 * 1 + 9`, ce qui donne `18`.
-
-### - { points=2 }
-
-Quelles modifications faut-il apporter pour que le résultat soit correct ?
-
-!!! solution { lines=3 }
-
-    Il est nécessaire de rajouter des parenthèses dans la définition de la macro.
-
-    ```c
-    #define TEN (ONE + NINE)
-    ```
-
-## Macros avec paramètres
-
-### - { points=5 }
-
-Expliquer pourquoi ce programme affiche `5`, et comment corriger ce problème.
-
-```c
-#include <stdio.h>
-#define MAX(i, j) i > j ? i : j
-
-int main(void) { printf("%d\n", MAX(5, 2) + 4); }
-```
-
-!!! solution { lines=fill }
-
-    L'appel de la macro `MAX(5,2)` est évalué comme `5 > 2 ? 5 : 2`. Mais l'addition qui suit donne l'expression : `5 > 2 ? 5 : 2 + 4`, soit `true ? 5 : 6` en raison des priorités des opérateurs.
-
-    Afin de résoudre ce problème il est nécessaire de protéger par des parenthèses toutes les variables d'une macro.
-
-    ```c
-    #define MAX(i, j) ((i) > (j) ? (i) : (j))
-    ```
-
-### - { points=5 }
-
-Expliquez pourquoi ce programme affiche la valeur `7`.
-
-```c
-#define ABS(x) ((x) >= 0 ? (x) : -(x))
-
-int main(void)
-{
-    int i = 5;
-    int res = ABS(++i);
-    printf("%d\n", res);
-}
-```
-
-!!! solution { lines=10 }
-
-    Une fois de plus le préprocesseur agit comme du remplacement de chaînes, et donc l'expression `ABS(++i)` est évaluée comme `((++i) >= 0 ? (++i) : -(++i))`. Comme `++i` est supérieur à 0, l'opérateur conditionnel évalue et retourne la première expression soit `++i`. Au final, `i` aura été incrémenté deux fois.
-
-    Il n'existe pas de solution pour éviter ce genre de problème, en revanche on prendra l'habitude de bien saisir les macros en MAJUSCULES pour bien les identifier, et éviter de donner à une macro des expressions qui peuvent poser problème.
-
-    L'approche correcte consiste à ne pas utiliser de macros, mais plutôt utiliser une fonction *inline*.
-
-    ```c
-    inline int abs_int(int x) {
-        return x >= 0 ? x : -x;
-    }
-    ```
-
-## Compilation conditionnelle { points=4 }
-
-Qu'affichent les programmes ci-dessous ?
-
-### - { points=2 }
-
-```c
-#include <stdio.h>
-
-#define TEST 0
-
-int main(void)
-{
-#ifdef TEST
-    printf("#ifdef\n");
-#else
-    printf("#else\n");
-#endif
-#ifndef TEST
-    printf("#ifndef\n");
-#endif
-#if !defined TEST
-    printf("#if !defined\n");
-#endif
-#if defined TEST
-    printf("#if defined\n");
-#endif
-#if TEST
-    printf("#if\n");
-#endif
-}
-```
-
-!!! solution { lines=3 }
-
-    ```c
-    #ifdef
-    #if defined
-    ```
-
-### - { points=2 }
-
-```c
-#include <stdio.h>
-
-//#define TEST 0
-
-int main()
-{
-#ifdef TEST
-    printf("#ifdef\n");
-#else
-    printf("#else\n");
-#endif
-#ifndef TEST
-    printf("#ifndef\n");
-#endif
-#if !defined TEST
-    printf("#if !defined\n");
-#endif
-#if defined TEST
-    printf("#if defined\n");
-#endif
-#if TEST
-    printf("#if\n");
-#endif
-}
-```
-
-!!! solution { lines=4 }
-
-    ```c
-    #else
-    #ifndef
-    #if !defined
-    ```
+| Instruction                 | a           | b          | c          | p           | q           |
+| --------------------------- | ----------- | ---------- | ---------- | ----------- | ----------- |
+| `int a = 1;`                | [1]{w=1cm}  | [?]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int b = 2;`                | [1]{w=1cm}  | [2]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int c = 3;`                | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
+| `int *p = &a;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [?]{w=1cm}  |
+| `int *q = &c;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
+| `*p=(*q)++;`                | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
+| `p = q;`                    | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&c]{w=1cm} |
+| `q = &b;`                   | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `*p -= *q;`                 | [3]{w=1cm}  | [2]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `++*q;`                     | [3]{w=1cm}  | [3]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `*p *= *q;`                 | [3]{w=1cm}  | [3]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `a = ++*q**p;`              | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
+| `p = &a;`                   | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
+| `*q = *p /= *q;`            | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
+| `int *r[3] = {&a, &b, &c};` | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
 
 ---
 
-## Lecture de code { points=10 }
+## Pointeurs { points=11 }
 
-Calcul du taux d'intérêt.
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-
-#define ZONE_SWISS
-
-#ifdef ZONE_SWISS
-#define ZONE_NAME "Suisse"
-#define CURRENCY "CHF"
-#elif defined ZONE_EUROPE
-#define ZONE_NAME "Europe"
-#define CURRENCY "EUR"
-#elif defined ZONE_AFRICA
-#define ZONE_NAME "Afrique"
-#define CURRENCY "CFA"
-#elif defined ZONE_USA
-#define ZONE_NAME "États-Unis"
-#define CURRENCY "USD"
-#else
-#error Ce programme n'est pas compatible pour cette zone géographique
-#endif
-
-int main(void)
-{
-    double capital;
-    printf("Programme de calcul des intérêts au %s pour la %s.\n",
-        __DATE__, ZONE_NAME
-    );
-    printf("Capital en %s ?", CURRENCY);
-    scanf("%lf", &capital);
-    printf("Taux d'intérêts annuel en %% \? : ");
-    double interest_rate;
-    scanf("%lf", &interest_rate);
-    printf("Montant annuel des intérêts : %g %s\n",
-        capital * interest_rate / 100,
-        CURRENCY);
-}
-```
-
-### - { points=2 }
-
-Que fait ce programme ? Que voit l'utilisateur à l'écran ?
+Intéressons-nous à l'arithmétique de pointeurs. On considère `p` un pointeur qui _pointe_ sur un tableau `a`:
 
 ```c
-echo "1000\n5\n" | ./a.out
+int a[] = {4, 8, 15, 16, 23, 42, 66, 104, 162};
+int *p = a;
 ```
 
-!!! solution { lines=5 }
+Quelles sont les valeurs ou adresses que fournissent ces expressions ? Pour indiquer l'adresse utiliser par exemple `&a[3]` pour indiquer l'adresse de l'élément `a[3]`. Pour indiquer la valeur d'un élément du tableau, utiliser par exemple `15` pour indiquer la valeur de l'élément `a[2]`.
+
+| Expression                          | Valeur ou adresse   |
+| ----------------------------------- | ------------------- |
+| `*p+2`                              | [6]{w=2cm}          |
+| `*(p+2)`                            | [15]{w=2cm}         |
+| `&a[4]-3`                           | [`&a[1]`]{w=2cm}    |
+| `a + 3`                             | [`&a[3]`]{w=2cm}    |
+| `&a[7]-p`                           | [7]{w=2cm}          |
+| `p+(*p-2)`                          | [`&a[2]`]{w=2cm}    |
+| `*(p+*(p+4)-a[3])`                  | [104]{w=2cm}        |
+| `(p+1)[2]`                          | [16]{w=2cm}         |
+| `5[p] // wtf!`                      | [42]{w=2cm}         |
+| `(uintptr_t)(p + 3) - (uintptr_t)a` | [12 (bytes)]{w=2cm} |
+| `(&a)[1][-1]`                       | [162]{w=2cm}        |
+
+## Programmation { points=5 }
+
+Écrire une fonction qui respecte le prototype ci-dessous. Cette fonction copie une chaîne de caractère de la source vers la destination.
+
+```c
+void strcpy(char *dest, const char *src);
+```
+
+Ne pas utiliser de boucle for, ni d'accès tableaux (`a[b]`). Utilisez une boucle `while` et l'arithmétique de pointeurs.
+
+!!! solution { lines=8 }
 
     ```c
-    Programme de calcul des intérêts au 2022-04-11 pour la Suisse.
-    Capital en CHF ? 1000
-    Taux d'intérêts annuel % \? 5
-    Montant annuel des intérêts : 50 CHF
-    ```
-
-### - { points=2 }
-
-Que faut-il faire pour adapter rapidement ce programme à une autre zone géographique ?
-
-!!! solution { lines=1 }
-
-    Il suffit de remplacer la définiton du symbole `ZONE_SWISS` par le symbole d'une autre zone.
-
-### - { points=2 }
-
-Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE_AFRICA` ?
-
-!!! solution { lines=1 }
-
-    Le nom de la zone géographique affichée sera `Afrique` et l'unité monétaire utilisée sera `CFA`.
-
-### - { points=2 }
-
-Quel changement y aura-t-il si on remplace la définition `ZONE_SWISS` par `ZONE_JAPAN` ?
-
-!!! solution { lines=1 }
-
-    Le programme n'a pas été prévu pour fonctionner avec cette zone. Lors de la compilation du programme un message d'erreur sera affiché.
-
-### - { points=2 }
-
-Comment compiler le programme depuis la ligne de commande pour n'importe quelle zone ?
-
-!!! solution { lines=1 }
-
-    Il faut tout d'abord retirer la définition `ZONE_SWISS` du programme, puis compiler en utilisant par exemple :
-
-    ```c
-    cc -DZONE_SWISS interest.c -ointerest
+    void strcpy(char *dest, const char *src)
+    {
+        char *p = dest;
+        while (*src)
+            *p++ = *src++;
+        *p = '\0';
+    }
     ```

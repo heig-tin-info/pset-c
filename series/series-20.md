@@ -9,6 +9,52 @@ tags:
 exam:
   course: INFO2-TIN
 ---
+# Algorithmie { points=6 }
+
+## - { points=2 }
+
+On souhaite développer un programme qui analyse un fichier de mesures. Proposez une décomposition en sous-problèmes (raffinage successif) en listant 4 à 6 fonctions possibles, avec un nom clair pour chaque fonction.
+
+!!! solution { lines=6 }
+
+    Exemple :
+    - `read_file` : lire le fichier et charger les données en mémoire
+    - `parse_measurement` : parser une ligne en structure de mesure
+    - `compute_stats` : calculer min, max, moyenne
+    - `print_report` : afficher le rapport
+    - `save_csv` : exporter les résultats
+
+## - { points=2 }
+
+Pour chaque tâche ci-dessous, indiquez si elle doit être réalisée dans une fonction distincte ou peut rester dans `main`, et justifiez en une phrase.
+
+1. Lecture d'un argument de ligne de commande  
+2. Validation du format d'une date ISO8601  
+3. Calcul d'une distance euclidienne  
+4. Écriture d'un rapport dans un fichier
+
+!!! solution { lines=6 }
+
+    1. Peut rester dans `main` (simple, spécifique au programme).
+    2. Fonction distincte (réutilisable et testable).
+    3. Fonction distincte (réutilisable, calcul pur).
+    4. Fonction distincte (sépare I/O et logique).
+
+## - { points=2 }
+
+Complétez le pseudo-code en détaillant le raffinage successif (2 niveaux) pour l'algorithme suivant : "compter le nombre de valeurs positives dans un tableau".
+
+!!! solution { lines=6 }
+
+    Niveau 1 :
+    - parcourir le tableau
+    - compter les valeurs positives
+    - retourner le compteur
+
+    Niveau 2 (détail du parcours) :
+    - initialiser `count` à 0
+    - pour chaque élément `x`, si `x > 0` alors `count++`
+
 # Arithmétique et expressions { points=10 }
 
 Considérez les déclarations suivantes :

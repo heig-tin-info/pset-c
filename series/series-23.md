@@ -1,86 +1,154 @@
 ---
 title: Série 23
-subtitle: Les pointeurs
+subtitle: Classes de stockage et alignement
 tags:
-  - pointers
-  - pointer-arithmetic
-  - indirection
-  - string-copy
+- storage-classes
+- const
+- volatile
+- extern
+- alignment
+- pragma-pack
+- bitfields
 exam:
   course: INFO2-TIN
 ---
 
-## Pointeurs et arithmétique de pointeurs { points=10 }
+# Classes de stockage et qualificateurs
 
-Complétez le tableau suivant en indiquant la valeur des variables après chaque instruction.
+## - { points=2 }
 
-Pour indiquer que la variable `p` contient l'adresse `a`, on notera `&a` dans la colonne `p`.
+Quel est l'effet du mot-clé `static` sur une variable déclarée au **niveau fichier** ?
 
-Pour indiquer qu'une variable est non initialisée ou que son contenu n'est pas connu, utiliser `?`.
+- [ ] La variable est allouée sur la pile
+- [x] La variable est visible uniquement dans l'unité de traduction
+- [ ] La variable est réinitialisée à chaque appel de fonction
+- [ ] La variable doit être initialisée obligatoirement
 
-| Instruction                 | a           | b          | c          | p           | q           |
-| --------------------------- | ----------- | ---------- | ---------- | ----------- | ----------- |
-| `int a = 1;`                | [1]{w=1cm}  | [?]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
-| `int b = 2;`                | [1]{w=1cm}  | [2]{w=1cm} | [?]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
-| `int c = 3;`                | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [?]{w=1cm}  | [?]{w=1cm}  |
-| `int *p = &a;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [?]{w=1cm}  |
-| `int *q = &c;`              | [1]{w=1cm}  | [2]{w=1cm} | [3]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
-| `*p=(*q)++;`                | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&a]{w=1cm} | [&c]{w=1cm} |
-| `p = q;`                    | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&c]{w=1cm} |
-| `q = &b;`                   | [3]{w=1cm}  | [2]{w=1cm} | [4]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
-| `*p -= *q;`                 | [3]{w=1cm}  | [2]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
-| `++*q;`                     | [3]{w=1cm}  | [3]{w=1cm} | [2]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
-| `*p *= *q;`                 | [3]{w=1cm}  | [3]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
-| `a = ++*q**p;`              | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&c]{w=1cm} | [&b]{w=1cm} |
-| `p = &a;`                   | [24]{w=1cm} | [4]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
-| `*q = *p /= *q;`            | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
-| `int *r[3] = {&a, &b, &c};` | [6]{w=1cm}  | [6]{w=1cm} | [6]{w=1cm} | [&a]{w=1cm} | [&b]{w=1cm} |
+## - { points=2 }
 
----
+Quel mot-clé doit être utilisé dans un fichier d'en-tête pour **déclarer** une variable globale définie dans un autre fichier ?
 
-## Pointeurs { points=11 }
+- [ ] `static`
+- [x] `extern`
+- [ ] `register`
+- [ ] `volatile`
 
-Intéressons-nous à l'arithmétique de pointeurs. On considère `p` un pointeur qui _pointe_ sur un tableau `a`:
+## - { points=2 }
 
-```c
-int a[] = {4, 8, 15, 16, 23, 42, 66, 104, 162};
-int *p = a;
-```
+À propos de `volatile`, quelle affirmation est correcte ?
 
-Quelles sont les valeurs ou adresses que fournissent ces expressions ? Pour indiquer l'adresse utiliser par exemple `&a[3]` pour indiquer l'adresse de l'élément `a[3]`. Pour indiquer la valeur d'un élément du tableau, utiliser par exemple `15` pour indiquer la valeur de l'élément `a[2]`.
+- [ ] Le compilateur peut mettre en cache la valeur dans un registre
+- [x] Le compilateur doit relire la valeur en mémoire à chaque accès
+- [ ] `volatile` rend la variable constante
+- [ ] `volatile` supprime tout risque de data race
 
-| Expression                          | Valeur ou adresse   |
-| ----------------------------------- | ------------------- |
-| `*p+2`                              | [6]{w=2cm}          |
-| `*(p+2)`                            | [15]{w=2cm}         |
-| `&a[4]-3`                           | [`&a[1]`]{w=2cm}    |
-| `a + 3`                             | [`&a[3]`]{w=2cm}    |
-| `&a[7]-p`                           | [7]{w=2cm}          |
-| `p+(*p-2)`                          | [`&a[2]`]{w=2cm}    |
-| `*(p+*(p+4)-a[3])`                  | [104]{w=2cm}        |
-| `(p+1)[2]`                          | [16]{w=2cm}         |
-| `5[p] // wtf!`                      | [42]{w=2cm}         |
-| `(uintptr_t)(p + 3) - (uintptr_t)a` | [12 (bytes)]{w=2cm} |
-| `(&a)[1][-1]`                       | [162]{w=2cm}        |
+## - { points=2 }
 
-## Programmation { points=5 }
-
-Écrire une fonction qui respecte le prototype ci-dessous. Cette fonction copie une chaîne de caractère de la source vers la destination.
+Pour chaque déclaration, indiquez si l'on peut modifier **la valeur pointée** et/ou **le pointeur**.
 
 ```c
-void strcpy(char *dest, const char *src);
+const int *p1;
+int * const p2 = NULL;
+const int * const p3 = NULL;
 ```
 
-Ne pas utiliser de boucle for, ni d'accès tableaux (`a[b]`). Utilisez une boucle `while` et l'arithmétique de pointeurs.
+!!! solution { lines=6 }
 
-!!! solution { lines=8 }
+    - `p1` : on ne peut pas modifier la valeur pointée, on peut modifier le pointeur.
+    - `p2` : on peut modifier la valeur pointée, on ne peut pas modifier le pointeur.
+    - `p3` : on ne peut modifier ni la valeur pointée ni le pointeur.
+
+## - { points=2 }
+
+Analysez le code suivant et indiquez ce qui est affiché.
+
+```c
+#include <stdio.h>
+
+int next_id(void) {
+    static int id = 0;
+    return ++id;
+}
+
+int main(void) {
+    printf("%d %d %d\n", next_id(), next_id(), next_id());
+}
+```
+
+!!! solution { lines=1 }
+
+    `1 2 3`
+
+# Alignement et `#pragma pack`
+
+## - { points=3 }
+
+Sur une machine 64-bit avec alignement naturel (`char=1`, `short=2`, `int=4`, `double=8`), calculez `sizeof` pour les structures ci-dessous.
+
+```c
+typedef struct {
+    char c;
+    int i;
+    short s;
+} A;
+
+#pragma pack(push, 1)
+typedef struct {
+    char c;
+    int i;
+    short s;
+} B;
+#pragma pack(pop)
+```
+
+!!! solution { lines=4 }
+
+    `sizeof(A) = 12` (padding après `c` et en fin de structure).
+    `sizeof(B) = 7` (structure compactée, aucun padding).
+
+## - { points=2 }
+
+Citez deux risques liés à l'utilisation de `#pragma pack(1)`.
+
+!!! solution { lines=3 }
+
+    - Accès mémoire non alignés, pouvant dégrader les performances.
+    - Risque de crash ou de comportement non portable selon l'architecture.
+
+# Champs de bits
+
+## - { points=3 }
+
+Déclarez une structure `Flags` contenant 3 indicateurs booléens (`ready`, `error`, `busy`) sur 1 bit chacun, et un champ `code` sur 5 bits.
+
+!!! solution { lines=6 }
 
     ```c
-    void strcpy(char *dest, const char *src)
-    {
-        char *p = dest;
-        while (*src)
-            *p++ = *src++;
-        *p = '\0';
+    typedef struct {
+        unsigned ready : 1;
+        unsigned error : 1;
+        unsigned busy  : 1;
+        unsigned code  : 5;
+    } Flags;
+    ```
+
+## - { points=3 }
+
+Écrire une fonction qui met à 1 le flag `error` et met à 0 le flag `ready` dans une variable `Flags *f`.
+
+!!! solution { lines=4 }
+
+    ```c
+    void set_error(Flags *f) {
+        f->error = 1;
+        f->ready = 0;
     }
     ```
+
+## - { points=3 }
+
+Que se passe-t-il si on affecte la valeur `17` à un champ de bits défini sur 4 bits ?
+
+!!! solution { lines=3 }
+
+    La valeur est tronquée aux 4 bits de poids faible. Le comportement exact est implémentation-défini.
