@@ -44,6 +44,7 @@ def build_series_entries() -> list[dict]:
                 "subtitle": str(fm.get("subtitle", "")),
                 "tags": [str(x) for x in fm.get("tags", []) if str(x).strip()],
                 "pset_pdf": f"pset-{series_id}.pdf",
+                "light_pdf": f"pset-{series_id}-light.pdf",
                 "solution_pdf": f"pset-{series_id}-solution.pdf",
                 "source_md": f"{slug}.md",
             }

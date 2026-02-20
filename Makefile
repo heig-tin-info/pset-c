@@ -1,4 +1,4 @@
-.PHONY: all pset solution list clean mrproper dist deps deps-dev-template deps-reset-template $(SERIES_TARGETS)
+.PHONY: all pset light solution list clean mrproper dist deps deps-dev-template deps-reset-template $(SERIES_TARGETS)
 
 ROOT_DIR := $(CURDIR)
 TEXSMITH := uv run --no-sync texsmith
@@ -6,6 +6,7 @@ UV := uv
 SERIES_DIR := $(ROOT_DIR)/series
 BUILD_ROOT := $(ROOT_DIR)/build/series
 COMMON_CONFIG := $(SERIES_DIR)/common.yml
+LIGHT_PREP_SCRIPT := $(ROOT_DIR)/scripts/prepare_light.py
 CPP_FLAGS := -std=c++20 -Wall -Wextra -pedantic
 TEMPLATE_EXAM_PATH ?= ../template-exam
 
@@ -18,6 +19,13 @@ define build_variant
 	src="$(SERIES_DIR)/$${name}.md"; \
 	out="$(BUILD_ROOT)/$${id}/$(2)"; \
 	extra_args=""; \
+	if [ "$(2)" = "light" ]; then \
+		light_src="$(BUILD_ROOT)/$${id}/light-src/$${name}.md"; \
+		mkdir -p "$(BUILD_ROOT)/$${id}/light-src"; \
+		$(UV) run --extra dev python "$(LIGHT_PREP_SCRIPT)" "$$src" "$$light_src"; \
+		src="$$light_src"; \
+		extra_args="-a compact=true"; \
+	fi; \
 	if [ "$(2)" = "solution" ]; then extra_args="-a solution=true"; fi; \
 	mkdir -p "$$out"; \
 	$(TEXSMITH) -o"$$out" -texam "$(COMMON_CONFIG)" "$$src" --build $$extra_args; \
@@ -28,6 +36,13 @@ define build_variant
 	else \
 		echo "No PDF output found in $$out"; \
 		exit 1; \
+	fi; \
+	if [ "$(2)" = "pset" ]; then \
+		cp "$$out/pset.pdf" "$(BUILD_ROOT)/$${id}/$${name}.pdf"; \
+	elif [ "$(2)" = "light" ]; then \
+		cp "$$out/light.pdf" "$(BUILD_ROOT)/$${id}/$${name}-light.pdf"; \
+	elif [ "$(2)" = "solution" ]; then \
+		cp "$$out/solution.pdf" "$(BUILD_ROOT)/$${id}/$${name}-solutions.pdf"; \
 	fi
 endef
 
@@ -58,16 +73,21 @@ deps-reset-template:
 
 # Backward-compatible aggregate targets
 pset: $(addprefix pset-,$(SERIES_TARGETS))
+light: $(addprefix light-,$(SERIES_TARGETS))
 solution: $(addprefix solution-,$(SERIES_TARGETS))
 
 list:
 	@for s in $(SERIES_TARGETS); do echo $$s; done
 
-$(SERIES_TARGETS): %: pset-% solution-%
+$(SERIES_TARGETS): %: pset-% light-% solution-%
 
 pset-%:
 	$(call check_series_code,$*)
 	$(call build_variant,$*,pset)
+
+light-%:
+	$(call check_series_code,$*)
+	$(call build_variant,$*,light)
 
 solution-%:
 	$(call check_series_code,$*)
@@ -85,6 +105,9 @@ dist: all
 		name=$$(basename "$$d"); \
 		if [ -f "$$d/pset/pset.pdf" ]; then \
 			cp "$$d/pset/pset.pdf" "dist/pset-$$name.pdf"; \
+		fi; \
+		if [ -f "$$d/light/light.pdf" ]; then \
+			cp "$$d/light/light.pdf" "dist/pset-$$name-light.pdf"; \
 		fi; \
 		if [ -f "$$d/solution/solution.pdf" ]; then \
 			cp "$$d/solution/solution.pdf" "dist/pset-$$name-solution.pdf"; \
