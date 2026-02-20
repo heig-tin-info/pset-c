@@ -1,4 +1,4 @@
-# pset-c
+# Problem sets for Info1/Info2 C course
 
 C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with TeXSmith and the `exam` template.
 
@@ -7,9 +7,12 @@ C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with Te
 - `series/`: Markdown sources (`series-*.md`) with frontmatter config.
 - `series/common.yml`: shared TeXSmith config.
 - `assets/`: shared assets used by series.
+- `pelican/` + `pelicanconf.py`: static site generation for `dist/index.html`.
+
+Temporary build outputs:
+
 - `build/`: local build output (`build/series/<id>/...`).
 - `dist/`: static distribution folder (PDFs + site).
-- `pelican/` + `pelicanconf.py`: static site generation for `dist/index.html`.
 
 ## Tooling
 
@@ -22,7 +25,6 @@ C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with Te
 
 - `uv`
 - `make` (recommended)
-- `tectonic` available in `PATH` (required by TeXSmith for PDF builds)
 
 ## Install Dependencies
 
@@ -75,11 +77,11 @@ make clean      # remove build/
 make mrproper   # clean + remove dist/*.pdf
 ```
 
-## Codex Dev Mode for `template-exam`
+## Development for `template-exam`
 
-Default behavior uses the pinned GitHub revision of `texsmith-template-exam` from `pyproject.toml`.
+Default behavior uses latest GitHub revision of `texsmith-template-exam` from `pyproject.toml`.
 
-To work in debug mode (editable local checkout, useful for Codex iterations):
+To work in debug mode (editable local checkout, useful for Agent work):
 
 1. Clone `template-exam` next to this repository:
 
@@ -107,14 +109,8 @@ Tip: if your local checkout path differs, pass it explicitly:
 make deps-dev-template TEMPLATE_EXAM_PATH=/path/to/template-exam
 ```
 
-## Updating the `template-exam` Pin
-
 After pushing changes to `template-exam`:
 
 1. Update the `rev` under `[tool.uv.sources]` in `pyproject.toml`.
 2. Run `uv lock`.
 3. Commit `pyproject.toml` and `uv.lock` in this repository.
-
-## CI Note (Private `template-exam`)
-
-If `yves-chevallier/template-exam` is private for your CI runner, add a repository secret named `TEMPLATE_EXAM_TOKEN` (GitHub PAT with read access to that repository). The workflow will use it automatically before `uv sync`.
