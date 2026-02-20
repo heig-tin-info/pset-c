@@ -11,3 +11,9 @@ Ajouter une option pour avoir une série compacte, sans espaces pour les répons
 3. On garde les fillin pour les textes à trous
 
 On modifie le makefile pour compiler cette version compacte avec la version standard. Lors du make dist on copie le pset-light qu'on met à disposition dans le site pelican. Si bien qu'on peut télécharger la série avec espace de réponse et la série courte.
+
+---
+
+Clean template-exam to remove unused things, and release on PyPi
+
+---
