@@ -1,7 +1,7 @@
 .PHONY: all pset light solution list clean mrproper dist deps deps-dev-template deps-reset-template $(SERIES_TARGETS)
 
 ROOT_DIR := $(CURDIR)
-TEXSMITH := uv run --no-sync texsmith
+TEXSMITH := uv run texsmith
 UV := uv
 SERIES_DIR := $(ROOT_DIR)/series
 BUILD_ROOT := $(ROOT_DIR)/build/series

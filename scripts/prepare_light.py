@@ -10,6 +10,7 @@ PAGE_BREAK_FORCE_RE = re.compile(r"^\s*---\s*\{\s*force\s*\}\s*$", re.IGNORECASE
 SOLUTION_DIRECTIVE_RE = re.compile(r"^(\s*)!!!\s+solution\b.*$", re.IGNORECASE)
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 WIDTH_FILLIN_RE = re.compile(r"\[(.*?)\]\{[^}]*\bwidth\s*=\s*[^}]+\}")
+TASK_ITEM_RE = re.compile(r"^(\s*[-*]\s+)\[[ xX]\]\s+")
 
 
 def _split_frontmatter(text: str) -> tuple[str, str]:
@@ -21,6 +22,18 @@ def _split_frontmatter(text: str) -> tuple[str, str]:
     frontmatter = text[: end + 5]
     body = text[end + 5 :]
     return frontmatter, body
+
+
+def _ensure_compact_frontmatter(frontmatter: str) -> str:
+    if not frontmatter:
+        return "---\ncompact: true\n---\n"
+    if re.search(r"(?m)^compact\s*:\s*", frontmatter):
+        return frontmatter
+    lines = frontmatter.splitlines(keepends=True)
+    if len(lines) >= 2 and lines[-1].strip() == "---":
+        lines.insert(-1, "compact: true\n")
+        return "".join(lines)
+    return frontmatter
 
 
 def _is_mcq_heading(title: str) -> bool:
@@ -48,6 +61,7 @@ def transform_light_body(body: str) -> str:
             out.append(f"{solution.group(1)}!!! solution\n")
             continue
 
+        line = TASK_ITEM_RE.sub(r"\1", line)
         if in_mcq_section:
             line = WIDTH_FILLIN_RE.sub(r"\1", line)
 
@@ -66,6 +80,7 @@ def main() -> int:
 
     text = src.read_text(encoding="utf-8")
     frontmatter, body = _split_frontmatter(text)
+    frontmatter = _ensure_compact_frontmatter(frontmatter)
     compact_body = transform_light_body(body)
 
     dst.parent.mkdir(parents=True, exist_ok=True)
