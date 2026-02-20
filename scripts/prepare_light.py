@@ -10,7 +10,6 @@ PAGE_BREAK_FORCE_RE = re.compile(r"^\s*---\s*\{\s*force\s*\}\s*$", re.IGNORECASE
 SOLUTION_DIRECTIVE_RE = re.compile(r"^(\s*)!!!\s+solution\b.*$", re.IGNORECASE)
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 WIDTH_FILLIN_RE = re.compile(r"\[(.*?)\]\{[^}]*\bwidth\s*=\s*[^}]+\}")
-TASK_ITEM_RE = re.compile(r"^(\s*[-*]\s+)\[[ xX]\]\s+")
 
 
 def _split_frontmatter(text: str) -> tuple[str, str]:
@@ -61,7 +60,6 @@ def transform_light_body(body: str) -> str:
             out.append(f"{solution.group(1)}!!! solution\n")
             continue
 
-        line = TASK_ITEM_RE.sub(r"\1", line)
         if in_mcq_section:
             line = WIDTH_FILLIN_RE.sub(r"\1", line)
 

@@ -1,8 +1,9 @@
 .PHONY: all pset light solution list clean mrproper dist deps deps-dev-template deps-reset-template $(SERIES_TARGETS)
 
 ROOT_DIR := $(CURDIR)
-TEXSMITH := uv run texsmith
 UV := uv
+UV_RUN := uv run --no-sync
+TEXSMITH := $(UV_RUN) texsmith
 SERIES_DIR := $(ROOT_DIR)/series
 BUILD_ROOT := $(ROOT_DIR)/build/series
 COMMON_CONFIG := $(SERIES_DIR)/common.yml
@@ -23,7 +24,7 @@ define build_variant
 		light_src="$(BUILD_ROOT)/$${id}/light-src/$${name}.md"; \
 		mkdir -p "$(BUILD_ROOT)/$${id}/light-src"; \
 		ln -sfn "$(ROOT_DIR)/assets" "$(BUILD_ROOT)/$${id}/assets"; \
-		$(UV) run --extra dev python "$(LIGHT_PREP_SCRIPT)" "$$src" "$$light_src"; \
+		$(UV_RUN) --extra dev python "$(LIGHT_PREP_SCRIPT)" "$$src" "$$light_src"; \
 		src="$$light_src"; \
 		extra_args="-a compact=true"; \
 	fi; \
@@ -117,4 +118,4 @@ dist: all
 	@for src in $(SERIES_DIR)/series-*.md; do \
 		cp "$$src" "dist/$$(basename "$$src")"; \
 	done
-	uv run --extra dev pelican pelican/content -s pelicanconf.py -o dist
+	$(UV_RUN) --extra dev pelican pelican/content -s pelicanconf.py -o dist
