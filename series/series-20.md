@@ -68,21 +68,47 @@ int i = 3;     long l = 4;
 float f = 3.3; double d = 7.7;
 ```
 
-Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur. On vous donne un exemple de réponse pour la première expression.
+Pour chacune des expressions ci-dessous, indiquez leur type et leur valeur. Par exemple l'expression `2 / 3 * c` donne `(int)0` car `2 / 3` est égal à `0` en division entière, et comme l'opération passe par l'ALU, le resultat est promu en `int` avant d'être multiplié par `c`.
 
-| Expression       | Type et valeur             |
-| ---------------- | -------------------------- |
-| `2 / 3 * c`      | `(int)0`                   |
-| `c / 2`          | [`(int)1`]{width=3cm}      |
-| `s + c / 10`     | [`(int)7`]{width=3cm}      |
-| `l + i / 2.0`    | [`(double)5.5`]{width=3cm} |
-| `d + f`          | [`(double)11`]{width=3cm}  |
-| `(int)d + f`     | [`(float)10.3`]{width=3cm} |
-| `(int)d + l`     | [`(long)11`]{width=3cm}    |
-| `c << 2`         | [`(int)12`]{width=3cm}     |
-| `s & 0xf0`       | [`(int)0`]{width=3cm}      |
-| `s && 0xf0`      | [`(int)1`]{width=3cm}      |
-| `d + f == s + l` | [`(int)0`]{width=3cm}      |
+## - { points=2 answer="`(int)1`" }
+
+`c / 2`
+
+## - { points=2 answer="`(int)7`" }
+
+`s + c / 10`
+
+## - { points=2 answer="`(double)5.5`" }
+
+`l + i / 2.0`
+
+## - { points=2 answer="`(double)11`" }
+
+`d + f`
+
+## - { points=2 answer="`(float)10.3`" }
+
+`(int)d + f`
+
+## - { points=2 answer="`(long)11`" }
+
+`(int)d + l`
+
+## - { points=2 answer="`(int)12`" }
+
+`c << 2`
+
+## - { points=2 answer="`(int)0`" }
+
+`s & 0xf0`
+
+## - { points=2 answer="`(int)1`" }
+
+`s && 0xf0`
+
+## - { points=2 answer="`(int)0`" }
+
+`d + f == s + l`
 
 # Analyse de code
 
