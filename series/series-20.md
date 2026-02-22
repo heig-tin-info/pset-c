@@ -13,13 +13,13 @@ exam:
 
 ## - { points=2 }
 
-On souhaite développer un programme qui analyse un fichier de mesures. Proposez une décomposition en sous-problèmes (raffinage successif) en listant 4 à 6 fonctions possibles, avec un nom clair pour chaque fonction.
+On souhaite développer un programme qui analyse un fichier de mesures passé sur l'entrée standard. Proposez une décomposition en sous-problèmes (raffinage successif) en listant 4 à 6 fonctions possibles, avec un nom clair pour chaque fonction.
 
 !!! solution { lines=6 }
 
     Voici une proposition de décomposition en fonctions pour le programme d'analyse de mesures :
 
-    - `read_file` : lire le fichier et charger les données en mémoire
+    - `read_input` : lire l'entrée standard et stocker les données dans une structure appropriée
     - `parse_measurement` : parser une ligne en structure de mesure
     - `compute_stats` : calculer min, max, moyenne
     - `print_report` : afficher le rapport
