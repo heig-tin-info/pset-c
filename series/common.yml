@@ -1,5 +1,4 @@
 language: fr
-problem-label: Exercice
 typesetting:
   paragraph:
     indent: none
@@ -18,3 +17,4 @@ exam:
   next-page-advice: false
   problem-label: Exercice
   fillin-style: dotted
+  version: git

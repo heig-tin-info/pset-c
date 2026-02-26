@@ -9,7 +9,7 @@ tags:
 exam:
   course: INFO2-TIN
 ---
-# Algorithmie { points=6 }
+# Algorithmique { points=6 }
 
 ## - { points=2 }
 
