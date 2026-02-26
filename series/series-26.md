@@ -1,5 +1,5 @@
 ---
-title: Série 26
+title: Série 0x26
 subtitle: Compilation séparée et bibliothèques
 tags:
 - separate-compilation

@@ -1,5 +1,5 @@
 ---
-title: Série 8
+title: Série 0x08
 subtitle: Programmation et algorithmique
 tags:
 - algorithms
@@ -9,9 +9,6 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
-# Série 8 — Programmation et algorithmique
-
 Pour vous préparer aux examens écrits, on vous propose de réaliser les exercices suivants sur papier avec un crayon et une gomme. Vous pouvez utiliser des feuilles de brouillon.
 
 ## - { points=4 }
@@ -106,7 +103,7 @@ Sans utiliser `strlen`, écrire une fonction qui calcule la longueur d'une chaî
 
 Écrire une fonction qui affiche `version` sur la sortie standard si un argument `--version` est présent dans les arguments du programme. Cette fonction aura le prototype suivant, et la fonction main est donnée.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     void parse_arguments(int argc, char *argv[])

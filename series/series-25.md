@@ -1,5 +1,5 @@
 ---
-title: Série 25
+title: Série 0x25
 subtitle: Le Préprocesseur
 tags:
 - preprocessor

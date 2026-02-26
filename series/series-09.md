@@ -1,5 +1,5 @@
 ---
-title: Série 9
+title: Série 0x09
 subtitle: Pointeurs et tableaux
 tags:
 - pointers
@@ -9,9 +9,6 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
-# Série 9 — Pointeurs et tableaux
-
 ## - { points=4 }
 
 Que fait ce programme ?
@@ -41,7 +38,11 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-!!! solution
+!!! solution { lines=10 }
+
+    Ce programme affiche les arguments du programme en majuscules. Il itère sur les arguments, copie chaque argument dans un buffer de taille 100, transforme les minuscules en majuscules, puis affiche le contenu du buffer.
+
+    Voici une version commentée du programme:
 
     ```c
     #include <stdio.h>
@@ -74,9 +75,9 @@ int main(int argc, char *argv[]) {
     }
     ```
 
-## - { points=10 }
+## Tableaux { points=10 }
 
-Quelques questions sur les tableaux. Considérez ces déclarations:
+Considérez les déclarations suivantes:
 
 ```c
 int a[10];
@@ -91,7 +92,7 @@ int (*f)[10];
 
 Quelle est la taille en mémoire de chaque déclaration ?
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     int a[10]; // 10 * sizeof(int) = 40
@@ -110,7 +111,7 @@ Quelle est la taille en mémoire de chaque déclaration ?
 
 Quelle est la différence entre `sizeof(a)`, `sizeof(*a)` et `sizeof(a[1])` ?
 
-!!! solution
+!!! solution { lines=4 }
 
     ```c
     sizeof(a) = 40 // Taille du tableau, car sa taille est connue
@@ -122,7 +123,7 @@ Quelle est la différence entre `sizeof(a)`, `sizeof(*a)` et `sizeof(a[1])` ?
 
 Quelle est la différence entre `sizeof(d)`, `strlen(d)` ? Et comment est-ce que `strlen` fonctionne ?
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     sizeof(d) = 6 // Taille du tableau en mémoire (5 octets plus la sentinelle)
@@ -135,7 +136,7 @@ Quelle est la différence entre `sizeof(d)`, `strlen(d)` ? Et comment est-ce que
 
 Pouvez-vous implémenter le comportement de `strlen` ?
 
-!!! solution
+!!! solution { lines=7 }
 
     ```c
     size_t strlen(char *str) {
@@ -151,7 +152,7 @@ Pouvez-vous implémenter le comportement de `strlen` ?
 
 Comment afficher le contenu de `b` sous forme de matrice ligne colonne ?
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     for (int i = 0; i < 10; i++) {
@@ -232,7 +233,7 @@ int main() {
 }
 ```
 
-!!! solution
+!!! solution { lines=6 }
 
     Le code compile mais n'est pas correct. Il affichera:
 

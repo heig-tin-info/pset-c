@@ -1,5 +1,5 @@
 ---
-title: Série 23
+title: Série 0x23
 subtitle: Classes de stockage et alignement
 tags:
 - storage-classes

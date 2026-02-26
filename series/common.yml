@@ -13,6 +13,7 @@ press:
       bottom: 2.4cm
     marks: false
 exam:
+  logo: heig-vd
   titlepage: minimal
   next-page-advice: false
   problem-label: Exercice

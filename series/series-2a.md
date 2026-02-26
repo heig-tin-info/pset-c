@@ -1,5 +1,5 @@
 ---
-title: Série 2a
+title: Série 0x2a
 subtitle: Tries (arbres de préfixes) — optionnelle
 tags:
 - trie

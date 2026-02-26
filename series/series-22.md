@@ -1,5 +1,5 @@
 ---
-title: Série 22
+title: Série 0x22
 subtitle: Les structures de données
 tags:
 - structs

@@ -1,5 +1,5 @@
 ---
-title: Série 30
+title: Série 0x30
 subtitle: Structure de données récursives
 tags:
 - linked-list

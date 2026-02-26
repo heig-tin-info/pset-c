@@ -1,5 +1,5 @@
 ---
-title: Série 27
+title: Série 0x27
 subtitle: La récursivité
 tags:
 - recursion

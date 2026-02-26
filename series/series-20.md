@@ -1,5 +1,5 @@
 ---
-title: Série 20
+title: Série 0x20
 subtitle: Révision du cours Info1
 tags:
 - arithmetic-expressions
@@ -19,11 +19,11 @@ On souhaite développer un programme qui analyse un fichier de mesures passé su
 
     Voici une proposition de décomposition en fonctions pour le programme d'analyse de mesures :
 
-    - `read_input` : lire l'entrée standard et stocker les données dans une structure appropriée
-    - `parse_measurement` : parser une ligne en structure de mesure
-    - `compute_stats` : calculer min, max, moyenne
-    - `print_report` : afficher le rapport
-    - `save_csv` : exporter les résultats
+    1. `read_input` : lire l'entrée standard et stocker les données dans une structure appropriée
+    2. `parse_measurement` : parser une ligne en structure de mesure
+    3. `compute_stats` : calculer min, max, moyenne
+    4. `print_report` : afficher le rapport
+    5. `save_csv` : exporter les résultats
 
 ## - { points=2 }
 

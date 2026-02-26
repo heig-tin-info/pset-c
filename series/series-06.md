@@ -1,18 +1,16 @@
 ---
-title: Série 6
+title: Série 0x06
 subtitle: Opérateurs et embranchements
 tags:
-- compound-assignment
-- branching
-- ternary-operator
-- expressions
+  - compound-assignment
+  - branching
+  - ternary-operator
+  - expressions
 exam:
   course: INFO1-TIN
 ---
 
-# Série 6 — Opérateurs et embranchements
-
-## Opérateurs combinés { points=4 }
+## Opérateurs combinés { points=10 }
 
 En reprenant à chaque fois les valeurs suivantes, calculer les valeurs de `i`, `j` et lorsque cela s'applique `z` après l'exécution des instructions suivantes :
 
@@ -21,20 +19,20 @@ int i = 1, j = 3;
 int z;
 ```
 
-| Expression | i | j | z |
-| --- | --- | --- | --- |
-| `i += j` | [4] | [3] | [?] |
-| `i += -j` | [-2] | [3] | [?] |
-| `i -= j` | [-2] | [3] | [?] |
-| `i -= -j` | [4] | [3] | [?] |
-| `i *= j` | [3] | [3] | [?] |
-| `i *= -j` | [-3] | [3] | [?] |
-| `i /= j` | [0] | [3] | [?] |
-| `z = i * j == 6` | [1] | [3] | [0] |
-| `z = i++ * j == 6` | [2] | [3] | [0] |
-| `z = ++i * j == 6` | [2] | [3] | [1] |
+| Expression         | i           | j          | z          |
+| ------------------ | ----------- | ---------- | ---------- |
+| `i += j`           | [4]{w=1cm}  | [3]{w=1cm} | [?]{w=1cm} |
+| `i += -j`          | [-2]{w=1cm} | [3]{w=1cm} | [?]{w=1cm} |
+| `i -= j`           | [-2]{w=1cm} | [3]{w=1cm} | [?]{w=1cm} |
+| `i -= -j`          | [4]{w=1cm}  | [3]{w=1cm} | [?]{w=1cm} |
+| `i *= j`           | [3]{w=1cm}  | [3]{w=1cm} | [?]{w=1cm} |
+| `i *= -j`          | [-3]{w=1cm} | [3]{w=1cm} | [?]{w=1cm} |
+| `i /= j`           | [0]{w=1cm}  | [3]{w=1cm} | [?]{w=1cm} |
+| `z = i * j == 6`   | [1]{w=1cm}  | [3]{w=1cm} | [0]{w=1cm} |
+| `z = i++ * j == 6` | [2]{w=1cm}  | [3]{w=1cm} | [0]{w=1cm} |
+| `z = ++i * j == 6` | [2]{w=1cm}  | [3]{w=1cm} | [1]{w=1cm} |
 
-## Opérateur ternaire { points=4 }
+## Opérateur ternaire
 
 ### - { points=2 }
 
@@ -64,7 +62,7 @@ Soit variable `n` est de type `int`. Écrire une expression unique qui prend la 
     n < 0 ? -1 : (n == 0) ? 0 : 1
     ```
 
-## Opérateurs incorrects { points=10 }
+## Opérateurs incorrects
 
 Soit les déclarations suivantes, indiquez pourquoi les propositions suivantes sont incorrectes :
 
@@ -232,11 +230,11 @@ if (!((i < 8) || (i > 8))) printf("i vaut 8\n");
 
     Correct !
 
-## - { points=4 }
+## Analyse de code { points=4 }
 
 Que voyez-vous sur la sortie standard ?
 
-*Notez que selon le standard ISO8899, une expression comportant plusieurs post ou pré incrémentation est indéterminée, néanmoins la logique de l'expression est définie dans la plupart des compilateurs et elle suit la règle enseignée en cours.*
+Notez que selon le standard ISO8899, une expression comportant plusieurs post ou pré incrémentation est indéterminée, néanmoins la logique de l'expression est définie dans la plupart des compilateurs et elle suit la règle enseignée en cours.
 
 ```c
 #include <stdio.h>

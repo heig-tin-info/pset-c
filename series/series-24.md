@@ -1,5 +1,5 @@
 ---
-title: Série 24
+title: Série 0x24
 subtitle: Les pointeurs
 tags:
   - pointers

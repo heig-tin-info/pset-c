@@ -1,5 +1,5 @@
 ---
-title: Série 16 (Lanceur Spatial)
+title: Série 0x1a
 subtitle: Lanceur Spatial
 tags:
 - simulation
@@ -9,9 +9,6 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
-# Série 16 — Lanceur Spatial
-
 ## Lanceur Spatial { points=4 }
 
 ### Contexte {heading=true}

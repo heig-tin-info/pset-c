@@ -1,5 +1,5 @@
 ---
-title: Série 28
+title: Série 0x28
 subtitle: L'allocation dynamique
 tags:
 - dynamic-memory

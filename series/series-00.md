@@ -1,5 +1,5 @@
 ---
-title: Série 0
+title: Série 0x00
 subtitle: Généralités et Numération
 tags:
   - basics

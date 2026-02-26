@@ -1,5 +1,5 @@
 ---
-title: Série 3
+title: Série 0x03
 subtitle: Types et Formats
 tags:
 - data-types
@@ -9,7 +9,6 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
 # Types et Formats
 
 ## - { points=4 }

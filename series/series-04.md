@@ -1,5 +1,5 @@
 ---
-title: Série 4
+title: Série 0x04
 subtitle: Boucles
 tags:
 - loops
@@ -9,7 +9,6 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
 # Série 4 — Boucles
 
 ## - { points=8 }
@@ -230,7 +229,7 @@ for (i = 12, k = 1; k++ < 5 ; printf("%i ", i-- ));
 
 !!! solution { lines=1 }
 
-    12 11 10 9 
+    12 11 10 9
 
 ## Boucles `while` : renseignez ce qu'affiche ces boucles { points=20 }
 

@@ -1,5 +1,5 @@
 ---
-title: Série 1
+title: Série 0x01
 subtitle: Numération et Arguments
 tags:
 - numeration

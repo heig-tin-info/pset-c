@@ -1,5 +1,5 @@
 ---
-title: Série 16
+title: Série 0x10
 subtitle: Révision, fonctions et programmes
 tags:
 - revision
@@ -9,10 +9,7 @@ tags:
 exam:
   course: INFO1-TIN
 ---
-
-# Série 16 — Révision, fonctions et programmes
-
-## Choix multiples { points=8 }
+## Choix multiples
 
 ### - { points=2 }
 
@@ -55,13 +52,13 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 - [x] Les deux peuvent être passés à une fonction pour être modifiés.
 - [x] L'accès à l'élément 2 s'écrit dans les deux cas `p[2]`.
 
-## Fonctions { points=10 }
+## Fonctions
 
 ### - { points=2 }
 
 Écrire une fonction `vowel` qui prend en paramètre une chaîne de caractère et qui retourne le nombre de voyelles dans la chaîne.
 
-!!! solution
+!!! solution { lines=11 }
 
     ```c
     int vowel(char *str) {
@@ -81,7 +78,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 
 Écrire une fonction `max_interval` qui calcule l'intervalle le plus grand dans un tableau d'entiers passé en paramètre. Le second paramètre est la taille du tableau.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     int max_interval(int *a, size_t size) {
@@ -101,7 +98,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 
 Écrire une fonction `is_palindrome` qui retourne vrai si une chaîne de caractères est un palindrome, faux sinon. La chaîne est passée en paramètre.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     bool is_palindrome(char *str) {
@@ -118,7 +115,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 
 Écrire une fonction qui prend en paramètre deux tableaux d'entiers et qui s'assure que l'un est bien dans l'ordre inverse que l'autre. La fonction prend en paramètre les deux tableaux et leur taille qui est commune.
 
-!!! solution
+!!! solution { lines=10 }
 
     ```c
     bool is_reverse(int *a, int *b, size_t size) {
@@ -134,7 +131,7 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
 
 Écrire un une fonction qui rempli un tableau à deux dimensions de taille 10x10 avec des valeurs aléatoires entre 0 et 100. La fonction prend en paramètre le tableau, le nombre de lignes et le nombre de colonnes.
 
-!!! solution
+!!! solution { lines=6 }
 
     ```c
     void fill_random(int a[10][10]) {
@@ -145,11 +142,11 @@ Cocher ce qui est vrai concernant `int *p` et `int p[10]` ?
     }
     ```
 
-## - { points=4 }
+## Programmation { points=10 }
 
 Écrire un programme complet qui lit sur les arguments `--min=X` et `--max=Y` où X et Y sont des entiers positifs. Le programme appelle une fonction `compute(x, y)` avec les valeurs capturées sur les arguments. Cette fonction retourne vraie si elle s'est exécutée correctement, sinon faux.
 
-!!! solution
+!!! solution { lines=15 }
 
     ```c
     #include <stdio.h>

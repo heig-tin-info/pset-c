@@ -1,5 +1,5 @@
 ---
-title: Série 29
+title: Série 0x29
 subtitle: Tableaux dynamiques
 tags:
 - dynamic-array
