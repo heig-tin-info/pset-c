@@ -18,3 +18,4 @@ exam:
   problem-label: Exercice
   fillin-style: dotted
   version: git
+  points: false

@@ -8,57 +8,9 @@ tags:
 - debugging
 exam:
   course: INFO2-TIN
+
 ---
-# Algorithmique { points=6 }
-
-## - { points=2 }
-
-On souhaite développer un programme qui analyse un fichier de mesures passé sur l'entrée standard. Proposez une décomposition en sous-problèmes (raffinage successif) en listant 4 à 6 fonctions possibles, avec un nom clair pour chaque fonction.
-
-!!! solution { lines=6 }
-
-    Voici une proposition de décomposition en fonctions pour le programme d'analyse de mesures :
-
-    1. `read_input` : lire l'entrée standard et stocker les données dans une structure appropriée
-    2. `parse_measurement` : parser une ligne en structure de mesure
-    3. `compute_stats` : calculer min, max, moyenne
-    4. `print_report` : afficher le rapport
-    5. `save_csv` : exporter les résultats
-
-## - { points=2 }
-
-Pour chaque tâche ci-dessous, indiquez si elle doit être réalisée dans une fonction distincte ou peut rester dans `main`, et justifiez en une phrase.
-
-1. Lecture d'un argument de ligne de commande
-2. Validation du format d'une date ISO8601
-3. Calcul d'une distance euclidienne
-4. Écriture d'un rapport dans un fichier
-
-!!! solution { lines=6 }
-
-    1. Peut rester dans `main` (simple, spécifique au programme).
-    2. Fonction distincte (réutilisable et testable).
-    3. Fonction distincte (réutilisable, calcul pur).
-    4. Fonction distincte (sépare I/O et logique).
-
-## - { points=2 }
-
-Complétez le pseudo-code en détaillant le raffinage successif (2 niveaux) pour l'algorithme suivant : "compter le nombre de valeurs positives dans un tableau".
-
-!!! solution { lines=6 }
-
-    Niveau 1 :
-
-    - parcourir le tableau
-    - compter les valeurs positives
-    - retourner le compteur
-
-    Niveau 2 (détail du parcours) :
-
-    - initialiser `count` à 0
-    - pour chaque élément `x`, si `x > 0` alors `count++`
-
-# Arithmétique et expressions { points=10 }
+# Arithmétique et expressions
 
 Considérez les déclarations suivantes :
 
@@ -134,9 +86,7 @@ while (x > 1.0);
 ## - { points=2 }
 
 ```c
-long x = 100;
-if (x = 0)
-    printf("Erreur : la valeur 0 est interdite !\n");
+long x = 100; if (x = 0) printf("Erreur : la valeur 0 est interdite !\n");
 ```
 
 !!! solution { lines=2 }
@@ -163,8 +113,7 @@ switch (x) {
 ## - { points=2 }
 
 ```c
-for (int i = 0; i < 10; i++);
-{
+for (int i = 0; i < 10; i++); {
     printf("%d\n", i);
 }
 ```
@@ -189,7 +138,7 @@ while i < 100
 
 ---
 
-## - { points=2 }
+# Lecture de code { points=2 }
 
 On s'intéresse ici au passage par adresse. Observez le programme suivant et indiquez ce que vous voyez sur la sortie standard.
 
@@ -220,7 +169,23 @@ int main() {
 
 ## - { points=5 }
 
-Algorithme sur les tableaux : écrire une fonction qui reçoit en paramètre un tableau d'entiers et qui retourne la position de la première occurrence d'une valeur dans ce tableau, ou `-1` si la valeur n'est pas présente. Utiliser la syntaxe pointeur pour le paramètre tableau.
+Écrire une fonction qui reçoit une chaîne de caractère en paramètre et qui retourne vrai si la chaîne est un palindrome, c'est à dire qu'elle se lit de la même manière de gauche à droite et de droite à gauche. Utiliser la syntaxe pointeur pour le paramètre chaîne.
+
+!!! solution { lines=5 }
+
+    ```c
+    int is_palindrome(const char *str) {
+      size_t len = strlen(str);
+      for (size_t i = 0; i < len / 2; i++)
+          if (str[i] != str[len - 1 - i])
+              return 0;
+      return 1;
+    }
+    ```
+
+## - { points=5 }
+
+Écrire une fonction qui reçoit en paramètre un **tableau d'entiers** et qui retourne la position de la **première** occurrence d'une valeur dans ce tableau, ou `-1` si la valeur n'est pas présente. Utiliser la syntaxe pointeur pour le paramètre tableau.
 
 !!! solution { lines=5 }
 

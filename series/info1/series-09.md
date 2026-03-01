@@ -130,7 +130,7 @@ Quelle est la différence entre `sizeof(d)`, `strlen(d)` ? Et comment est-ce que
     strlen(d) = 5 // Taille de la chaîne de caractères, sans la sentinelle
     ```
 
-    La fonction `strlen` itère sur la chaîne de caractères jusqu'à trouver la sentinelle `\0`.
+    La fonction `strlen` itère sur la chaîne de caractères jusqu'à trouver la sentinelle `\\0`.
 
 ### - { points=2 }
 

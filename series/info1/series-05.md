@@ -60,7 +60,7 @@ Quelle est la valeur de `z` évaluées avec les valeurs suivantes ?
 
 ## Cas particuliers
 
-### - { points=2 answer="`32768`"}
+### - { points=2 answer="`32768`" }
 
 Que vaut `i` ?
 
@@ -69,7 +69,7 @@ uint16_t i = 32767;
 i++;
 ```
 
-### - { points=2 answer="`0.`"}
+### - { points=2 answer="`0.`" }
 
 Que vaut `i` ?
 
@@ -78,7 +78,7 @@ int16_t i = 0;
 --i; i--; i++; ++i;
 ```
 
-### - { points=2 answer="`'D'`, soit 68"}
+### - { points=2 answer="D68" }
 
 Que vaut `i` ?
 
@@ -86,7 +86,7 @@ Que vaut `i` ?
 short i = 'A' > 'B' ? 'C' : 'D';
 ```
 
-### - { points=2 answer="i: `1`, j: `0`, k: `5`"}
+### - { points=2 answer="i1j0k5" }
 
 Que valent `i`, `j` et `k` ?
 
@@ -95,7 +95,7 @@ short i = 0, j = 1, k;
 k = (k = 5, i++) >= j ? i++ : --j;
 ```
 
-### - { points=2 answer="i: `3`, j: `1`, k: `8`"}
+### - { points=2 answer="i3j1k8" }
 
 Que valent `i`, `j` et `k` ?
 

@@ -9,11 +9,68 @@ tags:
 exam:
   course: INFO2-TIN
 ---
+# Connaissances générales
+
+## - { points=1 }
+
+Qu'est-ce qu'une structure de données en langage C ?
+
+- [ ] Un type de données primitif;
+- [x] Un type de données composés qui regroupe plusieurs éléments de données;
+- [ ] Une manière d'agencer des fichiers sur un disque dur;
+- [ ] Un algorithme de tri.
+
+## - { points=1 }
+
+Quelle est la syntaxe correcte pour déclarer une structure de données en langage C ?
+
+- [ ] `struct { ... }`
+- [ ] `typedef struct { ... }`
+- [ ] `struct name { ... }`
+- [x] `typedef struct name { ... } Name;`
+- [ ] `typedef struct { ... } Name;`
+- [ ] `struct name { ... };`
+
+!!! solution
+
+    On privilégie toujours la création d'un type avec `typedef` pour raccourcis la syntaxe d'utilisation et éviter l'utilisation de `struct` à chaque fois. De plus,
+    il est recommandé de donner un nom à la structure pour faciliter le débogage et la lisibilité du code. Enfin on choisit si possible un nom de type en PascalCase
+    pour différencier les types des variables, et s'approcher de la syntaxe des langages orientés objet (Python, C++, C#)...
+
+## - { points=1 }
+
+Comment connaître la taille en octets d'une structure de données en langage C, en admettant que la structure n'est pas un type incomplet ?
+
+- [ ] En utilisant l'opérateur `sizeof` sur une variable de ce type;
+- [ ] En utilisant l'opérateur `sizeof` sur le type de la structure;
+- [x] En utilisant l'opérateur `sizeof` sur le type de la structure;
+- [ ] En utilisant l'opérateur `strlen`;
+- [ ] En utilisant l'arithmétique de pointeurs;
+- [ ] On ne peut pas connaître la taille d'une structure de données.
+
+## - { points=1 }
+
+Qu'est-ce qu'un membre flexible dans une structure de données en langage C ?
+
+- [ ] Un membre qui peut être modifié à l'exécution;
+- [ ] Un membre qui peut être de n'importe quel type;
+- [x] Un membre qui peut être un tableau de taille variable, défini à la fin de la structure;
+- [ ] Un membre qui peut être utilisé pour stocker des données de type `void *`.
+
+## - { points=1 }
+
+Comment une variable de type `struct` est passée à une fonction ?
+
+- [ ] Passage par valeur (copie du contenu);
+- [ ] Passage par adresse (copie de l'adresse).
+
 # Anniversaires
+
+On réalise un programme permettant de traiter les anniversaires de plusieurs personnes. Chaque personne est caractérisée par un nom et une date d'anniversaire. La date d'anniversaire est composée d'un jour, d'un mois et d'une année.
 
 ## - { points=2 }
 
-Écrire la déclaration d'un type de structure de données `Date` permettant de mémoriser une date (jour, mois, année).
+Écrire la déclaration d'un type de structure de données `Date` permettant de mémoriser une date d'anniversaire.
 
 !!! solution { lines=6 }
 
@@ -32,8 +89,7 @@ exam:
 !!! solution { lines=6 }
 
     ```c
-    int read_date(FILE *fp, Date *dt)
-    {
+    int read_date(FILE *fp, Date *dt) {
         return fscanf(fp, "%hu-%hhu-%hhu",
             &dt->year, &dt->month, &dt->day) != 3;
     }
@@ -89,11 +145,11 @@ Déclarez un tableau de `Birthday` de taille `10`. Initialisez la première entr
     };
     ```
 
-## -
+# Taille en mémoire
 
 Quelle est la taille en octets des structures suivantes :
 
-### - { points=1 }
+## - { points=1 }
 
 ```c
 struct { int32_t a; int32_t b; };
@@ -103,7 +159,7 @@ struct { int32_t a; int32_t b; };
 
     8 bytes
 
-### - { points=1 }
+## - { points=1 }
 
 ```c
 struct { char *name; int32_t age; };
@@ -113,7 +169,7 @@ struct { char *name; int32_t age; };
 
     16 bytes sur une machine 64 bits
 
-### - { points=1 }
+## - { points=1 }
 
 ```c
 struct { char k[8]; short s[2]; };
@@ -123,7 +179,7 @@ struct { char k[8]; short s[2]; };
 
     12 bytes
 
-### - { points=1 }
+## - { points=1 }
 
 ```c
 struct { char a; short b; };
@@ -133,32 +189,29 @@ struct { char a; short b; };
 
     4 bytes (à cause de l'alignement)
 
+## - { points=1 }
+
+```c
+struct { char a; short b; char c[]; };
+```
+
+!!! solution { lines=1 }
+
+    4 bytes (taille de la partie fixe, le membre flexible ne compte pas dans la taille de la structure)
+
 ---
 
-## - { points=4 }
+# Accès aux membres { points=4 }
 
 Comment dans `function` afficher sur la sortie standard la valeur de la deuxième entrée `bar` du cinquième élément ?
 
 ```c
-typedef struct {
-    int32_t foo;
-    int32_t bar[8];
-} Element;
+typedef struct { int32_t foo; int32_t bar[8]; } Element;
+typedef struct { int32_t count; Element data[100]; } Data;
 
-typedef struct {
-    int32_t count;
-    Element data[100];
-} Data;
+void function(Data *data) { ... }
 
-void function(Data *data)
-{
-    ...
-}
-
-int main() {
-    Data data;
-    function(&data);
-}
+int main() { Data data; function(&data); }
 ```
 
 !!! solution { lines=2 }
@@ -169,9 +222,7 @@ int main() {
 
 # Tableau Périodique { points=5 }
 
-Le tableau périodique des éléments de Mendeleev regroupe tous les éléments chimiques. Ces éléments sont caractérisés par un nom pouvant comporter jusqu'à 20 lettres, un symbole comportant au maximum 3 lettres, un numéro périodique représentant la position dans le tableau (c'est-à-dire le nombre de protons du noyau), et une valeur logique indiquant si la substance est radioactive ou non.
-
-Déclarez les types de données et une variable permettant de stocker les caractéristiques mentionnées ci-dessus pour un nombre variable d'éléments compris entre 0 et 120 éléments inclus.
+Le tableau périodique des éléments de Dimitri Mendeleev regroupe tous les éléments chimiques connus de l'Homme. Ces éléments sont caractérisés par un nom pouvant comporter jusqu'à 20 lettres, un symbole comportant au maximum 3 lettres, un numéro périodique représentant la position dans le tableau (c'est-à-dire le nombre de protons du noyau), et une valeur logique indiquant si la substance est radioactive ou non. Déclarez les types de données et une variable permettant de stocker les caractéristiques mentionnées ci-dessus pour un nombre variable d'éléments compris entre 0 et 120 éléments inclus.
 
 !!! solution { lines=10 }
 
@@ -184,4 +235,22 @@ Déclarez les types de données et une variable permettant de stocker les caract
     } Element;
 
     Element[121] elements;
+    ```
+
+# Arbre { points=5 }
+
+Un arbre (en 2D sur une peinture) est composés de branches. Une branche à une longueur, un diamètre, et un angle par rapport à la branche parente. Chaque branche peut avoir jusqu'à 2 branches suivantes (branches enfants). Déclarez les types de données et une variable permettant de stocker les caractéristiques mentionnées ci-dessus pour un arbre.
+
+!!! solution { lines=10 }
+
+    ```c
+    typedef struct branch {
+        float length;
+        float diameter;
+        float angle;
+        struct branch *child1;
+        struct branch *child2;
+    } Branch;
+
+    Branch tree;
     ```

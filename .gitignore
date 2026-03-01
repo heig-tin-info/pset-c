@@ -2,6 +2,7 @@
 build/
 .venv/
 __pycache__/
+*:Zone.Identifier
 dist/
 *.log
 .DS_Store

@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.13"
 
 [[package]]
@@ -259,8 +259,8 @@ requires-dist = [
     { name = "markdown", marker = "extra == 'dev'", specifier = ">=3.6,<4.0" },
     { name = "pelican", marker = "extra == 'dev'", specifier = ">=4.10,<5.0" },
     { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0,<7.0" },
-    { name = "texsmith", git = "https://github.com/yves-chevallier/texsmith.git" },
-    { name = "texsmith-exam", specifier = ">=0.2.0,<1.0" },
+    { name = "texsmith", specifier = ">=0.2.1,<1.0" },
+    { name = "texsmith-exam", specifier = ">=0.2.3,<1.0" },
 ]
 provides-extras = ["dev"]
 
@@ -874,7 +874,7 @@ wheels = [
 [[package]]
 name = "texsmith"
 version = "0.2.2"
-source = { git = "https://github.com/yves-chevallier/texsmith.git#b5e812e279debf7ae9683f2408f3a9d54293707e" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "cairosvg" },
@@ -900,17 +900,21 @@ dependencies = [
     { name = "typer" },
     { name = "unicodeblocks" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/60/23ff748199603d984f7095f0fcc09fbe1aa6cf59da090f73e53d9234f7bd/texsmith-0.2.2.tar.gz", hash = "sha256:aa32eb52c97b9b2896291ec08ef844b16b76159713f6284e5b4b2a5b0463e6e2", size = 6402819, upload-time = "2026-02-24T16:18:41.626Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/6f/c85290c16ce2d5bf5e70a4efa9acaf7c09cb2dd0b431942ed3056c5af808/texsmith-0.2.2-py3-none-any.whl", hash = "sha256:7da9b6e67959e0fe388a1947b052b93b24f75c0f4afed244e174196696572932", size = 517021, upload-time = "2026-02-24T16:18:39.872Z" },
+]
 
 [[package]]
 name = "texsmith-exam"
-version = "0.2.0"
+version = "0.2.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "texsmith" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ed/15/125a81d05399dd10b20c48b1b91435c42da67502d7ca55c2b32870003e5b/texsmith_exam-0.2.0.tar.gz", hash = "sha256:f7a5ef50ce8b52e84e105804faa9df4b09507856947831fe83a7446871918501", size = 119475, upload-time = "2026-02-26T11:39:43.297Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/23/759a3e11b09df82b1a31c31ccab5ccd00e6ef9dae095cd221ea61e9502b9/texsmith_exam-0.2.3.tar.gz", hash = "sha256:af0abd5695815c750f9a427299fc60615f8f7490518e864a61e4dd016c0e1d36", size = 121282, upload-time = "2026-02-28T18:28:44.813Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/63/bc/6771df9aae2ff93516e4da227ccd2f82bf09c1c80a3697d43c6873300744/texsmith_exam-0.2.0-py3-none-any.whl", hash = "sha256:7c5761b6e3f7188fc52fe516215bec804fedb19fe4596d3ce5af3fb19ff998d8", size = 41768, upload-time = "2026-02-26T11:39:41.734Z" },
+    { url = "https://files.pythonhosted.org/packages/06/bf/60c048b84d0264e51f80e8d126898a7d152ff3259928214a7a35d635f5d6/texsmith_exam-0.2.3-py3-none-any.whl", hash = "sha256:3efaf6fe04047f53cbf3aecad28c0977aefd08c3f6e6b5d33c18abcbb9cf45ee", size = 42519, upload-time = "2026-02-28T18:28:42.696Z" },
 ]
 
 [[package]]

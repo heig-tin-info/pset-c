@@ -42,7 +42,7 @@ Représentez par un arbre les appels de fonction imbriqués lors de l'évaluatio
 
     On peut établir le diagramme d'appel suivant:
 
-    ![Arbre d'appels Fibonacci](../assets/fib.png){ width=80% }
+    ![Arbre d'appels Fibonacci](../../assets/fib.png){ width=80% }
 
 ### - { points=2 }
 

@@ -16,7 +16,7 @@ exam:
 
 ### Modèle physique {heading=true}
 
-![Voiture](../assets/car.png){ width=100% }
+![Voiture](../../assets/car.png){ width=100% }
 
 On modélise le freinage d'une voiture par une décélération constante $a_0 = \mu g$ et une force de traînée aérodynamique quadratique
 $F_D = \tfrac{1}{2}\rho C_d A v^2$. On montre que la vitesse initiale $v_0$ mène aux formes fermées suivantes, avec :

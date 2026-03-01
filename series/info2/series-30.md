@@ -114,7 +114,7 @@ Implémentez une fonction de comparaison `compare` qui reçoit deux listes et re
 
 Un BST (*Binary Search Tree*) est un arbre binaire respectant la propriété suivante : l'enfant de gauche est toujours plus petit que son parent et l'enfant de droite est toujours plus grand que son parent. Voici un exemple :
 
-![BST](../assets/bst.pdf){ width=50% }
+![BST](../../assets/bst.pdf){ width=50% }
 
 ### - { points=2 }
 
