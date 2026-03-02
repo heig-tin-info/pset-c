@@ -13,14 +13,14 @@ exam:
 
 ## - { points=1 }
 
-Qu’est-ce qu’un **flux (stream)** en programmation C (et plus généralement en informatique) ?
+Qu'est-ce qu'un **flux (stream)** en programmation C (et plus généralement en informatique) ?
 
 - [ ] Un flux est une variable spéciale qui permet de stocker plusieurs valeurs dans la mémoire.
-- [x] Un flux est un mécanisme permettant de lire ou d’écrire des données de manière séquentielle entre un programme et une source ou une destination (fichier, clavier, écran, réseau, etc.).
-- [ ] Un flux est un type de boucle utilisé pour répéter des instructions jusqu’à la fin d’un fichier.
-- [ ] Un flux est un composant matériel qui transporte physiquement les données dans l’ordinateur.
+- [x] Un flux est un mécanisme permettant de lire ou d'écrire des données de manière séquentielle entre un programme et une source ou une destination (fichier, clavier, écran, réseau, etc.).
+- [ ] Un flux est un type de boucle utilisé pour répéter des instructions jusqu'à la fin d'un fichier.
+- [ ] Un flux est un composant matériel qui transporte physiquement les données dans l'ordinateur.
 - [ ] Un flux est une suite de données qui doit obligatoirement être entièrement chargée en mémoire avant de pouvoir être utilisée.
-- [ ] Un flux est une fonction du langage C utilisée uniquement pour afficher du texte à l’écran.
+- [ ] Un flux est une fonction du langage C utilisée uniquement pour afficher du texte à l'écran.
 
 ## - { points=1 }
 
@@ -220,16 +220,16 @@ Sous forme d'un diagramme en flux, proposer un algorithme pour compter le nombre
     On peut également présenter l'algorithme de manière textuelle en pseudo-code impératif:
 
     ```text
-    nbMots ← 0
-    dansMot ← faux
+    nbMots <- 0
+    dansMot <- faux
 
     TANT QUE (il y a un caractère c à lire dans le flux) FAIRE
         SI (c est un séparateur) ALORS
-            dansMot ← faux
+            dansMot <- faux
         SINON
             SI (dansMot = faux) ALORS
-                nbMots ← nbMots + 1
-                dansMot ← vrai
+                nbMots <- nbMots + 1
+                dansMot <- vrai
             FIN SI
         FIN SI
     FIN TANT QUE
