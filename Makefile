@@ -137,6 +137,7 @@ dist: all
 		fi; \
 	done
 	@for src in $(SERIES_DIR)/*/series-*.md; do \
-		cp "$$src" "dist/$$(basename "$$src")"; \
+		group=$$(basename "$$(dirname "$$src")"); \
+		cp "$$src" "dist/$${group}-$$(basename "$$src")"; \
 	done
 	$(UV_RUN) --extra dev pelican pelican/content -s pelicanconf.py -o dist

@@ -32,24 +32,29 @@ def _sort_key(series_id: str) -> tuple[int, int | str]:
 
 def build_series_entries() -> list[dict]:
     entries: list[dict] = []
-    for path in sorted(SERIES_DIR.glob("series-*.md")):
+    for path in sorted(SERIES_DIR.glob("*/*.md")):
+        if not path.name.startswith("series-") or path.name == "pool.md":
+            continue
         fm = _read_frontmatter(path)
+        group = path.parent.name
         slug = path.stem
         series_id = slug.removeprefix("series-")
+        name = path.name
         entries.append(
             {
+                "group": group,
                 "slug": slug,
                 "id": series_id,
                 "title": str(fm.get("title", slug)),
                 "subtitle": str(fm.get("subtitle", "")),
                 "tags": [str(x) for x in fm.get("tags", []) if str(x).strip()],
-                "pset_pdf": f"pset-{series_id}.pdf",
-                "light_pdf": f"pset-{series_id}-light.pdf",
-                "solution_pdf": f"pset-{series_id}-solution.pdf",
-                "source_md": f"{slug}.md",
+                "pset_pdf": f"pset-{group}-{slug}.pdf",
+                "light_pdf": f"pset-{group}-{slug}-light.pdf",
+                "solution_pdf": f"pset-{group}-{slug}-solution.pdf",
+                "source_md": f"{group}-{name}",
             }
         )
-    entries.sort(key=lambda e: _sort_key(e["id"]))
+    entries.sort(key=lambda e: (e["group"], _sort_key(e["id"])))
     return entries
 
 
