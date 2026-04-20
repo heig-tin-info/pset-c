@@ -14,3 +14,9 @@ dev = [
     "pelican>=4.10,<5.0",
     "markdown>=3.6,<4.0",
 ]
+
+[tool.uv]
+# pelican pins pygments<2.19.0 but 2.20.0 fixes a ReDoS vulnerability (CVE)
+override-dependencies = [
+    "pygments>=2.20.0",
+]
