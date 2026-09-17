@@ -2,6 +2,8 @@
 
 C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with TeXSmith and the `exam` template.
 
+Two rendering backends are available from the same Markdown sources: **Typst** (default) and **LaTeX**.
+
 ## Repository Layout
 
 - `series/`: Markdown sources (`series-*.md`) with frontmatter config.
@@ -11,13 +13,13 @@ C exercise series (INFO1/INFO2), written in Markdown and rendered to PDF with Te
 
 Temporary build outputs:
 
-- `build/`: local build output (`build/series/<id>/...`).
+- `build/`: local build output (`build/series/<group>/<series>/<format>/<variant>/`).
 - `dist/`: static distribution folder (PDFs + site).
 
 ## Tooling
 
 - `uv` for Python environment and dependency management.
-- `texsmith` + `texsmith-template-exam` for Markdown -> LaTeX -> PDF.
+- `texsmith[typst]` + `texsmith-exam` for Markdown -> LaTeX/Typst -> PDF.
 - `pelican` for static index page generation.
 - `make` for build orchestration.
 
@@ -38,24 +40,75 @@ Equivalent command:
 uv sync --extra dev
 ```
 
+### Optional: draw.io diagrams
+
+`series-21` embeds a `.drawio` diagram, which TeXSmith converts with a headless
+Chromium. Install it once:
+
+```bash
+PLAYWRIGHT_BROWSERS_PATH=~/.cache/texsmith/playwright/browsers \
+  uv run --no-sync playwright install --only-shell chromium
+```
+
+If your distribution is not officially supported by Playwright, add
+`PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64` to download a fallback
+build. Without this browser the diagram is skipped with a warning; everything
+else still builds.
+
 ## Build PDFs
 
-Build everything (pset + solution for all series):
+Build everything (pset + light + solution for all series) with the default
+backend, Typst:
 
 ```bash
 make all
 ```
 
-Build one series (example `series-20`):
+Choose the backend explicitly:
+
+| Target | Result |
+| --- | --- |
+| `make typst` | all series via Typst (`build/series/<group>/<series>/typst/...`) |
+| `make latex` | all series via LaTeX/Tectonic (`build/series/<group>/<series>/latex/...`) |
+
+Any target also accepts `FORMAT=latex` or `FORMAT=typst`:
 
 ```bash
-make series-20
+make solution FORMAT=latex
 ```
 
-Outputs:
+Build one series, by full name or short name:
 
-- `build/series/<id>/pset/pset.pdf`
-- `build/series/<id>/solution/solution.pdf`
+```bash
+make info2/series-20
+make series-20            # alias
+make pset-series-20       # a single variant
+make light-series-20
+make solution-series-20
+```
+
+Aggregate variant targets: `make pset`, `make light`, `make solution`.
+
+Outputs, for `FORMAT=typst`:
+
+- `build/series/<group>/<series>/typst/pset/pset.pdf`
+- `build/series/<group>/<series>/typst/light/light.pdf`
+- `build/series/<group>/<series>/typst/solution/solution.pdf`
+
+Copies with friendly names land next to them in
+`build/series/<group>/<series>/`.
+
+List available series:
+
+```bash
+make list
+```
+
+Check that the C++ assets of every series still compile:
+
+```bash
+make check-code
+```
 
 ## Build Distribution
 
@@ -65,7 +118,7 @@ make dist
 
 This command:
 
-- Builds all series.
+- Builds all series (with `FORMAT`, Typst by default).
 - Copies PDFs to `dist/`.
 - Copies source Markdown files (`series-*.md`) to `dist/`.
 - Regenerates `dist/index.html` using Pelican.
@@ -77,16 +130,17 @@ make clean      # remove build/
 make mrproper   # clean + remove dist/*.pdf
 ```
 
-## Development for `template-exam`
+## Development for `texsmith-exam`
 
-Default behavior uses latest GitHub revision of `texsmith-template-exam` from `pyproject.toml`.
+Default behavior uses the released `texsmith-exam` from PyPI, pinned in
+`pyproject.toml` and `uv.lock`.
 
 To work in debug mode (editable local checkout, useful for Agent work):
 
-1. Clone `template-exam` next to this repository:
+1. Clone `texsmith-exam` next to this repository:
 
 ```bash
-git clone git@github.com:yves-chevallier/template-exam.git ../template-exam
+git clone git@github.com:yves-chevallier/texsmith-exam.git ../texsmith-exam
 ```
 
 2. Enable editable override:
@@ -95,9 +149,11 @@ git clone git@github.com:yves-chevallier/template-exam.git ../template-exam
 make deps-dev-template
 ```
 
-This installs `../template-exam` in editable mode into this repo's `.venv`, so local changes are picked up immediately.
+This installs `../texsmith-exam` in editable mode into this repo's `.venv`, so
+local changes are picked up immediately.
 
-3. When finished, publish your changes in `template-exam`, then reset this repo to pinned dependency behavior:
+3. When finished, publish your changes in `texsmith-exam`, then reset this repo
+to pinned dependency behavior:
 
 ```bash
 make deps-reset-template
@@ -106,11 +162,11 @@ make deps-reset-template
 Tip: if your local checkout path differs, pass it explicitly:
 
 ```bash
-make deps-dev-template TEMPLATE_EXAM_PATH=/path/to/template-exam
+make deps-dev-template TEMPLATE_EXAM_PATH=/path/to/texsmith-exam
 ```
 
-After pushing changes to `template-exam`:
+After releasing a new `texsmith-exam`:
 
-1. Update the `rev` under `[tool.uv.sources]` in `pyproject.toml`.
-2. Run `uv lock`.
+1. Bump the specifier in `pyproject.toml` if needed.
+2. Run `uv lock --upgrade-package texsmith-exam`.
 3. Commit `pyproject.toml` and `uv.lock` in this repository.

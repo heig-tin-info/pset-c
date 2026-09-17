@@ -1,11 +1,12 @@
 [project]
-name = "exam"
+name = "pset-c"
 version = "0.1.0"
-description = "Exam build using TeXSmith."
+description = "Problem sets for Info1/Info2 C course, built with TeXSmith."
 requires-python = ">=3.13"
 dependencies = [
-    "texsmith>=0.2.1,<1.0",
-    "texsmith-exam>=0.2.4,<1.0",
+    "texsmith[typst]>=0.9,<1.0",
+    "texsmith-exam>=0.3,<1.0",
+    "texsmith-fragment-heig-logo>=0.2,<1.0",
 ]
 
 [project.optional-dependencies]
@@ -16,6 +17,7 @@ dev = [
 ]
 
 [tool.uv]
+prerelease = "allow"
 # pelican pins pygments<2.19.0 but 2.20.0 fixes a ReDoS vulnerability (CVE)
 override-dependencies = [
     "pygments>=2.20.0",
