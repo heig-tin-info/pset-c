@@ -627,7 +627,7 @@ requires-dist = [
     { name = "pelican", marker = "extra == 'dev'", specifier = ">=4.10,<5.0" },
     { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0,<7.0" },
     { name = "texsmith", extras = ["typst"], specifier = ">=0.9,<1.0" },
-    { name = "texsmith-exam", specifier = ">=0.3,<1.0" },
+    { name = "texsmith-exam", specifier = ">=0.3.1,<1.0" },
     { name = "texsmith-fragment-heig-logo", specifier = ">=0.2,<1.0" },
 ]
 provides-extras = ["dev"]
@@ -945,16 +945,16 @@ typst = [
 
 [[package]]
 name = "texsmith-exam"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pyyaml" },
     { name = "texsmith" },
     { name = "texsmith-fragment-heig-logo" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d6/5d/8ea2499805ef851aa5e8b036df274c4514b960b7cb72d2881f1fbb8eaf71/texsmith_exam-0.3.0.tar.gz", hash = "sha256:eb432fb88a7df73362511321667273731ac93acf217319d2cb1d3556c83603fd", size = 150233, upload-time = "2026-09-17T10:13:11.675Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/61/025ba5f619c57e958e989d87c261c9c2bece622ae2720179b18d8ddc0a7c/texsmith_exam-0.3.1.tar.gz", hash = "sha256:eaa1ad91680d18bd3e643e67058098b86288e56dd04b538a338fc281ffc99e17", size = 151764, upload-time = "2026-09-17T15:04:47.128Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/51/ef/07cef862460568580f362654fc3103bb8a3f9f48de75a280eb3be36706a4/texsmith_exam-0.3.0-py3-none-any.whl", hash = "sha256:a8f385f8fcd6095805371ac0365d29db069b92f38022783a0d0a0c570bfdcacc", size = 58934, upload-time = "2026-09-17T10:13:10.1Z" },
+    { url = "https://files.pythonhosted.org/packages/02/c2/212a436980c54a5f41ba2b44f18fcf8764813b011034cee5a6f079cccdcd/texsmith_exam-0.3.1-py3-none-any.whl", hash = "sha256:585b8b7ffe81dd0dad6c32d197a5b9a2d37e74300e2aedae9aea61e81c64749d", size = 59699, upload-time = "2026-09-17T15:04:45.71Z" },
 ]
 
 [[package]]
