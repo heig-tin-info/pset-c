@@ -75,7 +75,7 @@ En quelle année a été inventé le langage C ?
 Complétez la table suivante avec les valeurs qui conviennent. Utilisez la convention d'écriture C, soit le préfixe `0` pour l'octal, le `0b` pour le binaire et le `0x` pour l'hexadécimal.
 
 | Binaire             | Octal            | Décimal | Hexadécimal      |
-| ------------------- | ---------------- | ------- | ---------------- |
+| ------------------- | ---------------- | ------: | ---------------- |
 | [0b0000]{width=2cm} | [000]{width=2cm} | 0       | [0x0]{width=2cm} |
 | [0b0001]{width=2cm} | [001]{width=2cm} | 1       | [0x1]{width=2cm} |
 | [0b0010]{width=2cm} | [002]{width=2cm} | 2       | [0x2]{width=2cm} |
